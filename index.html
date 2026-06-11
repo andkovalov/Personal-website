@@ -249,7 +249,7 @@ main{overflow-x:clip;width:100%;max-width:100%}
 }
 .bento-card:hover{border-color:rgba(215,251,68,.35)}
 .bento-a{grid-column:span 2;grid-row:span 2}
-.bento-b{grid-column:span 2}
+.bento-b{grid-column:span 2;min-height:295px}
 .bento-card h3{
   font-family:var(--font-display);font-weight:700;font-size:clamp(1.1rem,1.8vw,1.55rem);
   line-height:1.25;margin-bottom:12px;position:relative;z-index:2;
@@ -278,14 +278,70 @@ main{overflow-x:clip;width:100%;max-width:100%}
   font-style:normal;font-size:13px;font-weight:500;color:var(--ink-dim);
   border:1px solid var(--line);border-radius:999px;padding:6px 14px;
 }
+/* ---------- bento live stages ---------- */
+.bento-media.stage{background:linear-gradient(165deg,#17191c 0%,#101113 100%)}
+.bento-media.stage::after{background:linear-gradient(to top,rgba(10,10,11,.92) 6%,rgba(10,10,11,.06) 52%)}
+.design-stage{position:absolute;inset:0}
+.ds-skel{position:absolute;height:10px;border-radius:6px;background:rgba(242,240,234,.09)}
+.ds-skel-1{top:26px;left:9%;width:42%}
+.ds-skel-2{top:46px;left:9%;width:26%}
+.ds-slider{position:absolute;top:94px;left:9%;width:48%}
+.ds-track{position:relative;height:4px;border-radius:999px;background:rgba(242,240,234,.14)}
+.ds-fill{position:absolute;left:0;top:0;bottom:0;width:38%;border-radius:999px;background:var(--lime);opacity:.75}
+.ds-knob{
+  position:absolute;top:50%;left:38%;width:15px;height:15px;border-radius:50%;
+  background:var(--lime);transform:translate(-50%,-50%);
+  box-shadow:0 0 0 4px rgba(215,251,68,.16);
+}
+.ds-select{position:absolute;top:140px;left:9%;padding:14px;border:1.5px dashed rgba(215,251,68,.45)}
+.ds-select i{position:absolute;width:8px;height:8px;background:var(--bg);border:1.5px solid var(--lime)}
+.ds-select i:nth-of-type(1){top:-5px;left:-5px}
+.ds-select i:nth-of-type(2){top:-5px;right:-5px}
+.ds-select i:nth-of-type(3){bottom:-5px;left:-5px}
+.ds-select i:nth-of-type(4){bottom:-5px;right:-5px}
+.ds-ripple{position:absolute;inset:8px;border:1.5px solid var(--lime);border-radius:999px;opacity:0;pointer-events:none}
+.ds-btn{
+  font-family:var(--font-body);font-weight:700;font-size:14px;
+  background:var(--lime);color:var(--lime-ink);border:none;border-radius:10px;
+  padding:13px 26px;pointer-events:none;display:block;
+}
+.ds-pointer{position:absolute;left:0;top:0;z-index:3;filter:drop-shadow(0 3px 8px rgba(0,0,0,.55))}
+.ds-tag{
+  position:absolute;left:15px;top:17px;background:var(--lime);color:var(--lime-ink);
+  font-size:10px;font-weight:700;letter-spacing:.04em;border-radius:999px;padding:3px 9px;white-space:nowrap;
+}
+@media (max-width:560px){
+  .ds-skel-1{top:20px;width:52%}
+  .ds-skel-2{top:38px}
+  .ds-slider{top:78px;width:60%}
+  .ds-select{top:116px}
+  .ds-btn{font-size:13px;padding:11px 20px}
+}
+.code-stage{
+  position:absolute;inset:0;margin:0;padding:24px 28px;text-align:left;overflow:hidden;
+  font:500 12px/1.7 ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  color:rgba(242,240,234,.72);white-space:pre-wrap;
+}
+.tok-t{color:var(--lime)}
+.tok-a{color:rgba(242,240,234,.5)}
+.tok-s{color:#a8c7fa}
+.tok-p{color:rgba(242,240,234,.38)}
+.tok-x{color:rgba(242,240,234,.88)}
+.tok-c{color:rgba(242,240,234,.32);font-style:italic}
+.code-caret{
+  display:inline-block;width:7px;height:14px;background:var(--lime);
+  vertical-align:-2px;margin-left:2px;animation:caret 1s steps(1) infinite;
+}
+@keyframes caret{50%{opacity:0}}
 @media (max-width:900px){
   .bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:minmax(210px,auto)}
-  .bento-a{grid-column:span 2;grid-row:span 1;min-height:340px}
-  .bento-b{grid-column:span 2}
+  .bento-a{grid-column:span 2;grid-row:span 1;min-height:480px}
+  .bento-b{grid-column:span 2;min-height:360px}
 }
 @media (max-width:560px){
   .bento{grid-template-columns:1fr}
   .bento-a,.bento-b{grid-column:span 1}
+  .bento-b{min-height:430px}
 }
 
 /* ---------- manifesto ---------- */
@@ -536,7 +592,24 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
 
       <div class="bento">
         <article class="bento-card bento-a reveal" data-hover>
-          <div class="bento-media"><img src="https://picsum.photos/seed/uxdesign/1200/1200" alt="Дизайн интерфейсов" loading="lazy"></div>
+          <div class="bento-media stage">
+            <div class="design-stage" aria-hidden="true">
+              <div class="ds-skel ds-skel-1"></div>
+              <div class="ds-skel ds-skel-2"></div>
+              <div class="ds-slider">
+                <div class="ds-track"><div class="ds-fill"></div><div class="ds-knob"></div></div>
+              </div>
+              <div class="ds-select">
+                <i></i><i></i><i></i><i></i>
+                <span class="ds-ripple"></span>
+                <button class="ds-btn" tabindex="-1">Оставить заявку</button>
+              </div>
+              <div class="ds-pointer">
+                <svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 1.5 17 12l-6.6 1L13 19l-3 1.4-2.6-6L2 18z" fill="#f2f0ea" stroke="#0a0a0b" stroke-width="1"/></svg>
+                <span class="ds-tag">клиент</span>
+              </div>
+            </div>
+          </div>
           <h3>Дизайн, который ведёт к кнопке</h3>
           <p>Не «красивые картинки», а продуманный путь клиента: каждый экран отвечает на возражение и подталкивает к заявке.</p>
           <div class="bento-tags">
@@ -545,7 +618,9 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
         </article>
 
         <article class="bento-card bento-b reveal" data-hover>
-          <div class="bento-media"><img src="https://picsum.photos/seed/cleancode/1200/600" alt="Чистый код" loading="lazy"></div>
+          <div class="bento-media stage">
+            <pre class="code-stage" aria-hidden="true"><code id="codeType"></code><span class="code-caret"></span></pre>
+          </div>
           <h3>Чистый код, а не конструктор</h3>
           <p>Ручная вёрстка, GSAP-анимации, удобная CMS. Сайт легко расширять, он не разваливается через год.</p>
         </article>
@@ -1072,6 +1147,135 @@ if (!reduceMotion) {
 } else {
   document.querySelectorAll('.reveal').forEach((el) => { el.style.opacity = 1; el.style.transform = 'none'; });
 }
+
+/* ---------- bento stage: design demo ---------- */
+(function initDesignStage() {
+  const stage = document.querySelector('.design-stage');
+  if (!stage) return;
+  const ptr = stage.querySelector('.ds-pointer');
+  const knob = stage.querySelector('.ds-knob');
+  const fill = stage.querySelector('.ds-fill');
+  const track = stage.querySelector('.ds-track');
+  const btn = stage.querySelector('.ds-btn');
+  const rip = stage.querySelector('.ds-ripple');
+
+  if (reduceMotion) {
+    gsap.set([knob], { left: '72%' });
+    gsap.set(fill, { width: '72%' });
+    gsap.set(btn, { borderRadius: 999 });
+    const b = btn.getBoundingClientRect(), s = stage.getBoundingClientRect();
+    gsap.set(ptr, { x: b.left - s.left + b.width * 0.7, y: b.top - s.top + b.height * 0.7 });
+    return;
+  }
+
+  let tl = null;
+  function build() {
+    if (tl) tl.kill();
+    gsap.set(knob, { left: '38%' });
+    gsap.set(fill, { width: '38%' });
+    gsap.set(btn, { borderRadius: 10, scale: 1, boxShadow: 'none' });
+    const s = stage.getBoundingClientRect();
+    if (s.width < 40) { tl = null; return; }
+    const tr = track.getBoundingClientRect();
+    const b = btn.getBoundingClientRect();
+    const sliderY = tr.top - s.top + tr.height / 2;
+    const kStartX = tr.left - s.left + tr.width * 0.38;
+    const kEndX = tr.left - s.left + tr.width * 0.80;
+    const btnX = b.left - s.left + b.width * 0.62;
+    const btnY = b.top - s.top + b.height * 0.62;
+    const homeX = s.width * 0.74, homeY = s.height * 0.14;
+
+    gsap.set(ptr, { x: homeX, y: homeY, scale: 1 });
+    tl = gsap.timeline({ repeat: -1, repeatDelay: 1.6, defaults: { ease: 'power2.inOut' } });
+    tl.to(ptr, { x: kStartX, y: sliderY, duration: 1 })
+      .to(ptr, { scale: 0.82, duration: 0.15 })
+      .to(ptr, { x: kEndX, duration: 1.1 })
+      .to(knob, { left: '80%', duration: 1.1 }, '<')
+      .to(fill, { width: '80%', duration: 1.1 }, '<')
+      .to(btn, { borderRadius: 999, duration: 1.1 }, '<')
+      .to(ptr, { scale: 1, duration: 0.15 })
+      .to(ptr, { x: btnX, y: btnY, duration: 0.9 }, '+=0.2')
+      .to(btn, { scale: 1.05, boxShadow: '0 8px 32px rgba(215,251,68,.4)', duration: 0.3 })
+      .to(btn, { scale: 0.94, duration: 0.12 }, '+=0.3')
+      .to(btn, { scale: 1.03, duration: 0.25 })
+      .fromTo(rip, { opacity: 0.9, scale: 0.75 }, { opacity: 0, scale: 1.45, duration: 0.7, ease: 'power1.out' }, '<')
+      .to(ptr, { x: homeX, y: homeY, duration: 1.1 }, '+=0.7')
+      .to(btn, { scale: 1, boxShadow: 'none', borderRadius: 10, duration: 0.5 }, '<+0.3')
+      .to(knob, { left: '38%', duration: 0.5 }, '<')
+      .to(fill, { width: '38%', duration: 0.5 }, '<');
+  }
+  build();
+  window.addEventListener('load', build);
+  let rw = innerWidth;
+  addEventListener('resize', () => {
+    if (Math.abs(innerWidth - rw) < 50) return;
+    rw = innerWidth;
+    gsap.delayedCall(0.3, build);
+  });
+  new IntersectionObserver((en) => {
+    if (!tl) return;
+    en[0].isIntersecting ? tl.play() : tl.pause();
+  }).observe(stage);
+})();
+
+/* ---------- bento stage: code typing ---------- */
+(function initCodeStage() {
+  const codeEl = document.getElementById('codeType');
+  if (!codeEl) return;
+  const lines = [
+    [['p', '<'], ['t', 'section '], ['a', 'class'], ['p', '="'], ['s', 'hero'], ['p', '">']],
+    [['p', '  <'], ['t', 'h1'], ['p', '>'], ['x', 'Сайт, который продаёт'], ['p', '</'], ['t', 'h1'], ['p', '>']],
+    [['p', '  <'], ['t', 'button'], ['p', '>'], ['x', 'Оставить заявку'], ['p', '</'], ['t', 'button'], ['p', '>']],
+    [['p', '</'], ['t', 'section'], ['p', '>']],
+    [['c', '/* ручная вёрстка — ноль конструкторов */']]
+  ];
+  function renderFull() {
+    codeEl.textContent = '';
+    lines.forEach((ln, i) => {
+      ln.forEach(([cls, txt]) => {
+        const sp = document.createElement('span');
+        sp.className = 'tok-' + cls;
+        sp.textContent = txt;
+        codeEl.appendChild(sp);
+      });
+      if (i < lines.length - 1) codeEl.appendChild(document.createTextNode('\n'));
+    });
+  }
+  if (reduceMotion) { renderFull(); return; }
+
+  const flat = [];
+  lines.forEach((ln, i) => {
+    ln.forEach(([cls, txt]) => { for (const ch of txt) flat.push([cls, ch]); });
+    if (i < lines.length - 1) flat.push(['nl', '\n']);
+  });
+  let i = 0, curCls = null, curSpan = null, inView = false, running = false;
+  function step() {
+    if (!inView) { running = false; return; }
+    if (i >= flat.length) {
+      running = false;
+      gsap.delayedCall(3.5, () => { codeEl.textContent = ''; curCls = null; i = 0; running = true; step(); });
+      return;
+    }
+    const [cls, ch] = flat[i++];
+    if (ch === '\n') {
+      codeEl.appendChild(document.createTextNode('\n'));
+      curCls = null;
+    } else {
+      if (cls !== curCls) {
+        curSpan = document.createElement('span');
+        curSpan.className = 'tok-' + cls;
+        codeEl.appendChild(curSpan);
+        curCls = cls;
+      }
+      curSpan.textContent += ch;
+    }
+    gsap.delayedCall(ch === '\n' ? 0.14 : 0.026, step);
+  }
+  new IntersectionObserver((en) => {
+    inView = en[0].isIntersecting;
+    if (inView && !running) { running = true; step(); }
+  }).observe(codeEl);
+})();
 
 /* ---------- counters ---------- */
 document.querySelectorAll('[data-count]').forEach((el) => {
