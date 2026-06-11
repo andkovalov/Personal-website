@@ -305,11 +305,12 @@ main{overflow-x:clip;width:100%;max-width:100%}
   background:var(--lime);color:var(--lime-ink);border:none;border-radius:10px;
   padding:13px 26px;pointer-events:none;display:block;
 }
-.ds-pointer{position:absolute;left:0;top:0;z-index:3;filter:drop-shadow(0 3px 8px rgba(0,0,0,.55))}
+.ds-pointer{position:absolute;left:0;top:0;z-index:3;filter:drop-shadow(0 3px 8px rgba(0,0,0,.55));transform-origin:4px 3px}
 .ds-tag{
   position:absolute;left:15px;top:17px;background:var(--lime);color:var(--lime-ink);
   font-size:10px;font-weight:700;letter-spacing:.04em;border-radius:999px;padding:3px 9px;white-space:nowrap;
 }
+.ds-pointer-me .ds-tag{background:#a8c7fa;color:#0c1322}
 @media (max-width:560px){
   .ds-skel-1{top:20px;width:52%}
   .ds-skel-2{top:38px}
@@ -528,7 +529,7 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
     <a href="#process" data-hover>Процесс</a>
     <a href="#tseny" data-hover>Цены</a>
   </div>
-  <a class="nav-cta" href="#kontakt" data-hover>Обсудить проект</a>
+  <a class="nav-cta" href="https://cal.com/andkovalov/first-talk" target="_blank" rel="noopener" data-hover>Обсудить проект</a>
   <button class="burger" id="burger" aria-label="Меню">
     <span></span><span></span>
   </button>
@@ -562,7 +563,7 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
       <p class="hero-sub reveal-hero">Дизайн и код под ключ — от первого эскиза до запуска, скорости и SEO. Один человек, полная ответственность за результат.</p>
 
       <div class="hero-ctas reveal-hero">
-        <a class="btn btn-primary" href="#kontakt" data-hover>
+        <a class="btn btn-primary" href="https://cal.com/andkovalov/first-talk" target="_blank" rel="noopener" data-hover>
           Обсудить проект
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -604,7 +605,11 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
                 <span class="ds-ripple"></span>
                 <button class="ds-btn" tabindex="-1">Оставить заявку</button>
               </div>
-              <div class="ds-pointer">
+              <div class="ds-pointer ds-pointer-me">
+                <svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 1.5 17 12l-6.6 1L13 19l-3 1.4-2.6-6L2 18z" fill="#f2f0ea" stroke="#0a0a0b" stroke-width="1"/></svg>
+                <span class="ds-tag">Andrey</span>
+              </div>
+              <div class="ds-pointer ds-pointer-client">
                 <svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 1.5 17 12l-6.6 1L13 19l-3 1.4-2.6-6L2 18z" fill="#f2f0ea" stroke="#0a0a0b" stroke-width="1"/></svg>
                 <span class="ds-tag">клиент</span>
               </div>
@@ -1152,19 +1157,24 @@ if (!reduceMotion) {
 (function initDesignStage() {
   const stage = document.querySelector('.design-stage');
   if (!stage) return;
-  const ptr = stage.querySelector('.ds-pointer');
+  const me = stage.querySelector('.ds-pointer-me');
+  const cl = stage.querySelector('.ds-pointer-client');
   const knob = stage.querySelector('.ds-knob');
   const fill = stage.querySelector('.ds-fill');
   const track = stage.querySelector('.ds-track');
+  const sel = stage.querySelector('.ds-select');
   const btn = stage.querySelector('.ds-btn');
   const rip = stage.querySelector('.ds-ripple');
 
   if (reduceMotion) {
-    gsap.set([knob], { left: '72%' });
+    gsap.set(knob, { left: '72%' });
     gsap.set(fill, { width: '72%' });
     gsap.set(btn, { borderRadius: 999 });
-    const b = btn.getBoundingClientRect(), s = stage.getBoundingClientRect();
-    gsap.set(ptr, { x: b.left - s.left + b.width * 0.7, y: b.top - s.top + b.height * 0.7 });
+    const s = stage.getBoundingClientRect();
+    const t = track.getBoundingClientRect();
+    const b = btn.getBoundingClientRect();
+    gsap.set(me, { x: t.left - s.left + t.width * 0.72, y: t.top - s.top + 14 });
+    gsap.set(cl, { x: b.left - s.left + b.width * 0.7, y: b.top - s.top + b.height * 0.7 });
     return;
   }
 
@@ -1173,34 +1183,54 @@ if (!reduceMotion) {
     if (tl) tl.kill();
     gsap.set(knob, { left: '38%' });
     gsap.set(fill, { width: '38%' });
+    gsap.set(sel, { scale: 1, transformOrigin: '0% 0%' });
     gsap.set(btn, { borderRadius: 10, scale: 1, boxShadow: 'none' });
     const s = stage.getBoundingClientRect();
     if (s.width < 40) { tl = null; return; }
     const tr = track.getBoundingClientRect();
+    const se = sel.getBoundingClientRect();
     const b = btn.getBoundingClientRect();
+    const grow = 1.12;
     const sliderY = tr.top - s.top + tr.height / 2;
     const kStartX = tr.left - s.left + tr.width * 0.38;
     const kEndX = tr.left - s.left + tr.width * 0.80;
-    const btnX = b.left - s.left + b.width * 0.62;
-    const btnY = b.top - s.top + b.height * 0.62;
-    const homeX = s.width * 0.74, homeY = s.height * 0.14;
+    /* bottom-right resize handle of the selection frame, before and after growth */
+    const selX = se.left - s.left, selY = se.top - s.top;
+    const hX = selX + se.width, hY = selY + se.height;
+    const hX2 = selX + se.width * grow, hY2 = selY + se.height * grow;
+    /* button center after the frame is scaled from its top-left corner */
+    const btnX = selX + (b.left - s.left + b.width * 0.62 - selX) * grow;
+    const btnY = selY + (b.top - s.top + b.height * 0.62 - selY) * grow;
+    const meHomeX = s.width * 0.62, meHomeY = s.height * 0.08;
+    const clHomeX = s.width * 0.84, clHomeY = s.height * 0.30;
 
-    gsap.set(ptr, { x: homeX, y: homeY, scale: 1 });
+    gsap.set(me, { x: meHomeX, y: meHomeY, scale: 1 });
+    gsap.set(cl, { x: clHomeX, y: clHomeY, scale: 1 });
     tl = gsap.timeline({ repeat: -1, repeatDelay: 1.6, defaults: { ease: 'power2.inOut' } });
-    tl.to(ptr, { x: kStartX, y: sliderY, duration: 1 })
-      .to(ptr, { scale: 0.82, duration: 0.15 })
-      .to(ptr, { x: kEndX, duration: 1.1 })
+    /* Andrey tunes the design: slider, then enlarges the button frame */
+    tl.to(me, { x: kStartX, y: sliderY, duration: 0.9 })
+      .to(me, { scale: 0.82, duration: 0.15 })
+      .to(me, { x: kEndX, duration: 1.1 })
       .to(knob, { left: '80%', duration: 1.1 }, '<')
       .to(fill, { width: '80%', duration: 1.1 }, '<')
       .to(btn, { borderRadius: 999, duration: 1.1 }, '<')
-      .to(ptr, { scale: 1, duration: 0.15 })
-      .to(ptr, { x: btnX, y: btnY, duration: 0.9 }, '+=0.2')
+      .to(me, { scale: 1, duration: 0.15 })
+      .to(me, { x: hX, y: hY, duration: 0.7 }, '+=0.15')
+      .to(me, { scale: 0.82, duration: 0.12 })
+      .to(sel, { scale: grow, duration: 0.8 })
+      .to(me, { x: hX2, y: hY2, duration: 0.8 }, '<')
+      .to(me, { scale: 1, duration: 0.12 })
+      .to(me, { x: meHomeX, y: meHomeY, duration: 0.9 }, '+=0.2')
+      /* the client arrives and clicks */
+      .to(cl, { x: btnX, y: btnY, duration: 0.9 }, '-=0.5')
       .to(btn, { scale: 1.05, boxShadow: '0 8px 32px rgba(215,251,68,.4)', duration: 0.3 })
       .to(btn, { scale: 0.94, duration: 0.12 }, '+=0.3')
       .to(btn, { scale: 1.03, duration: 0.25 })
       .fromTo(rip, { opacity: 0.9, scale: 0.75 }, { opacity: 0, scale: 1.45, duration: 0.7, ease: 'power1.out' }, '<')
-      .to(ptr, { x: homeX, y: homeY, duration: 1.1 }, '+=0.7')
-      .to(btn, { scale: 1, boxShadow: 'none', borderRadius: 10, duration: 0.5 }, '<+0.3')
+      .to(cl, { x: clHomeX, y: clHomeY, duration: 1 }, '+=0.7')
+      /* reset for the next loop */
+      .to(sel, { scale: 1, duration: 0.5 }, '<+0.3')
+      .to(btn, { scale: 1, boxShadow: 'none', borderRadius: 10, duration: 0.5 }, '<')
       .to(knob, { left: '38%', duration: 0.5 }, '<')
       .to(fill, { width: '38%', duration: 0.5 }, '<');
   }
@@ -1212,10 +1242,11 @@ if (!reduceMotion) {
     rw = innerWidth;
     gsap.delayedCall(0.3, build);
   });
-  new IntersectionObserver((en) => {
-    if (!tl) return;
-    en[0].isIntersecting ? tl.play() : tl.pause();
-  }).observe(stage);
+  ScrollTrigger.create({
+    trigger: stage, start: 'top bottom', end: 'bottom top',
+    onToggle(self) { if (tl) { self.isActive ? tl.play() : tl.pause(); } },
+    onRefresh(self) { if (tl) { self.isActive ? tl.play() : tl.pause(); } }
+  });
 })();
 
 /* ---------- bento stage: code typing ---------- */
@@ -1271,10 +1302,14 @@ if (!reduceMotion) {
     }
     gsap.delayedCall(ch === '\n' ? 0.14 : 0.026, step);
   }
-  new IntersectionObserver((en) => {
-    inView = en[0].isIntersecting;
+  const syncCode = (self) => {
+    inView = self.isActive;
     if (inView && !running) { running = true; step(); }
-  }).observe(codeEl);
+  };
+  ScrollTrigger.create({
+    trigger: codeEl, start: 'top bottom', end: 'bottom top',
+    onToggle: syncCode, onRefresh: syncCode
+  });
 })();
 
 /* ---------- counters ---------- */
