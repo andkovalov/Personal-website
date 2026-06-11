@@ -387,32 +387,20 @@ main{overflow-x:clip;width:100%;max-width:100%}
 .case-link:hover{background:var(--lime);color:var(--lime-ink);border-color:var(--lime);transform:scale(1.05)}
 .case-link svg{transition:transform .35s}
 .case-link:hover svg{transform:translate(2px,-2px)}
-.case-media{overflow:hidden;position:relative;background:var(--bg-soft)}
-.case-media img{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;
-  filter:contrast(1.04) brightness(.96);
-  transition:transform .9s cubic-bezier(.22,1,.36,1),filter .9s;
+.case-media{
+  overflow:hidden;position:relative;background:var(--bg-soft);
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(20px,3.5vw,44px);
 }
-.case:hover .case-media img{transform:scale(1.04);filter:contrast(1.02) brightness(1)}
-.case-mock{
-  position:absolute;inset:0;background:#f4f1ea;display:flex;flex-direction:column;
+.case-media img{
+  max-width:min(100%,620px);max-height:100%;width:auto;height:auto;
   transition:transform .9s cubic-bezier(.22,1,.36,1);
 }
-.case:hover .case-mock{transform:scale(1.04)}
-.mock-bar{display:flex;align-items:center;gap:6px;padding:12px 16px;background:#e9e4da;border-bottom:1px solid rgba(0,0,0,.06)}
-.mock-bar i{width:9px;height:9px;border-radius:50%;background:#d3ccbe}
-.mock-url{margin-left:10px;font-size:11px;color:#8a8273;background:#f4f1ea;border-radius:999px;padding:4px 14px;flex:1;text-align:left}
-.mock-body{
-  flex:1;padding:clamp(18px,3vw,42px);color:#23211c;text-align:left;
-  display:flex;flex-direction:column;gap:16px;justify-content:center;align-items:flex-start;
-}
-.mock-kicker{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#a39879}
-.mock-h{font-family:var(--font-display);font-weight:700;font-size:clamp(1rem,1.7vw,1.45rem);line-height:1.25;color:#1d1b16;max-width:420px}
-.mock-btn{background:#1d1b16;color:#f4f1ea;font-size:12px;font-weight:600;border-radius:999px;padding:9px 20px}
-.mock-cards{display:flex;gap:10px;width:100%}
-.mock-cards span{flex:1;background:#fff;border:1px solid #e3ddd0;border-radius:10px;padding:10px 12px;font-size:10.5px;color:#5d564a;line-height:1.45}
-.mock-cards b{display:block;color:#1d1b16;font-size:12px;margin-bottom:2px}
-@media (max-width:560px){.mock-cards span:nth-child(3){display:none}}
+.case:hover .case-media img{transform:scale(1.045) translateY(-4px)}
+.cm-notadocs{background:linear-gradient(160deg,#e3f4e6,#cfe9d6)}
+.cm-tattoo{background:linear-gradient(160deg,#2c2620,#171310)}
+.cm-ucet{background:linear-gradient(160deg,#f8ecdd,#f1dfc9)}
+.cm-magic{background:linear-gradient(160deg,#f8f0df,#f3e2d6)}
 @media (max-width:860px){
   .case{grid-template-columns:1fr;min-height:0}
   .case-media{height:240px;position:relative;order:-1}
@@ -681,7 +669,7 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
               </a>
             </div>
           </div>
-          <div class="case-media"><img src="https://image.thum.io/get/wait/3/width/1200/crop/900/https://notadocs.de/" alt="NotaDocs — юридические документы онлайн" loading="lazy"></div>
+          <div class="case-media cm-notadocs"><img src="assets/cases/notadocs.png" alt="NotaDocs — юридические документы онлайн" loading="lazy" width="640" height="435"></div>
         </article>
 
         <article class="case" data-hover>
@@ -702,7 +690,7 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
               </a>
             </div>
           </div>
-          <div class="case-media"><img src="https://image.thum.io/get/wait/3/width/1200/crop/900/https://kovalov.tattoo/" alt="Kovalov Tattoo — сайт тату-мастера" loading="lazy"></div>
+          <div class="case-media cm-tattoo"><img src="assets/cases/kovalov-tattoo.png" alt="Kovalov Tattoo — сайт тату-мастера" loading="lazy" width="640" height="435"></div>
         </article>
 
         <article class="case" data-hover>
@@ -723,21 +711,7 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
               </a>
             </div>
           </div>
-          <div class="case-media">
-            <div class="case-mock" role="img" aria-label="Účetnictví Vladimirová — бухгалтерские услуги в Праге">
-              <div class="mock-bar"><i></i><i></i><i></i><span class="mock-url">ucetnictvi-vladimirova.cz</span></div>
-              <div class="mock-body">
-                <span class="mock-kicker">Účetnictví — Praha</span>
-                <span class="mock-h">Účetnictví není jen odevzdaná zpráva.</span>
-                <span class="mock-btn">Nezávazná konzultace</span>
-                <div class="mock-cards">
-                  <span><b>Vedení účetnictví</b>kompletní agenda pro s.r.o. i OSVČ</span>
-                  <span><b>Mzdy a personalistika</b>výplaty, odvody, reporting</span>
-                  <span><b>Daňová přiznání</b>DPH, INTRASTAT, kontrolní hlášení</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div class="case-media cm-ucet"><img src="assets/cases/ucetnictvi.png" alt="Účetnictví Vladimirová — бухгалтерские услуги в Праге" loading="lazy" width="640" height="435"></div>
         </article>
 
         <article class="case" data-hover>
@@ -758,7 +732,7 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
               </a>
             </div>
           </div>
-          <div class="case-media"><img src="https://image.thum.io/get/wait/3/width/1200/crop/900/https://www.justmagic.best/" alt="Just Magic — питомник Devon Rex и Maine Coon" loading="lazy"></div>
+          <div class="case-media cm-magic"><img src="assets/cases/justmagic.png" alt="Just Magic — питомник Devon Rex и Maine Coon" loading="lazy" width="640" height="435"></div>
         </article>
       </div>
     </div>
