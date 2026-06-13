@@ -80,10 +80,14 @@ main{overflow-x:clip;width:100%;max-width:100%}
 }
 .nav.is-hidden{transform:translateX(-50%) translateY(-130%);opacity:0}
 .nav-logo{
-  font-family:var(--font-display);font-weight:800;font-size:15px;letter-spacing:.04em;
-  margin-right:14px;white-space:nowrap;
+  font-family:var(--font-display);font-weight:800;font-size:14px;letter-spacing:.01em;
+  color:var(--lime-ink);background:var(--lime);
+  width:34px;height:34px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:10px;margin-right:10px;
+  transition:transform .3s,box-shadow .3s;
 }
-.nav-logo em{color:var(--lime);font-style:normal}
+.nav-logo:hover{transform:scale(1.06);box-shadow:0 0 20px rgba(215,251,68,.4)}
 .nav-links{display:flex;gap:2px}
 .nav-links a{
   font-size:14px;font-weight:500;color:var(--ink-dim);
@@ -526,7 +530,7 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
 <div class="cursor-ring"></div>
 
 <nav class="nav" id="nav">
-  <a class="nav-logo" href="#top">ANDREY<em>.</em>KOVALOV</a>
+  <a class="nav-logo" href="#top" aria-label="Andrey Kovalov — наверх">AK</a>
   <div class="nav-links">
     <a href="#raboty" data-hover data-i18n="nav.works">Работы</a>
     <a href="#uslugi" data-hover data-i18n="nav.services">Услуги</a>
@@ -948,10 +952,10 @@ const STR = {
   'nav.contact': ["Контакт", "Kontakt", "Contact"],
   'btn.discuss': ["Обсудить проект", "Probrat projekt", "Start a project"],
 
-  'hero.eyebrow': ["Андрей Ковалев — <b>веб-дизайнер и fullstack-разработчик</b>", "Andrey Kovalov — <b>webový designér &amp; full-stack vývojář</b>", "Andrey Kovalov — <b>web designer &amp; full-stack developer</b>"],
+  'hero.eyebrow': ["Андрей Ковалев — <b>веб-дизайнер и fullstack-разработчик</b>", "Andrey Kovalov — <b>webový designér a full-stack vývojář</b>", "Andrey Kovalov — <b>web designer &amp; full-stack developer</b>"],
   'hero.h1top': ["Сайты, которые", "Weby, které", "Websites that"],
   'hero.h1big': ["продают", "prodávají", "sell"],
-  'hero.sub': ["Дизайн и код под ключ — от первого эскиза до запуска, скорости и SEO. Один человек, полная ответственность за результат.", "Design i kód na klíč — od prvního návrhu po spuštění, rychlost a SEO. Jeden člověk, plná odpovědnost za výsledek.", "Turnkey design and code — from the first sketch to launch, speed and SEO. One person, full accountability for the result."],
+  'hero.sub': ["Дизайн и код под ключ — от первого эскиза до запуска, скорости и SEO. Один человек, полная ответственность за результат.", "Design i kód na klíč — od prvního návrhu až po spuštění, rychlost a SEO. Jeden člověk, plná odpovědnost za výsledek.", "Turnkey design and code — from the first sketch to launch, speed and SEO. One person, full accountability for the result."],
   'hero.work': ["Смотреть работы", "Prohlédnout práce", "See the work"],
   'hero.cornerL': ["Прага —<br>работаю по всему миру", "Praha —<br>pracuji po celém světě", "Prague —<br>working worldwide"],
   'hero.cornerR': ["Свободен для проектов<br>июль 2026", "Volný pro projekty<br>červenec 2026", "Available for projects<br>July 2026"],
@@ -970,7 +974,7 @@ const STR = {
   'services.sub': ["Без испорченного телефона между дизайнером и программистом: стратегия, макет и код не теряют смысл по дороге.", "Žádná tichá pošta mezi designérem a programátorem: strategie, layout i kód cestou neztratí smysl.", "No broken telephone between designer and developer: strategy, layout and code don’t lose meaning along the way."],
 
   'bento.design.h3': ["Дизайн, который ведёт к кнопке", "Design, který vede k tlačítku", "Design that leads to the button"],
-  'bento.design.p': ["Не «красивые картинки», а продуманный путь клиента: каждый экран отвечает на возражение и подталкивает к заявке.", "Ne „hezké obrázky“, ale promyšlená cesta klienta: každá obrazovka odpovídá na námitku a tlačí k poptávce.", "Not “pretty pictures”, but a thought-through customer journey: every screen answers an objection and nudges toward the request."],
+  'bento.design.p': ["Не «красивые картинки», а продуманный путь клиента: каждый экран отвечает на возражение и подталкивает к заявке.", "Ne „hezké obrázky“, ale promyšlená cesta klienta: každá obrazovka odpovídá na námitku a vede k poptávce.", "Not “pretty pictures”, but a thought-through customer journey: every screen answers an objection and nudges toward the request."],
   'bento.tag.ux': ["UX-логика", "UX logika", "UX logic"],
   'bento.tag.proto': ["Прототип", "Prototyp", "Prototype"],
   'bento.tag.brand': ["Фирменный стиль", "Vizuální styl", "Brand identity"],
@@ -987,7 +991,7 @@ const STR = {
   'ds.btn': ["Оставить заявку", "Odeslat poptávku", "Send a request"],
   'code.h1': ["Сайт, который продаёт", "Web, který prodává", "A site that sells"],
   'code.btn': ["Оставить заявку", "Odeslat poptávku", "Send a request"],
-  'code.comment': ["/* ручная вёрстка — ноль конструкторов */", "/* ruční kód — nula stavebnic */", "/* hand-coded — zero builders */"],
+  'code.comment': ["/* ручная вёрстка — ноль конструкторов */", "/* ruční kód — žádné stavebnice */", "/* hand-coded — zero builders */"],
 
   'manifesto': ["Красивый сайт — это минимум. Я проектирую путь клиента: от первого взгляда до заявки. Каждый экран отвечает на вопрос и ведёт дальше — поэтому мои сайты окупаются, а не просто висят в портфолио.", "Hezký web je minimum. Navrhuji cestu klienta: od prvního pohledu po poptávku. Každá obrazovka odpovídá na otázku a vede dál — proto se mé weby vyplácejí, místo aby jen visely v portfoliu.", "A beautiful site is the bare minimum. I design the customer’s path: from the first glance to the request. Every screen answers a question and leads further — that’s why my sites pay off instead of just sitting in a portfolio."],
 
@@ -996,18 +1000,18 @@ const STR = {
   'case.open': ["Открыть сайт", "Otevřít web", "Visit site"],
 
   'case.deltag.idx': ["/ 01 — Корпоративный сайт с нуля", "/ 01 — Firemní web od nuly", "/ 01 — Corporate site from scratch"],
-  'case.deltag.desc': ["Геодезическая фирма со старым сайтом, который отпугивал жаргоном и терял заказы. Пересобрал всё с нуля на новом коде: услуги переписаны с профессионального языка на жизненные ситуации для частных клиентов, а B2B-направление переосмыслено в полноценный корпоративный сайт. Куки-баннер, политика, отдельные SEO-страницы под каждую услугу.", "Geodetická firma se starým webem, který odrazoval žargonem a ztrácel zakázky. Vše jsem postavil znovu od nuly na novém kódu: služby přepsané z odborného jazyka do životních situací pro soukromé klienty a B2B větev přepracovaná do plnohodnotného firemního webu. Cookie lišta, zásady, samostatné SEO stránky pro každou službu.", "A surveying firm with an old site that scared people off with jargon and lost orders. I rebuilt everything from scratch on new code: services rewritten from professional language into real-life situations for private clients, and the B2B branch reimagined into a full corporate site. Cookie banner, privacy policy, dedicated SEO pages for every service."],
+  'case.deltag.desc': ["Геодезическая фирма со старым сайтом, который отпугивал жаргоном и терял заказы. Пересобрал всё с нуля на новом коде: услуги переписаны с профессионального языка на жизненные ситуации для частных клиентов, а B2B-направление переосмыслено в полноценный корпоративный сайт. Куки-баннер, политика, отдельные SEO-страницы под каждую услугу.", "Geodetická firma se starým webem, který odrazoval žargonem a ztrácel zakázky. Vše jsem postavil znovu od nuly na novém kódu: služby přepsané z odborného jazyka do životních situací pro soukromé klienty a B2B větev přepracovaná do plnohodnotného firemního webu. Cookie lišta, zásady soukromí, samostatné SEO stránky pro každou službu.", "A surveying firm with an old site that scared people off with jargon and lost orders. I rebuilt everything from scratch on new code: services rewritten from professional language into real-life situations for private clients, and the B2B branch reimagined into a full corporate site. Cookie banner, privacy policy, dedicated SEO pages for every service."],
   'case.deltag.mb': ["11 страниц", "11 stránek", "11 pages"],
   'case.deltag.ms': ["единая дизайн-система, PageSpeed под сотню по всем метрикам", "jednotný design systém, PageSpeed kolem 100 ve všech metrikách", "one design system, near-100 PageSpeed across all metrics"],
   'case.deltag.alt': ["Delta G — антикризисный редизайн сайта геодезической фирмы", "Delta G — redesign firemního webu geodetické firmy", "Delta G — corporate website redesign for a surveying firm"],
 
   'case.notadocs.idx': ["/ 02 — Веб-сервис", "/ 02 — Webová služba", "/ 02 — Web service"],
-  'case.notadocs.desc': ["Сервис юридических документов для украинцев в Германии: двуязычные доверенности и заявления онлайн, без очередей. Понятный путь от вопроса до готового документа.", "Služba pro právní dokumenty pro Ukrajince v Německu: dvojjazyčné plné moci a žádosti online, bez front. Srozumitelná cesta od dotazu k hotovému dokumentu.", "A legal-document service for Ukrainians in Germany: bilingual powers of attorney and applications online, no queues. A clear path from question to finished document."],
+  'case.notadocs.desc': ["Сервис юридических документов для украинцев в Германии: двуязычные доверенности и заявления онлайн, без очередей. Понятный путь от вопроса до готового документа.", "Služba právních dokumentů pro Ukrajince v Německu: dvojjazyčné plné moci a žádosti online, bez front. Srozumitelná cesta od dotazu k hotovému dokumentu.", "A legal-document service for Ukrainians in Germany: bilingual powers of attorney and applications online, no queues. A clear path from question to finished document."],
   'case.notadocs.ms': ["посетителей оставляют заявку", "návštěvníků zanechá poptávku", "of visitors leave a request"],
   'case.notadocs.alt': ["NotaDocs — юридические документы онлайн", "NotaDocs — právní dokumenty online", "NotaDocs — legal documents online"],
 
   'case.tattoo.idx': ["/ 03 — Личный бренд", "/ 03 — Osobní značka", "/ 03 — Personal brand"],
-  'case.tattoo.desc': ["Сайт тату-мастера в Праге: портфолио fine-line работ, прайс, FAQ и запись — на трёх языках. Минимализм, где убрано всё лишнее и не потеряно ничего важного.", "Web tatéra v Praze: portfolio fine-line prací, ceník, FAQ a rezervace — ve třech jazycích. Minimalismus, kde je odstraněno vše zbytečné a nic důležitého neztraceno.", "A tattoo artist’s site in Prague: a fine-line portfolio, pricing, FAQ and booking — in three languages. Minimalism where all the excess is removed and nothing important is lost."],
+  'case.tattoo.desc': ["Сайт тату-мастера в Праге: портфолио fine-line работ, прайс, FAQ и запись — на трёх языках. Минимализм, где убрано всё лишнее и не потеряно ничего важного.", "Web tatéra v Praze: portfolio fine-line prací, ceník, FAQ a rezervace — ve třech jazycích. Minimalismus, kde zmizelo vše zbytečné a nic důležitého nechybí.", "A tattoo artist’s site in Prague: a fine-line portfolio, pricing, FAQ and booking — in three languages. Minimalism where all the excess is removed and nothing important is lost."],
   'case.tattoo.ms': ["PageSpeed Insights по всем метрикам", "PageSpeed Insights ve všech metrikách", "PageSpeed Insights on every metric"],
   'case.tattoo.alt': ["Kovalov Tattoo — сайт тату-мастера", "Kovalov Tattoo — web tatéra", "Kovalov Tattoo — tattoo artist website"],
 
@@ -1017,7 +1021,7 @@ const STR = {
   'case.ucet.alt': ["Účetnictví Vladimirová — бухгалтерские услуги в Праге", "Účetnictví Vladimirová — účetní služby v Praze", "Účetnictví Vladimirová — accounting services in Prague"],
 
   'case.magic.idx': ["/ 05 — E-commerce", "/ 05 — E-commerce", "/ 05 — E-commerce"],
-  'case.magic.desc': ["Питомник Devon Rex и Maine Coon с доставкой по миру: каталог котят, отзывы, блог. Тёплый, эмоциональный сайт, который влюбляет в котёнка ещё до первого видеозвонка.", "Chovatelská stanice Devon Rex a Maine Coon s doručením po celém světě: katalog koťat, recenze, blog. Vřelý, emotivní web, do kterého se zamilujete ještě před prvním videohovorem.", "A Devon Rex and Maine Coon cattery with worldwide delivery: kitten catalogue, reviews, blog. A warm, emotional site that makes you fall in love with a kitten before the first video call."],
+  'case.magic.desc': ["Питомник Devon Rex и Maine Coon с доставкой по миру: каталог котят, отзывы, блог. Тёплый, эмоциональный сайт, который влюбляет в котёнка ещё до первого видеозвонка.", "Chovatelská stanice Devon Rex a Maine Coon s doručením po celém světě: katalog koťat, recenze, blog. Vřelý, emotivní web, díky kterému se do koťete zamilujete ještě před prvním videohovorem.", "A Devon Rex and Maine Coon cattery with worldwide delivery: kitten catalogue, reviews, blog. A warm, emotional site that makes you fall in love with a kitten before the first video call."],
   'case.magic.mb': ["12+ стран", "12+ zemí", "12+ countries"],
   'case.magic.ms': ["куда уехали котята с этого сайта", "kam zamířila koťata z tohoto webu", "where kittens from this site have gone"],
   'case.magic.alt': ["Just Magic — питомник Devon Rex и Maine Coon", "Just Magic — chovatelská stanice Devon Rex a Maine Coon", "Just Magic — Devon Rex and Maine Coon cattery"],
@@ -1030,7 +1034,7 @@ const STR = {
   'step1.p': ["Созваниваемся, разбираю задачу и аудиторию, считаю точную стоимость и сроки. Бесплатно и ни к чему не обязывает.", "Zavoláme si, proberu zadání i publikum a spočítám přesnou cenu a termíny. Zdarma a nezávazně.", "We have a call, I dig into the task and the audience, and calculate the exact cost and timeline. Free and with no obligation."],
   'step1.time': ["1 день", "1 den", "1 day"],
   'step2.h3': ["Прототип и дизайн", "Prototyp a design", "Prototype and design"],
-  'step2.p': ["Сначала структура и тексты, потом визуал. Вы видите кликабельный макет и вносите правки до строчки кода.", "Nejdřív struktura a texty, pak vizuál. Uvidíte klikací maketu a doplníte úpravy ještě před řádkem kódu.", "Structure and copy first, visuals next. You see a clickable mockup and make edits before a single line of code."],
+  'step2.p': ["Сначала структура и тексты, потом визуал. Вы видите кликабельный макет и вносите правки до строчки кода.", "Nejdřív struktura a texty, pak vizuál. Uvidíte klikací maketu a úpravy uděláte ještě před prvním řádkem kódu.", "Structure and copy first, visuals next. You see a clickable mockup and make edits before a single line of code."],
   'step2.time': ["3–7 дней", "3–7 dní", "3–7 days"],
   'step3.h3': ["Разработка и анимации", "Vývoj a animace", "Development and animation"],
   'step3.p': ["Ручная вёрстка, GSAP-анимации, адаптив под все экраны, подключение CMS и форм. Тестирую в реальных браузерах.", "Ruční kódování, GSAP animace, responzivita pro všechny obrazovky, napojení CMS a formulářů. Testuji v reálných prohlížečích.", "Hand-coded markup, GSAP animations, responsive across all screens, CMS and forms wired up. Tested in real browsers."],
@@ -1040,7 +1044,7 @@ const STR = {
   'step4.time': ["1–2 дня", "1–2 dny", "1–2 days"],
 
   'pricing.kicker': ["Цены", "Ceník", "Pricing"],
-  'pricing.h2': ["Фиксированная смета <em>до&nbsp;старта.</em><br> Никаких «ну, так получилось».", "Pevná cena <em>před&nbsp;startem.</em><br> Žádné „no, tak nějak to vyšlo“.", "A fixed quote <em>before&nbsp;we&nbsp;start.</em><br> No “well, that’s how it turned out”."],
+  'pricing.h2': ["Фиксированная смета <em>до&nbsp;старта.</em><br> Никаких «ну, так получилось».", "Pevná cena <em>před&nbsp;startem.</em><br> Žádné „no, nějak to dopadlo“.", "A fixed quote <em>before&nbsp;we&nbsp;start.</em><br> No “well, that’s how it turned out”."],
   'price1.h3': ["Лендинг", "Landing page", "Landing page"],
   'price1.p': ["Одностраничник под продукт, услугу или событие.", "Jednostránka pro produkt, službu nebo událost.", "A one-pager for a product, service or event."],
   'price1.num': ["от $490", "od $490", "from $490"],
@@ -1074,7 +1078,7 @@ const STR = {
 
   'cta.kicker': ["Свободен для проектов — июль 2026", "Volný pro projekty — červenec 2026", "Available for projects — July 2026"],
   'cta.h2': ["Есть идея?<br> Давайте посчитаем.", "Máte nápad?<br> Pojďme to spočítat.", "Got an idea?<br> Let’s price it out."],
-  'cta.p': ["Опишите задачу в двух словах — в течение дня пришлю ориентир по цене и срокам. Бесплатно и без занудных созвонов.", "Popište zadání v pár větách — do dne pošlu orientační cenu a termíny. Zdarma a bez zdlouhavých hovorů.", "Describe the task in a couple of words — within a day I’ll send a ballpark on price and timeline. Free and without tedious calls."],
+  'cta.p': ["Опишите задачу в двух словах — в течение дня пришлю ориентир по цене и срокам. Бесплатно и без занудных созвонов.", "Popište zadání v pár větách — do druhého dne pošlu orientační cenu a termíny. Zdarma a bez zdlouhavých hovorů.", "Describe the task in a couple of words — within a day I’ll send a ballpark on price and timeline. Free and without tedious calls."],
   'cta.mail': ["Написать на почту", "Napsat e-mail", "Send an email"],
 
   'footer.mail': ["Почта", "E-mail", "Email"],
