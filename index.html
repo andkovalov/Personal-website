@@ -1432,8 +1432,11 @@ if (!reduceMotion) {
     const btnX = b.left - s.left + b.width * 0.62;
     const btnY = b.top - s.top + b.height * 0.62;
     const homeX = s.width * 0.66, homeY = s.height * 0.08;
-    /* one shared duration+ease so the slider fill and the button's corner
-       radius finish in perfect lockstep */
+    /* animate to the actual pill radius (half the button height), NOT 999 —
+       otherwise the value passes the visual full-round point in the first ~2%
+       and the button looks instantly rounded. Half-height makes the rounding
+       grow visibly in lockstep with the slider fill. */
+    const pill = b.height / 2;
     const DRAG = 1.3, dragEase = 'power1.inOut';
 
     gsap.set(cur, { x: homeX, y: homeY, scale: 1 });
@@ -1444,7 +1447,7 @@ if (!reduceMotion) {
       .to(cur, { x: kEndX, duration: DRAG, ease: dragEase })
       .to(knob, { left: '80%', duration: DRAG, ease: dragEase }, '<')
       .to(fill, { width: '80%', duration: DRAG, ease: dragEase }, '<')
-      .to(btn, { borderRadius: 999, duration: DRAG, ease: dragEase }, '<')
+      .to(btn, { borderRadius: pill, duration: DRAG, ease: dragEase }, '<')
       .to(cur, { scale: 1, duration: 0.14 })
       /* move to the button and click */
       .to(cur, { x: btnX, y: btnY, duration: 0.8 }, '+=0.25')
