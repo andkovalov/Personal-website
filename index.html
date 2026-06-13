@@ -497,6 +497,7 @@ main{overflow-x:clip;width:100%;max-width:100%}
   margin:22px 0 6px;line-height:1.06;
 }
 .price-num small{display:block;font-size:.4em;color:var(--ink-dim);font-weight:500;font-family:var(--font-body);letter-spacing:0;margin-top:7px}
+.price-num .pn-pre{font-size:.46em;font-weight:600;color:var(--ink-dim);font-family:var(--font-body);letter-spacing:0;margin-right:.2em;vertical-align:.12em}
 .price-term{font-size:13.5px;color:var(--ink-faint);margin-bottom:26px}
 .price-card ul{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:34px;flex-grow:1}
 .price-card li{display:flex;gap:12px;font-size:15px;color:var(--ink-dim);align-items:flex-start}
@@ -881,7 +882,7 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
         <article class="price-card reveal" data-hover>
           <h3 data-i18n="price1.h3">Лендинг</h3>
           <p data-i18n="price1.p">Одностраничник под продукт, услугу или событие.</p>
-          <div class="price-num" data-i18n="price1.num">от $490</div>
+          <div class="price-num" data-i18n="price1.num"><span class="pn-pre">от</span>€1&nbsp;000</div>
           <div class="price-term" data-i18n="price1.term">7–14 дней</div>
           <ul>
             <li data-i18n="price1.li1">Прототип, тексты и дизайн</li>
@@ -897,7 +898,7 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
           <span class="price-badge" data-i18n="price2.badge">Чаще всего выбирают</span>
           <h3 data-i18n="price2.h3">Сайт под ключ</h3>
           <p data-i18n="price2.p">Многостраничный сайт для компании или бренда.</p>
-          <div class="price-num" data-i18n="price2.num">от $990</div>
+          <div class="price-num" data-i18n="price2.num"><span class="pn-pre">от</span>€2&nbsp;220</div>
           <div class="price-term" data-i18n="price2.term">2–4 недели</div>
           <ul>
             <li data-i18n="price2.li1">Всё из тарифа «Лендинг»</li>
@@ -910,13 +911,13 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
         </article>
 
         <article class="price-card reveal" data-hover>
-          <h3 data-i18n="price3.h3">Магазин / веб-апп</h3>
-          <p data-i18n="price3.p">E-commerce или сервис с личным кабинетом.</p>
-          <div class="price-num" data-i18n="price3.num">от $1900</div>
+          <h3 data-i18n="price3.h3">Интернет-магазин</h3>
+          <p data-i18n="price3.p">Полноценный интернет-магазин: каталог, корзина, оплата.</p>
+          <div class="price-num" data-i18n="price3.num"><span class="pn-pre">от</span>€4&nbsp;900</div>
           <div class="price-term" data-i18n="price3.term">от 4 недель</div>
           <ul>
             <li data-i18n="price3.li1">Каталог и онлайн-оплата</li>
-            <li data-i18n="price3.li2">Личный кабинет, интеграции</li>
+            <li data-i18n="price3.li2">Интеграции оплаты и доставки</li>
             <li data-i18n="price3.li3">CRM и автоматизация</li>
             <li data-i18n="price3.li4">Нагрузочное тестирование</li>
             <li data-i18n="price3.li5">Индивидуальная оценка</li>
@@ -1079,7 +1080,7 @@ const STR = {
   'pricing.h2': ["Фиксированная смета <em>до&nbsp;старта.</em><br> Никаких «ну, так получилось».", "Pevná cena <em>před&nbsp;startem.</em><br> Žádné „no, nějak to dopadlo“.", "A fixed quote <em>before&nbsp;we&nbsp;start.</em><br> No “well, that’s how it turned out”."],
   'price1.h3': ["Лендинг", "Landing page", "Landing page"],
   'price1.p': ["Одностраничник под продукт, услугу или событие.", "Jednostránka pro produkt, službu nebo událost.", "A one-pager for a product, service or event."],
-  'price1.num': ["от €1&nbsp;000", "od 25&nbsp;000&nbsp;Kč", "from €1,000"],
+  'price1.num': ["<span class=\"pn-pre\">от</span>€1&nbsp;000", "<span class=\"pn-pre\">od</span>25&nbsp;000&nbsp;Kč", "<span class=\"pn-pre\">from</span>€1,000"],
   'price1.term': ["7–14 дней", "7–14 dní", "7–14 days"],
   'price1.li1': ["Прототип, тексты и дизайн", "Prototyp, texty a design", "Prototype, copy and design"],
   'price1.li2': ["Ручная вёрстка + анимации", "Ruční kódování + animace", "Hand-coded markup + animation"],
@@ -1089,19 +1090,19 @@ const STR = {
   'price2.badge': ["Чаще всего выбирают", "Nejčastější volba", "Most popular"],
   'price2.h3': ["Сайт под ключ", "Web na míru", "Turnkey website"],
   'price2.p': ["Многостраничный сайт для компании или бренда.", "Vícestránkový web pro firmu nebo značku.", "A multi-page site for a company or brand."],
-  'price2.num': ["от €2&nbsp;220", "od 55&nbsp;000&nbsp;Kč", "from €2,220"],
+  'price2.num': ["<span class=\"pn-pre\">от</span>€2&nbsp;220", "<span class=\"pn-pre\">od</span>55&nbsp;000&nbsp;Kč", "<span class=\"pn-pre\">from</span>€2,220"],
   'price2.term': ["2–4 недели", "2–4 týdny", "2–4 weeks"],
   'price2.li1': ["Всё из тарифа «Лендинг»", "Vše z balíčku „Landing page“", "Everything in “Landing page”"],
   'price2.li2': ["До 8 уникальных страниц", "Až 8 unikátních stránek", "Up to 8 unique pages"],
   'price2.li3': ["CMS — сами меняете контент", "CMS — obsah měníte sami", "CMS — edit content yourself"],
   'price2.li4': ["Блог и SEO-структура", "Blog a SEO struktura", "Blog and SEO structure"],
   'price2.li5': ["Месяц поддержки после запуска", "Měsíc podpory po spuštění", "A month of support after launch"],
-  'price3.h3': ["Магазин / веб-апп", "Obchod / webová aplikace", "Store / web app"],
-  'price3.p': ["E-commerce или сервис с личным кабинетом.", "E-commerce nebo služba s uživatelským účtem.", "E-commerce or a service with a user account."],
-  'price3.num': ["от €4&nbsp;900", "od 120&nbsp;000&nbsp;Kč", "from €4,900"],
+  'price3.h3': ["Интернет-магазин", "E-shop", "Online store"],
+  'price3.p': ["Полноценный интернет-магазин: каталог, корзина, оплата.", "Plnohodnotný e-shop: katalog, košík, platba.", "A full online store: catalogue, cart, checkout."],
+  'price3.num': ["<span class=\"pn-pre\">от</span>€4&nbsp;900", "<span class=\"pn-pre\">od</span>120&nbsp;000&nbsp;Kč", "<span class=\"pn-pre\">from</span>€4,900"],
   'price3.term': ["от 4 недель", "od 4 týdnů", "from 4 weeks"],
   'price3.li1': ["Каталог и онлайн-оплата", "Katalog a online platba", "Catalogue and online payment"],
-  'price3.li2': ["Личный кабинет, интеграции", "Uživatelský účet, integrace", "User account, integrations"],
+  'price3.li2': ["Интеграции оплаты и доставки", "Integrace plateb a dopravy", "Payment & delivery integrations"],
   'price3.li3': ["CRM и автоматизация", "CRM a automatizace", "CRM and automation"],
   'price3.li4': ["Нагрузочное тестирование", "Zátěžové testování", "Load testing"],
   'price3.li5': ["Индивидуальная оценка", "Individuální odhad", "Individual estimate"],
