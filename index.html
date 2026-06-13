@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Андрей Ковалев — сайт под ключ: дизайн и разработка</title>
-<meta name="description" content="Веб-дизайнер и fullstack-разработчик. Делаю сайты под ключ, которые продают: дизайн, код, анимации, SEO и запуск — в одних руках.">
+<title data-i18n="meta.title">Андрей Ковалев — сайт под ключ: дизайн и разработка</title>
+<meta name="description" data-i18n-content="meta.desc" content="Веб-дизайнер и fullstack-разработчик. Делаю сайты под ключ, которые продают: дизайн, код, анимации, SEO и запуск — в одних руках.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23d7fb44'/%3E%3Ctext x='32' y='42' font-family='Arial Black' font-size='28' font-weight='900' text-anchor='middle' fill='%230a0a0b'%3EAK%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -96,6 +96,14 @@ main{overflow-x:clip;width:100%;max-width:100%}
   transition:transform .3s,box-shadow .3s;
 }
 .nav-cta:hover{transform:scale(1.05);box-shadow:0 0 24px rgba(215,251,68,.35)}
+.lang-switch{display:flex;align-items:center;gap:1px;margin-right:6px}
+.lang-switch button{
+  font-family:var(--font-body);font-size:12px;font-weight:600;letter-spacing:.04em;
+  color:var(--ink-faint);background:transparent;border:none;cursor:pointer;
+  padding:7px 9px;border-radius:999px;transition:color .3s,background .3s;
+}
+.lang-switch button:hover{color:var(--ink)}
+.lang-switch button.is-active{color:var(--lime-ink);background:var(--lime)}
 .burger{
   display:none;width:42px;height:42px;border:none;background:rgba(242,240,234,.07);
   border-radius:50%;cursor:pointer;position:relative;flex-shrink:0;
@@ -109,10 +117,17 @@ main{overflow-x:clip;width:100%;max-width:100%}
 .menu-open .burger span:nth-child(1){top:20px;transform:rotate(45deg)}
 .menu-open .burger span:nth-child(2){top:20px;transform:rotate(-45deg)}
 @media (max-width:760px){
-  .nav-links,.nav .nav-cta{display:none}
+  .nav-links,.nav .nav-cta,.nav .lang-switch{display:none}
   .burger{display:block}
   .nav{padding:8px 8px 8px 18px;gap:12px}
 }
+.mobile-lang{display:flex;gap:8px;margin-top:46px}
+.mobile-lang button{
+  font-family:var(--font-display);font-weight:700;font-size:15px;letter-spacing:.04em;
+  color:var(--ink-dim);background:rgba(242,240,234,.06);border:1px solid var(--line);
+  border-radius:999px;padding:12px 22px;cursor:pointer;transition:color .3s,background .3s,border-color .3s;
+}
+.mobile-lang button.is-active{color:var(--lime-ink);background:var(--lime);border-color:var(--lime)}
 .mobile-menu{
   position:fixed;inset:0;z-index:90;background:rgba(10,10,11,.97);
   backdrop-filter:blur(10px);display:flex;flex-direction:column;justify-content:center;
@@ -513,23 +528,33 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
 <nav class="nav" id="nav">
   <a class="nav-logo" href="#top">ANDREY<em>.</em>KOVALOV</a>
   <div class="nav-links">
-    <a href="#raboty" data-hover>Работы</a>
-    <a href="#uslugi" data-hover>Услуги</a>
-    <a href="#process" data-hover>Процесс</a>
-    <a href="#tseny" data-hover>Цены</a>
+    <a href="#raboty" data-hover data-i18n="nav.works">Работы</a>
+    <a href="#uslugi" data-hover data-i18n="nav.services">Услуги</a>
+    <a href="#process" data-hover data-i18n="nav.process">Процесс</a>
+    <a href="#tseny" data-hover data-i18n="nav.pricing">Цены</a>
   </div>
-  <a class="nav-cta" href="https://cal.com/andkovalov/first-talk" target="_blank" rel="noopener" data-hover>Обсудить проект</a>
+  <div class="lang-switch" id="langSwitch" role="group" aria-label="Язык / Language">
+    <button type="button" data-lang="ru">RU</button>
+    <button type="button" data-lang="cs">CZ</button>
+    <button type="button" data-lang="en">EN</button>
+  </div>
+  <a class="nav-cta" href="https://cal.com/andkovalov/first-talk" target="_blank" rel="noopener" data-hover data-i18n="btn.discuss">Обсудить проект</a>
   <button class="burger" id="burger" aria-label="Меню">
     <span></span><span></span>
   </button>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#raboty">Работы <small>01</small></a>
-  <a href="#uslugi">Услуги <small>02</small></a>
-  <a href="#process">Процесс <small>03</small></a>
-  <a href="#tseny">Цены <small>04</small></a>
-  <a href="#kontakt">Контакт <small>05</small></a>
+  <a href="#raboty"><span data-i18n="nav.works">Работы</span> <small>01</small></a>
+  <a href="#uslugi"><span data-i18n="nav.services">Услуги</span> <small>02</small></a>
+  <a href="#process"><span data-i18n="nav.process">Процесс</span> <small>03</small></a>
+  <a href="#tseny"><span data-i18n="nav.pricing">Цены</span> <small>04</small></a>
+  <a href="#kontakt"><span data-i18n="nav.contact">Контакт</span> <small>05</small></a>
+  <div class="mobile-lang" id="mobileLang">
+    <button type="button" data-lang="ru">RU</button>
+    <button type="button" data-lang="cs">CZ</button>
+    <button type="button" data-lang="en">EN</button>
+  </div>
 </div>
 
 <main id="top">
@@ -542,43 +567,43 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
     <div class="hero-veil" aria-hidden="true"></div>
 
     <div class="hero-inner">
-      <p class="hero-eyebrow reveal-hero">Андрей Ковалев — <b>веб-дизайнер и fullstack-разработчик</b></p>
+      <p class="hero-eyebrow reveal-hero" data-i18n="hero.eyebrow">Андрей Ковалев — <b>веб-дизайнер и fullstack-разработчик</b></p>
 
       <h1>
-        <span class="h1-top" data-split>Сайты, которые</span>
-        <span class="h1-big" data-split>продают</span>
+        <span class="h1-top" data-split data-i18n="hero.h1top">Сайты, которые</span>
+        <span class="h1-big" data-split data-i18n="hero.h1big">продают</span>
       </h1>
 
-      <p class="hero-sub reveal-hero">Дизайн и код под ключ — от первого эскиза до запуска, скорости и SEO. Один человек, полная ответственность за результат.</p>
+      <p class="hero-sub reveal-hero" data-i18n="hero.sub">Дизайн и код под ключ — от первого эскиза до запуска, скорости и SEO. Один человек, полная ответственность за результат.</p>
 
       <div class="hero-ctas reveal-hero">
         <a class="btn btn-primary" href="https://cal.com/andkovalov/first-talk" target="_blank" rel="noopener" data-hover>
-          Обсудить проект
+          <span data-i18n="btn.discuss">Обсудить проект</span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <a class="btn btn-ghost" href="#raboty" data-hover>Смотреть работы</a>
+        <a class="btn btn-ghost" href="#raboty" data-hover data-i18n="hero.work">Смотреть работы</a>
       </div>
     </div>
 
-    <div class="hero-corner l">Прага —<br>работаю по всему миру</div>
-    <div class="hero-corner r">Свободен для проектов<br>июль 2026</div>
-    <div class="hero-scroll">скролл</div>
+    <div class="hero-corner l" data-i18n="hero.cornerL">Прага —<br>работаю по всему миру</div>
+    <div class="hero-corner r" data-i18n="hero.cornerR">Свободен для проектов<br>июль 2026</div>
+    <div class="hero-scroll" data-i18n="hero.scroll">скролл</div>
   </header>
 
   <!-- ======== MARQUEE ======== -->
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track">
-      <span>Лендинги</span><span>Корпоративные сайты</span><span>E-commerce</span><span>UI/UX дизайн</span><span>GSAP-анимации</span><span>SEO и скорость</span><span>Поддержка</span>
-      <span>Лендинги</span><span>Корпоративные сайты</span><span>E-commerce</span><span>UI/UX дизайн</span><span>GSAP-анимации</span><span>SEO и скорость</span><span>Поддержка</span>
+      <span data-i18n="mq.landing">Лендинги</span><span data-i18n="mq.corporate">Корпоративные сайты</span><span data-i18n="mq.ecom">E-commerce</span><span data-i18n="mq.uiux">UI/UX дизайн</span><span data-i18n="mq.gsap">GSAP-анимации</span><span data-i18n="mq.seo">SEO и скорость</span><span data-i18n="mq.support">Поддержка</span>
+      <span data-i18n="mq.landing">Лендинги</span><span data-i18n="mq.corporate">Корпоративные сайты</span><span data-i18n="mq.ecom">E-commerce</span><span data-i18n="mq.uiux">UI/UX дизайн</span><span data-i18n="mq.gsap">GSAP-анимации</span><span data-i18n="mq.seo">SEO и скорость</span><span data-i18n="mq.support">Поддержка</span>
     </div>
   </div>
 
   <!-- ======== BENTO / USLUGI ======== -->
   <section class="section" id="uslugi">
     <div class="wrap">
-      <p class="kicker reveal">Что вы получаете</p>
-      <h2 class="h2 reveal">Один подрядчик — <em>весь стек</em></h2>
-      <p class="section-sub reveal">Без испорченного телефона между дизайнером и программистом: стратегия, макет и код не теряют смысл по дороге.</p>
+      <p class="kicker reveal" data-i18n="services.kicker">Что вы получаете</p>
+      <h2 class="h2 reveal" data-i18n="services.h2">Один подрядчик — <em>весь стек</em></h2>
+      <p class="section-sub reveal" data-i18n="services.sub">Без испорченного телефона между дизайнером и программистом: стратегия, макет и код не теряют смысл по дороге.</p>
 
       <div class="bento">
         <article class="bento-card bento-a reveal" data-hover>
@@ -592,7 +617,7 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
               <div class="ds-select">
                 <i></i><i></i><i></i><i></i>
                 <span class="ds-ripple"></span>
-                <button class="ds-btn" tabindex="-1">Оставить заявку</button>
+                <button class="ds-btn" tabindex="-1" data-i18n="ds.btn">Оставить заявку</button>
               </div>
               <div class="ds-pointer ds-pointer-me">
                 <svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 1.5 17 12l-6.6 1L13 19l-3 1.4-2.6-6L2 18z" fill="#f2f0ea" stroke="#0a0a0b" stroke-width="1"/></svg>
@@ -600,14 +625,14 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
               </div>
               <div class="ds-pointer ds-pointer-client">
                 <svg width="20" height="20" viewBox="0 0 20 20"><path d="M2 1.5 17 12l-6.6 1L13 19l-3 1.4-2.6-6L2 18z" fill="#f2f0ea" stroke="#0a0a0b" stroke-width="1"/></svg>
-                <span class="ds-tag">клиент</span>
+                <span class="ds-tag" data-i18n="ds.client">клиент</span>
               </div>
             </div>
           </div>
-          <h3>Дизайн, который ведёт к кнопке</h3>
-          <p>Не «красивые картинки», а продуманный путь клиента: каждый экран отвечает на возражение и подталкивает к заявке.</p>
+          <h3 data-i18n="bento.design.h3">Дизайн, который ведёт к кнопке</h3>
+          <p data-i18n="bento.design.p">Не «красивые картинки», а продуманный путь клиента: каждый экран отвечает на возражение и подталкивает к заявке.</p>
           <div class="bento-tags">
-            <i>UX-логика</i><i>Прототип</i><i>Фирменный стиль</i><i>Анимации</i>
+            <i data-i18n="bento.tag.ux">UX-логика</i><i data-i18n="bento.tag.proto">Прототип</i><i data-i18n="bento.tag.brand">Фирменный стиль</i><i data-i18n="bento.tag.anim">Анимации</i>
           </div>
         </article>
 
@@ -615,20 +640,20 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
           <div class="bento-media stage">
             <pre class="code-stage" aria-hidden="true"><code id="codeType"></code><span class="code-caret"></span></pre>
           </div>
-          <h3>Чистый код, а не конструктор</h3>
-          <p>Ручная вёрстка, GSAP-анимации, удобная CMS. Сайт легко расширять, он не разваливается через год.</p>
+          <h3 data-i18n="bento.code.h3">Чистый код, а не конструктор</h3>
+          <p data-i18n="bento.code.p">Ручная вёрстка, GSAP-анимации, удобная CMS. Сайт легко расширять, он не разваливается через год.</p>
         </article>
 
         <article class="bento-card reveal" data-hover>
           <div class="bento-num"><span data-count="100">0</span><small>/100</small></div>
-          <h3>PageSpeed</h3>
-          <p>Оптимизирую до зелёной зоны Google: быстрый сайт ранжируется выше и теряет меньше клиентов.</p>
+          <h3 data-i18n="bento.ps.h3">PageSpeed</h3>
+          <p data-i18n="bento.ps.p">Оптимизирую до зелёной зоны Google: быстрый сайт ранжируется выше и теряет меньше клиентов.</p>
         </article>
 
         <article class="bento-card reveal" data-hover>
-          <div class="bento-num"><span data-count="14">0</span><small>&nbsp;дней</small></div>
-          <h3>Средний срок запуска</h3>
-          <p>Лендинг — от брифа до публикации за две недели. Фиксированная смета до старта работ.</p>
+          <div class="bento-num"><span data-count="14">0</span><small data-i18n="bento.days.unit">&nbsp;дней</small></div>
+          <h3 data-i18n="bento.days.h3">Средний срок запуска</h3>
+          <p data-i18n="bento.days.p">Лендинг — от брифа до публикации за две недели. Фиксированная смета до старта работ.</p>
         </article>
       </div>
     </div>
@@ -637,7 +662,7 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
   <!-- ======== MANIFESTO ======== -->
   <section class="section" style="padding-top:0">
     <div class="wrap manifesto">
-      <p id="manifesto-text">Красивый сайт — это минимум. Я проектирую путь клиента: от первого взгляда до заявки. Каждый экран отвечает на вопрос и ведёт дальше — поэтому мои сайты окупаются, а не просто висят в портфолио.</p>
+      <p id="manifesto-text" data-i18n="manifesto">Красивый сайт — это минимум. Я проектирую путь клиента: от первого взгляда до заявки. Каждый экран отвечает на вопрос и ведёт дальше — поэтому мои сайты окупаются, а не просто висят в портфолио.</p>
     </div>
   </section>
 
@@ -646,8 +671,8 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
     <div class="wrap">
       <div class="cases-head">
         <div>
-          <p class="kicker reveal">Избранные работы</p>
-          <h2 class="h2 reveal">Проекты, которые<br> уже <em>приносят заявки</em></h2>
+          <p class="kicker reveal" data-i18n="cases.kicker">Избранные работы</p>
+          <h2 class="h2 reveal" data-i18n="cases.h2">Проекты, которые<br> уже <em>приносят заявки</em></h2>
         </div>
       </div>
 
@@ -655,106 +680,106 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
         <article class="case" data-hover>
           <div class="case-info">
             <div>
-              <p class="case-idx">/ 01 — Корпоративный сайт с нуля</p>
+              <p class="case-idx" data-i18n="case.deltag.idx">/ 01 — Корпоративный сайт с нуля</p>
               <h3>Delta&nbsp;G</h3>
-              <p>Геодезическая фирма со старым сайтом, который отпугивал жаргоном и терял заказы. Пересобрал всё с нуля на новом коде: услуги переписаны с профессионального языка на жизненные ситуации для частных клиентов, а B2B-направление переосмыслено в полноценный корпоративный сайт. Куки-баннер, политика, отдельные SEO-страницы под каждую услугу.</p>
+              <p data-i18n="case.deltag.desc">Геодезическая фирма со старым сайтом, который отпугивал жаргоном и терял заказы. Пересобрал всё с нуля на новом коде: услуги переписаны с профессионального языка на жизненные ситуации для частных клиентов, а B2B-направление переосмыслено в полноценный корпоративный сайт. Куки-баннер, политика, отдельные SEO-страницы под каждую услугу.</p>
             </div>
             <div class="case-foot">
               <div class="case-metric">
-                <b>11 страниц</b>
-                <span>единая дизайн-система, PageSpeed под сотню по всем метрикам</span>
+                <b data-i18n="case.deltag.mb">11 страниц</b>
+                <span data-i18n="case.deltag.ms">единая дизайн-система, PageSpeed под сотню по всем метрикам</span>
               </div>
               <a class="case-link" href="https://deltag.vercel.app/" target="_blank" rel="noopener" data-hover>
-                Открыть сайт
+                <span data-i18n="case.open">Открыть сайт</span>
                 <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 12 12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </a>
             </div>
           </div>
-          <div class="case-media cm-deltag"><img src="assets/cases/deltag.png" alt="Delta G — антикризисный редизайн сайта геодезической фирмы" loading="lazy" width="640" height="435"></div>
+          <div class="case-media cm-deltag"><img src="assets/cases/deltag.png" data-i18n-alt="case.deltag.alt" alt="Delta G — антикризисный редизайн сайта геодезической фирмы" loading="lazy" width="640" height="435"></div>
         </article>
 
         <article class="case" data-hover>
           <div class="case-info">
             <div>
-              <p class="case-idx">/ 02 — Веб-сервис</p>
+              <p class="case-idx" data-i18n="case.notadocs.idx">/ 02 — Веб-сервис</p>
               <h3>NotaDocs</h3>
-              <p>Сервис юридических документов для украинцев в Германии: двуязычные доверенности и заявления онлайн, без очередей. Понятный путь от вопроса до готового документа.</p>
+              <p data-i18n="case.notadocs.desc">Сервис юридических документов для украинцев в Германии: двуязычные доверенности и заявления онлайн, без очередей. Понятный путь от вопроса до готового документа.</p>
             </div>
             <div class="case-foot">
               <div class="case-metric">
                 <b>30%</b>
-                <span>посетителей оставляют заявку</span>
+                <span data-i18n="case.notadocs.ms">посетителей оставляют заявку</span>
               </div>
               <a class="case-link" href="https://notadocs.de/" target="_blank" rel="noopener" data-hover>
-                Открыть сайт
+                <span data-i18n="case.open">Открыть сайт</span>
                 <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 12 12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </a>
             </div>
           </div>
-          <div class="case-media cm-notadocs"><img src="assets/cases/notadocs.png" alt="NotaDocs — юридические документы онлайн" loading="lazy" width="640" height="435"></div>
+          <div class="case-media cm-notadocs"><img src="assets/cases/notadocs.png" data-i18n-alt="case.notadocs.alt" alt="NotaDocs — юридические документы онлайн" loading="lazy" width="640" height="435"></div>
         </article>
 
         <article class="case" data-hover>
           <div class="case-info">
             <div>
-              <p class="case-idx">/ 03 — Личный бренд</p>
+              <p class="case-idx" data-i18n="case.tattoo.idx">/ 03 — Личный бренд</p>
               <h3>Kovalov Tattoo</h3>
-              <p>Сайт тату-мастера в Праге: портфолио fine-line работ, прайс, FAQ и запись — на трёх языках. Минимализм, где убрано всё лишнее и не потеряно ничего важного.</p>
+              <p data-i18n="case.tattoo.desc">Сайт тату-мастера в Праге: портфолио fine-line работ, прайс, FAQ и запись — на трёх языках. Минимализм, где убрано всё лишнее и не потеряно ничего важного.</p>
             </div>
             <div class="case-foot">
               <div class="case-metric">
                 <b>100/100</b>
-                <span>PageSpeed Insights по всем метрикам</span>
+                <span data-i18n="case.tattoo.ms">PageSpeed Insights по всем метрикам</span>
               </div>
               <a class="case-link" href="https://kovalov.tattoo/" target="_blank" rel="noopener" data-hover>
-                Открыть сайт
+                <span data-i18n="case.open">Открыть сайт</span>
                 <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 12 12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </a>
             </div>
           </div>
-          <div class="case-media cm-tattoo"><img src="assets/cases/kovalov-tattoo.png" alt="Kovalov Tattoo — сайт тату-мастера" loading="lazy" width="640" height="435"></div>
+          <div class="case-media cm-tattoo"><img src="assets/cases/kovalov-tattoo.png" data-i18n-alt="case.tattoo.alt" alt="Kovalov Tattoo — сайт тату-мастера" loading="lazy" width="640" height="435"></div>
         </article>
 
         <article class="case" data-hover>
           <div class="case-info">
             <div>
-              <p class="case-idx">/ 04 — Корпоративный сайт</p>
+              <p class="case-idx" data-i18n="case.ucet.idx">/ 04 — Корпоративный сайт</p>
               <h3>Účetnictví Vladimirová</h3>
-              <p>Бухгалтерская компания в Праге: шесть услуг, прозрачные тарифы, онбординг за три шага. Спокойный дизайн, который вызывает доверие у консервативной аудитории.</p>
+              <p data-i18n="case.ucet.desc">Бухгалтерская компания в Праге: шесть услуг, прозрачные тарифы, онбординг за три шага. Спокойный дизайн, который вызывает доверие у консервативной аудитории.</p>
             </div>
             <div class="case-foot">
               <div class="case-metric">
                 <b>CZ&nbsp;+&nbsp;RU</b>
-                <span>два языка под локальный рынок</span>
+                <span data-i18n="case.ucet.ms">два языка под локальный рынок</span>
               </div>
               <a class="case-link" href="https://ucetnictvi-vladimirova.vercel.app/" target="_blank" rel="noopener" data-hover>
-                Открыть сайт
+                <span data-i18n="case.open">Открыть сайт</span>
                 <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 12 12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </a>
             </div>
           </div>
-          <div class="case-media cm-ucet"><img src="assets/cases/ucetnictvi.png" alt="Účetnictví Vladimirová — бухгалтерские услуги в Праге" loading="lazy" width="640" height="435"></div>
+          <div class="case-media cm-ucet"><img src="assets/cases/ucetnictvi.png" data-i18n-alt="case.ucet.alt" alt="Účetnictví Vladimirová — бухгалтерские услуги в Праге" loading="lazy" width="640" height="435"></div>
         </article>
 
         <article class="case" data-hover>
           <div class="case-info">
             <div>
-              <p class="case-idx">/ 05 — E-commerce</p>
+              <p class="case-idx" data-i18n="case.magic.idx">/ 05 — E-commerce</p>
               <h3>Just Magic</h3>
-              <p>Питомник Devon Rex и Maine Coon с доставкой по миру: каталог котят, отзывы, блог. Тёплый, эмоциональный сайт, который влюбляет в котёнка ещё до первого видеозвонка.</p>
+              <p data-i18n="case.magic.desc">Питомник Devon Rex и Maine Coon с доставкой по миру: каталог котят, отзывы, блог. Тёплый, эмоциональный сайт, который влюбляет в котёнка ещё до первого видеозвонка.</p>
             </div>
             <div class="case-foot">
               <div class="case-metric">
-                <b>12+ стран</b>
-                <span>куда уехали котята с этого сайта</span>
+                <b data-i18n="case.magic.mb">12+ стран</b>
+                <span data-i18n="case.magic.ms">куда уехали котята с этого сайта</span>
               </div>
               <a class="case-link" href="https://www.justmagic.best/" target="_blank" rel="noopener" data-hover>
-                Открыть сайт
+                <span data-i18n="case.open">Открыть сайт</span>
                 <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 12 12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </a>
             </div>
           </div>
-          <div class="case-media cm-magic"><img src="assets/cases/justmagic.png" alt="Just Magic — питомник Devon Rex и Maine Coon" loading="lazy" width="640" height="435"></div>
+          <div class="case-media cm-magic"><img src="assets/cases/justmagic.png" data-i18n-alt="case.magic.alt" alt="Just Magic — питомник Devon Rex и Maine Coon" loading="lazy" width="640" height="435"></div>
         </article>
       </div>
     </div>
@@ -764,11 +789,11 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
   <section class="section" id="process">
     <div class="wrap process-grid">
       <div class="process-left" id="processLeft">
-        <p class="kicker">Как идёт работа</p>
-        <h2 class="h2">Прозрачный процесс<br> без <em>сюрпризов</em></h2>
-        <p>Вы всегда знаете, на каком этапе проект, сколько он стоит и когда будет готов. Смета фиксируется до начала работ.</p>
+        <p class="kicker" data-i18n="process.kicker">Как идёт работа</p>
+        <h2 class="h2" data-i18n="process.h2">Прозрачный процесс<br> без <em>сюрпризов</em></h2>
+        <p data-i18n="process.p">Вы всегда знаете, на каком этапе проект, сколько он стоит и когда будет готов. Смета фиксируется до начала работ.</p>
         <a class="btn btn-primary" href="#kontakt" data-hover>
-          Начать с брифа
+          <span data-i18n="process.cta">Начать с брифа</span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
@@ -777,33 +802,33 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
         <div class="step reveal">
           <div class="step-num">01</div>
           <div>
-            <h3>Бриф и смета</h3>
-            <p>Созваниваемся, разбираю задачу и аудиторию, считаю точную стоимость и сроки. Бесплатно и ни к чему не обязывает.</p>
-            <span class="step-time">1 день</span>
+            <h3 data-i18n="step1.h3">Бриф и смета</h3>
+            <p data-i18n="step1.p">Созваниваемся, разбираю задачу и аудиторию, считаю точную стоимость и сроки. Бесплатно и ни к чему не обязывает.</p>
+            <span class="step-time" data-i18n="step1.time">1 день</span>
           </div>
         </div>
         <div class="step reveal">
           <div class="step-num">02</div>
           <div>
-            <h3>Прототип и дизайн</h3>
-            <p>Сначала структура и тексты, потом визуал. Вы видите кликабельный макет и вносите правки до строчки кода.</p>
-            <span class="step-time">3–7 дней</span>
+            <h3 data-i18n="step2.h3">Прототип и дизайн</h3>
+            <p data-i18n="step2.p">Сначала структура и тексты, потом визуал. Вы видите кликабельный макет и вносите правки до строчки кода.</p>
+            <span class="step-time" data-i18n="step2.time">3–7 дней</span>
           </div>
         </div>
         <div class="step reveal">
           <div class="step-num">03</div>
           <div>
-            <h3>Разработка и анимации</h3>
-            <p>Ручная вёрстка, GSAP-анимации, адаптив под все экраны, подключение CMS и форм. Тестирую в реальных браузерах.</p>
-            <span class="step-time">5–10 дней</span>
+            <h3 data-i18n="step3.h3">Разработка и анимации</h3>
+            <p data-i18n="step3.p">Ручная вёрстка, GSAP-анимации, адаптив под все экраны, подключение CMS и форм. Тестирую в реальных браузерах.</p>
+            <span class="step-time" data-i18n="step3.time">5–10 дней</span>
           </div>
         </div>
         <div class="step reveal">
           <div class="step-num">04</div>
           <div>
-            <h3>Запуск и поддержка</h3>
-            <p>Домен, хостинг, аналитика, базовое SEO. После запуска — месяц бесплатной поддержки и мелких правок.</p>
-            <span class="step-time">1–2 дня</span>
+            <h3 data-i18n="step4.h3">Запуск и поддержка</h3>
+            <p data-i18n="step4.p">Домен, хостинг, аналитика, базовое SEO. После запуска — месяц бесплатной поддержки и мелких правок.</p>
+            <span class="step-time" data-i18n="step4.time">1–2 дня</span>
           </div>
         </div>
       </div>
@@ -813,54 +838,54 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
   <!-- ======== PRICING ======== -->
   <section class="section" id="tseny" style="padding-top:0">
     <div class="wrap">
-      <p class="kicker reveal">Цены</p>
-      <h2 class="h2 reveal">Фиксированная смета <em>до&nbsp;старта.</em><br> Никаких «ну, так получилось».</h2>
+      <p class="kicker reveal" data-i18n="pricing.kicker">Цены</p>
+      <h2 class="h2 reveal" data-i18n="pricing.h2">Фиксированная смета <em>до&nbsp;старта.</em><br> Никаких «ну, так получилось».</h2>
 
       <div class="pricing-grid">
         <article class="price-card reveal" data-hover>
-          <h3>Лендинг</h3>
-          <p>Одностраничник под продукт, услугу или событие.</p>
-          <div class="price-num">от $490</div>
-          <div class="price-term">7–14 дней</div>
+          <h3 data-i18n="price1.h3">Лендинг</h3>
+          <p data-i18n="price1.p">Одностраничник под продукт, услугу или событие.</p>
+          <div class="price-num" data-i18n="price1.num">от $490</div>
+          <div class="price-term" data-i18n="price1.term">7–14 дней</div>
           <ul>
-            <li>Прототип, тексты и дизайн</li>
-            <li>Ручная вёрстка + анимации</li>
-            <li>Адаптив под все устройства</li>
-            <li>Формы заявок и аналитика</li>
-            <li>Базовое SEO и запуск</li>
+            <li data-i18n="price1.li1">Прототип, тексты и дизайн</li>
+            <li data-i18n="price1.li2">Ручная вёрстка + анимации</li>
+            <li data-i18n="price1.li3">Адаптив под все устройства</li>
+            <li data-i18n="price1.li4">Формы заявок и аналитика</li>
+            <li data-i18n="price1.li5">Базовое SEO и запуск</li>
           </ul>
-          <a class="btn btn-ghost" href="#kontakt" data-hover>Выбрать</a>
+          <a class="btn btn-ghost" href="#kontakt" data-hover data-i18n="price.choose">Выбрать</a>
         </article>
 
         <article class="price-card is-featured reveal" data-hover>
-          <span class="price-badge">Чаще всего выбирают</span>
-          <h3>Сайт под ключ</h3>
-          <p>Многостраничный сайт для компании или бренда.</p>
-          <div class="price-num">от $990</div>
-          <div class="price-term">2–4 недели</div>
+          <span class="price-badge" data-i18n="price2.badge">Чаще всего выбирают</span>
+          <h3 data-i18n="price2.h3">Сайт под ключ</h3>
+          <p data-i18n="price2.p">Многостраничный сайт для компании или бренда.</p>
+          <div class="price-num" data-i18n="price2.num">от $990</div>
+          <div class="price-term" data-i18n="price2.term">2–4 недели</div>
           <ul>
-            <li>Всё из тарифа «Лендинг»</li>
-            <li>До 8 уникальных страниц</li>
-            <li>CMS — сами меняете контент</li>
-            <li>Блог и SEO-структура</li>
-            <li>Месяц поддержки после запуска</li>
+            <li data-i18n="price2.li1">Всё из тарифа «Лендинг»</li>
+            <li data-i18n="price2.li2">До 8 уникальных страниц</li>
+            <li data-i18n="price2.li3">CMS — сами меняете контент</li>
+            <li data-i18n="price2.li4">Блог и SEO-структура</li>
+            <li data-i18n="price2.li5">Месяц поддержки после запуска</li>
           </ul>
-          <a class="btn btn-primary" href="#kontakt" data-hover>Выбрать</a>
+          <a class="btn btn-primary" href="#kontakt" data-hover data-i18n="price.choose">Выбрать</a>
         </article>
 
         <article class="price-card reveal" data-hover>
-          <h3>Магазин / веб-апп</h3>
-          <p>E-commerce или сервис с личным кабинетом.</p>
-          <div class="price-num">от $1900</div>
-          <div class="price-term">от 4 недель</div>
+          <h3 data-i18n="price3.h3">Магазин / веб-апп</h3>
+          <p data-i18n="price3.p">E-commerce или сервис с личным кабинетом.</p>
+          <div class="price-num" data-i18n="price3.num">от $1900</div>
+          <div class="price-term" data-i18n="price3.term">от 4 недель</div>
           <ul>
-            <li>Каталог и онлайн-оплата</li>
-            <li>Личный кабинет, интеграции</li>
-            <li>CRM и автоматизация</li>
-            <li>Нагрузочное тестирование</li>
-            <li>Индивидуальная оценка</li>
+            <li data-i18n="price3.li1">Каталог и онлайн-оплата</li>
+            <li data-i18n="price3.li2">Личный кабинет, интеграции</li>
+            <li data-i18n="price3.li3">CRM и автоматизация</li>
+            <li data-i18n="price3.li4">Нагрузочное тестирование</li>
+            <li data-i18n="price3.li5">Индивидуальная оценка</li>
           </ul>
-          <a class="btn btn-ghost" href="#kontakt" data-hover>Обсудить</a>
+          <a class="btn btn-ghost" href="#kontakt" data-hover data-i18n="price.discuss">Обсудить</a>
         </article>
       </div>
     </div>
@@ -870,12 +895,12 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
   <section class="section cta" id="kontakt">
     <div class="cta-orb"></div>
     <div class="wrap">
-      <p class="kicker reveal" style="justify-content:center;display:flex">Свободен для проектов — июль 2026</p>
-      <h2 class="reveal">Есть идея?<br> Давайте посчитаем.</h2>
-      <p class="reveal">Опишите задачу в двух словах — в течение дня пришлю ориентир по цене и срокам. Бесплатно и без занудных созвонов.</p>
+      <p class="kicker reveal" style="justify-content:center;display:flex" data-i18n="cta.kicker">Свободен для проектов — июль 2026</p>
+      <h2 class="reveal" data-i18n="cta.h2">Есть идея?<br> Давайте посчитаем.</h2>
+      <p class="reveal" data-i18n="cta.p">Опишите задачу в двух словах — в течение дня пришлю ориентир по цене и срокам. Бесплатно и без занудных созвонов.</p>
       <div class="cta-actions reveal">
         <a class="btn btn-primary" href="mailto:andkovalov@gmail.com?subject=Хочу сайт" data-hover>
-          Написать на почту
+          <span data-i18n="cta.mail">Написать на почту</span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a class="btn btn-ghost" href="https://t.me/andkovalov" target="_blank" rel="noopener" data-hover>Telegram</a>
@@ -890,13 +915,13 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
   <div class="wrap footer-grid">
     <a class="footer-logo" href="#top">ANDREY<em>.</em>KOVALOV</a>
     <nav class="footer-nav">
-      <a href="#raboty" data-hover>Работы</a>
-      <a href="#uslugi" data-hover>Услуги</a>
-      <a href="#process" data-hover>Процесс</a>
-      <a href="#tseny" data-hover>Цены</a>
-      <a href="mailto:andkovalov@gmail.com" data-hover>Почта</a>
+      <a href="#raboty" data-hover data-i18n="nav.works">Работы</a>
+      <a href="#uslugi" data-hover data-i18n="nav.services">Услуги</a>
+      <a href="#process" data-hover data-i18n="nav.process">Процесс</a>
+      <a href="#tseny" data-hover data-i18n="nav.pricing">Цены</a>
+      <a href="mailto:andkovalov@gmail.com" data-hover data-i18n="footer.mail">Почта</a>
     </nav>
-    <p class="footer-meta">&copy; 2026 — дизайн и код: Андрей Ковалев</p>
+    <p class="footer-meta" data-i18n="footer.meta">&copy; 2026 — дизайн и код: Андрей Ковалев</p>
   </div>
 </footer>
 
@@ -908,6 +933,195 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
 gsap.registerPlugin(ScrollTrigger);
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ================= i18n (RU / CS / EN) ================= */
+/* Each key: [ru, cs, en]. Czech copy drafted — review for tone. */
+const LANGS = { ru: 0, cs: 1, en: 2 };
+const STR = {
+  'meta.title': ["Андрей Ковалев — сайт под ключ: дизайн и разработка", "Andrey Kovalov — weby na klíč: design a vývoj", "Andrey Kovalov — turnkey websites: design & development"],
+  'meta.desc': ["Веб-дизайнер и fullstack-разработчик. Делаю сайты под ключ, которые продают: дизайн, код, анимации, SEO и запуск — в одних руках.", "Webový designér a full-stack vývojář. Tvořím weby na klíč, které prodávají: design, kód, animace, SEO i spuštění — vše v jedněch rukou.", "Web designer and full-stack developer. I build turnkey websites that sell: design, code, animation, SEO and launch — all in one hand."],
+
+  'nav.works': ["Работы", "Práce", "Work"],
+  'nav.services': ["Услуги", "Služby", "Services"],
+  'nav.process': ["Процесс", "Proces", "Process"],
+  'nav.pricing': ["Цены", "Ceník", "Pricing"],
+  'nav.contact': ["Контакт", "Kontakt", "Contact"],
+  'btn.discuss': ["Обсудить проект", "Probrat projekt", "Start a project"],
+
+  'hero.eyebrow': ["Андрей Ковалев — <b>веб-дизайнер и fullstack-разработчик</b>", "Andrey Kovalov — <b>webový designér &amp; full-stack vývojář</b>", "Andrey Kovalov — <b>web designer &amp; full-stack developer</b>"],
+  'hero.h1top': ["Сайты, которые", "Weby, které", "Websites that"],
+  'hero.h1big': ["продают", "prodávají", "sell"],
+  'hero.sub': ["Дизайн и код под ключ — от первого эскиза до запуска, скорости и SEO. Один человек, полная ответственность за результат.", "Design i kód na klíč — od prvního návrhu po spuštění, rychlost a SEO. Jeden člověk, plná odpovědnost za výsledek.", "Turnkey design and code — from the first sketch to launch, speed and SEO. One person, full accountability for the result."],
+  'hero.work': ["Смотреть работы", "Prohlédnout práce", "See the work"],
+  'hero.cornerL': ["Прага —<br>работаю по всему миру", "Praha —<br>pracuji po celém světě", "Prague —<br>working worldwide"],
+  'hero.cornerR': ["Свободен для проектов<br>июль 2026", "Volný pro projekty<br>červenec 2026", "Available for projects<br>July 2026"],
+  'hero.scroll': ["скролл", "scroll", "scroll"],
+
+  'mq.landing': ["Лендинги", "Landing pages", "Landing pages"],
+  'mq.corporate': ["Корпоративные сайты", "Firemní weby", "Corporate sites"],
+  'mq.ecom': ["E-commerce", "E-commerce", "E-commerce"],
+  'mq.uiux': ["UI/UX дизайн", "UI/UX design", "UI/UX design"],
+  'mq.gsap': ["GSAP-анимации", "GSAP animace", "GSAP animations"],
+  'mq.seo': ["SEO и скорость", "SEO a rychlost", "SEO & speed"],
+  'mq.support': ["Поддержка", "Podpora", "Support"],
+
+  'services.kicker': ["Что вы получаете", "Co získáte", "What you get"],
+  'services.h2': ["Один подрядчик — <em>весь стек</em>", "Jeden dodavatel — <em>celý stack</em>", "One contractor — <em>the whole stack</em>"],
+  'services.sub': ["Без испорченного телефона между дизайнером и программистом: стратегия, макет и код не теряют смысл по дороге.", "Žádná tichá pošta mezi designérem a programátorem: strategie, layout i kód cestou neztratí smysl.", "No broken telephone between designer and developer: strategy, layout and code don’t lose meaning along the way."],
+
+  'bento.design.h3': ["Дизайн, который ведёт к кнопке", "Design, který vede k tlačítku", "Design that leads to the button"],
+  'bento.design.p': ["Не «красивые картинки», а продуманный путь клиента: каждый экран отвечает на возражение и подталкивает к заявке.", "Ne „hezké obrázky“, ale promyšlená cesta klienta: každá obrazovka odpovídá na námitku a tlačí k poptávce.", "Not “pretty pictures”, but a thought-through customer journey: every screen answers an objection and nudges toward the request."],
+  'bento.tag.ux': ["UX-логика", "UX logika", "UX logic"],
+  'bento.tag.proto': ["Прототип", "Prototyp", "Prototype"],
+  'bento.tag.brand': ["Фирменный стиль", "Vizuální styl", "Brand identity"],
+  'bento.tag.anim': ["Анимации", "Animace", "Animation"],
+  'bento.code.h3': ["Чистый код, а не конструктор", "Čistý kód, ne stavebnice", "Clean code, not a builder"],
+  'bento.code.p': ["Ручная вёрстка, GSAP-анимации, удобная CMS. Сайт легко расширять, он не разваливается через год.", "Ruční kódování, GSAP animace, pohodlný CMS. Web se snadno rozšiřuje a po roce se nerozpadne.", "Hand-coded markup, GSAP animations, a convenient CMS. The site is easy to extend and doesn’t fall apart in a year."],
+  'bento.ps.h3': ["PageSpeed", "PageSpeed", "PageSpeed"],
+  'bento.ps.p': ["Оптимизирую до зелёной зоны Google: быстрый сайт ранжируется выше и теряет меньше клиентов.", "Optimalizuji do zelené zóny Google: rychlý web se umisťuje výš a ztrácí méně klientů.", "I optimize into Google’s green zone: a fast site ranks higher and loses fewer customers."],
+  'bento.days.unit': ["&nbsp;дней", "&nbsp;dní", "&nbsp;days"],
+  'bento.days.h3': ["Средний срок запуска", "Průměrná doba spuštění", "Average launch time"],
+  'bento.days.p': ["Лендинг — от брифа до публикации за две недели. Фиксированная смета до старта работ.", "Landing page od briefu po publikaci za dva týdny. Pevná cena před začátkem prací.", "A landing page from brief to publish in two weeks. Fixed quote before work starts."],
+
+  'ds.client': ["клиент", "klient", "client"],
+  'ds.btn': ["Оставить заявку", "Odeslat poptávku", "Send a request"],
+  'code.h1': ["Сайт, который продаёт", "Web, který prodává", "A site that sells"],
+  'code.btn': ["Оставить заявку", "Odeslat poptávku", "Send a request"],
+  'code.comment': ["/* ручная вёрстка — ноль конструкторов */", "/* ruční kód — nula stavebnic */", "/* hand-coded — zero builders */"],
+
+  'manifesto': ["Красивый сайт — это минимум. Я проектирую путь клиента: от первого взгляда до заявки. Каждый экран отвечает на вопрос и ведёт дальше — поэтому мои сайты окупаются, а не просто висят в портфолио.", "Hezký web je minimum. Navrhuji cestu klienta: od prvního pohledu po poptávku. Každá obrazovka odpovídá na otázku a vede dál — proto se mé weby vyplácejí, místo aby jen visely v portfoliu.", "A beautiful site is the bare minimum. I design the customer’s path: from the first glance to the request. Every screen answers a question and leads further — that’s why my sites pay off instead of just sitting in a portfolio."],
+
+  'cases.kicker': ["Избранные работы", "Vybrané práce", "Selected work"],
+  'cases.h2': ["Проекты, которые<br> уже <em>приносят заявки</em>", "Projekty, které<br> už <em>přinášejí poptávky</em>", "Projects that<br> already <em>bring in leads</em>"],
+  'case.open': ["Открыть сайт", "Otevřít web", "Visit site"],
+
+  'case.deltag.idx': ["/ 01 — Корпоративный сайт с нуля", "/ 01 — Firemní web od nuly", "/ 01 — Corporate site from scratch"],
+  'case.deltag.desc': ["Геодезическая фирма со старым сайтом, который отпугивал жаргоном и терял заказы. Пересобрал всё с нуля на новом коде: услуги переписаны с профессионального языка на жизненные ситуации для частных клиентов, а B2B-направление переосмыслено в полноценный корпоративный сайт. Куки-баннер, политика, отдельные SEO-страницы под каждую услугу.", "Geodetická firma se starým webem, který odrazoval žargonem a ztrácel zakázky. Vše jsem postavil znovu od nuly na novém kódu: služby přepsané z odborného jazyka do životních situací pro soukromé klienty a B2B větev přepracovaná do plnohodnotného firemního webu. Cookie lišta, zásady, samostatné SEO stránky pro každou službu.", "A surveying firm with an old site that scared people off with jargon and lost orders. I rebuilt everything from scratch on new code: services rewritten from professional language into real-life situations for private clients, and the B2B branch reimagined into a full corporate site. Cookie banner, privacy policy, dedicated SEO pages for every service."],
+  'case.deltag.mb': ["11 страниц", "11 stránek", "11 pages"],
+  'case.deltag.ms': ["единая дизайн-система, PageSpeed под сотню по всем метрикам", "jednotný design systém, PageSpeed kolem 100 ve všech metrikách", "one design system, near-100 PageSpeed across all metrics"],
+  'case.deltag.alt': ["Delta G — антикризисный редизайн сайта геодезической фирмы", "Delta G — redesign firemního webu geodetické firmy", "Delta G — corporate website redesign for a surveying firm"],
+
+  'case.notadocs.idx': ["/ 02 — Веб-сервис", "/ 02 — Webová služba", "/ 02 — Web service"],
+  'case.notadocs.desc': ["Сервис юридических документов для украинцев в Германии: двуязычные доверенности и заявления онлайн, без очередей. Понятный путь от вопроса до готового документа.", "Služba pro právní dokumenty pro Ukrajince v Německu: dvojjazyčné plné moci a žádosti online, bez front. Srozumitelná cesta od dotazu k hotovému dokumentu.", "A legal-document service for Ukrainians in Germany: bilingual powers of attorney and applications online, no queues. A clear path from question to finished document."],
+  'case.notadocs.ms': ["посетителей оставляют заявку", "návštěvníků zanechá poptávku", "of visitors leave a request"],
+  'case.notadocs.alt': ["NotaDocs — юридические документы онлайн", "NotaDocs — právní dokumenty online", "NotaDocs — legal documents online"],
+
+  'case.tattoo.idx': ["/ 03 — Личный бренд", "/ 03 — Osobní značka", "/ 03 — Personal brand"],
+  'case.tattoo.desc': ["Сайт тату-мастера в Праге: портфолио fine-line работ, прайс, FAQ и запись — на трёх языках. Минимализм, где убрано всё лишнее и не потеряно ничего важного.", "Web tatéra v Praze: portfolio fine-line prací, ceník, FAQ a rezervace — ve třech jazycích. Minimalismus, kde je odstraněno vše zbytečné a nic důležitého neztraceno.", "A tattoo artist’s site in Prague: a fine-line portfolio, pricing, FAQ and booking — in three languages. Minimalism where all the excess is removed and nothing important is lost."],
+  'case.tattoo.ms': ["PageSpeed Insights по всем метрикам", "PageSpeed Insights ve všech metrikách", "PageSpeed Insights on every metric"],
+  'case.tattoo.alt': ["Kovalov Tattoo — сайт тату-мастера", "Kovalov Tattoo — web tatéra", "Kovalov Tattoo — tattoo artist website"],
+
+  'case.ucet.idx': ["/ 04 — Корпоративный сайт", "/ 04 — Firemní web", "/ 04 — Corporate site"],
+  'case.ucet.desc': ["Бухгалтерская компания в Праге: шесть услуг, прозрачные тарифы, онбординг за три шага. Спокойный дизайн, который вызывает доверие у консервативной аудитории.", "Účetní firma v Praze: šest služeb, transparentní ceny, onboarding ve třech krocích. Klidný design, který budí důvěru u konzervativního publika.", "An accounting company in Prague: six services, transparent pricing, three-step onboarding. A calm design that earns trust from a conservative audience."],
+  'case.ucet.ms': ["два языка под локальный рынок", "dva jazyky pro místní trh", "two languages for the local market"],
+  'case.ucet.alt': ["Účetnictví Vladimirová — бухгалтерские услуги в Праге", "Účetnictví Vladimirová — účetní služby v Praze", "Účetnictví Vladimirová — accounting services in Prague"],
+
+  'case.magic.idx': ["/ 05 — E-commerce", "/ 05 — E-commerce", "/ 05 — E-commerce"],
+  'case.magic.desc': ["Питомник Devon Rex и Maine Coon с доставкой по миру: каталог котят, отзывы, блог. Тёплый, эмоциональный сайт, который влюбляет в котёнка ещё до первого видеозвонка.", "Chovatelská stanice Devon Rex a Maine Coon s doručením po celém světě: katalog koťat, recenze, blog. Vřelý, emotivní web, do kterého se zamilujete ještě před prvním videohovorem.", "A Devon Rex and Maine Coon cattery with worldwide delivery: kitten catalogue, reviews, blog. A warm, emotional site that makes you fall in love with a kitten before the first video call."],
+  'case.magic.mb': ["12+ стран", "12+ zemí", "12+ countries"],
+  'case.magic.ms': ["куда уехали котята с этого сайта", "kam zamířila koťata z tohoto webu", "where kittens from this site have gone"],
+  'case.magic.alt': ["Just Magic — питомник Devon Rex и Maine Coon", "Just Magic — chovatelská stanice Devon Rex a Maine Coon", "Just Magic — Devon Rex and Maine Coon cattery"],
+
+  'process.kicker': ["Как идёт работа", "Jak to probíhá", "How it works"],
+  'process.h2': ["Прозрачный процесс<br> без <em>сюрпризов</em>", "Transparentní proces<br> bez <em>překvapení</em>", "A transparent process<br> with no <em>surprises</em>"],
+  'process.p': ["Вы всегда знаете, на каком этапе проект, сколько он стоит и когда будет готов. Смета фиксируется до начала работ.", "Vždy víte, v jaké fázi projekt je, kolik stojí a kdy bude hotový. Cena se fixuje před začátkem prací.", "You always know which stage the project is at, what it costs and when it will be ready. The quote is fixed before work begins."],
+  'process.cta': ["Начать с брифа", "Začít briefem", "Start with a brief"],
+  'step1.h3': ["Бриф и смета", "Brief a cena", "Brief and quote"],
+  'step1.p': ["Созваниваемся, разбираю задачу и аудиторию, считаю точную стоимость и сроки. Бесплатно и ни к чему не обязывает.", "Zavoláme si, proberu zadání i publikum a spočítám přesnou cenu a termíny. Zdarma a nezávazně.", "We have a call, I dig into the task and the audience, and calculate the exact cost and timeline. Free and with no obligation."],
+  'step1.time': ["1 день", "1 den", "1 day"],
+  'step2.h3': ["Прототип и дизайн", "Prototyp a design", "Prototype and design"],
+  'step2.p': ["Сначала структура и тексты, потом визуал. Вы видите кликабельный макет и вносите правки до строчки кода.", "Nejdřív struktura a texty, pak vizuál. Uvidíte klikací maketu a doplníte úpravy ještě před řádkem kódu.", "Structure and copy first, visuals next. You see a clickable mockup and make edits before a single line of code."],
+  'step2.time': ["3–7 дней", "3–7 dní", "3–7 days"],
+  'step3.h3': ["Разработка и анимации", "Vývoj a animace", "Development and animation"],
+  'step3.p': ["Ручная вёрстка, GSAP-анимации, адаптив под все экраны, подключение CMS и форм. Тестирую в реальных браузерах.", "Ruční kódování, GSAP animace, responzivita pro všechny obrazovky, napojení CMS a formulářů. Testuji v reálných prohlížečích.", "Hand-coded markup, GSAP animations, responsive across all screens, CMS and forms wired up. Tested in real browsers."],
+  'step3.time': ["5–10 дней", "5–10 dní", "5–10 days"],
+  'step4.h3': ["Запуск и поддержка", "Spuštění a podpora", "Launch and support"],
+  'step4.p': ["Домен, хостинг, аналитика, базовое SEO. После запуска — месяц бесплатной поддержки и мелких правок.", "Doména, hosting, analytika, základní SEO. Po spuštění — měsíc bezplatné podpory a drobných úprav.", "Domain, hosting, analytics, basic SEO. After launch — a month of free support and small fixes."],
+  'step4.time': ["1–2 дня", "1–2 dny", "1–2 days"],
+
+  'pricing.kicker': ["Цены", "Ceník", "Pricing"],
+  'pricing.h2': ["Фиксированная смета <em>до&nbsp;старта.</em><br> Никаких «ну, так получилось».", "Pevná cena <em>před&nbsp;startem.</em><br> Žádné „no, tak nějak to vyšlo“.", "A fixed quote <em>before&nbsp;we&nbsp;start.</em><br> No “well, that’s how it turned out”."],
+  'price1.h3': ["Лендинг", "Landing page", "Landing page"],
+  'price1.p': ["Одностраничник под продукт, услугу или событие.", "Jednostránka pro produkt, službu nebo událost.", "A one-pager for a product, service or event."],
+  'price1.num': ["от $490", "od $490", "from $490"],
+  'price1.term': ["7–14 дней", "7–14 dní", "7–14 days"],
+  'price1.li1': ["Прототип, тексты и дизайн", "Prototyp, texty a design", "Prototype, copy and design"],
+  'price1.li2': ["Ручная вёрстка + анимации", "Ruční kódování + animace", "Hand-coded markup + animation"],
+  'price1.li3': ["Адаптив под все устройства", "Responzivita pro všechna zařízení", "Responsive on all devices"],
+  'price1.li4': ["Формы заявок и аналитика", "Poptávkové formuláře a analytika", "Lead forms and analytics"],
+  'price1.li5': ["Базовое SEO и запуск", "Základní SEO a spuštění", "Basic SEO and launch"],
+  'price2.badge': ["Чаще всего выбирают", "Nejčastější volba", "Most popular"],
+  'price2.h3': ["Сайт под ключ", "Web na klíč", "Turnkey website"],
+  'price2.p': ["Многостраничный сайт для компании или бренда.", "Vícestránkový web pro firmu nebo značku.", "A multi-page site for a company or brand."],
+  'price2.num': ["от $990", "od $990", "from $990"],
+  'price2.term': ["2–4 недели", "2–4 týdny", "2–4 weeks"],
+  'price2.li1': ["Всё из тарифа «Лендинг»", "Vše z balíčku „Landing page“", "Everything in “Landing page”"],
+  'price2.li2': ["До 8 уникальных страниц", "Až 8 unikátních stránek", "Up to 8 unique pages"],
+  'price2.li3': ["CMS — сами меняете контент", "CMS — obsah měníte sami", "CMS — edit content yourself"],
+  'price2.li4': ["Блог и SEO-структура", "Blog a SEO struktura", "Blog and SEO structure"],
+  'price2.li5': ["Месяц поддержки после запуска", "Měsíc podpory po spuštění", "A month of support after launch"],
+  'price3.h3': ["Магазин / веб-апп", "Obchod / webová aplikace", "Store / web app"],
+  'price3.p': ["E-commerce или сервис с личным кабинетом.", "E-commerce nebo služba s uživatelským účtem.", "E-commerce or a service with a user account."],
+  'price3.num': ["от $1900", "od $1900", "from $1900"],
+  'price3.term': ["от 4 недель", "od 4 týdnů", "from 4 weeks"],
+  'price3.li1': ["Каталог и онлайн-оплата", "Katalog a online platba", "Catalogue and online payment"],
+  'price3.li2': ["Личный кабинет, интеграции", "Uživatelský účet, integrace", "User account, integrations"],
+  'price3.li3': ["CRM и автоматизация", "CRM a automatizace", "CRM and automation"],
+  'price3.li4': ["Нагрузочное тестирование", "Zátěžové testování", "Load testing"],
+  'price3.li5': ["Индивидуальная оценка", "Individuální odhad", "Individual estimate"],
+  'price.choose': ["Выбрать", "Vybrat", "Choose"],
+  'price.discuss': ["Обсудить", "Probrat", "Discuss"],
+
+  'cta.kicker': ["Свободен для проектов — июль 2026", "Volný pro projekty — červenec 2026", "Available for projects — July 2026"],
+  'cta.h2': ["Есть идея?<br> Давайте посчитаем.", "Máte nápad?<br> Pojďme to spočítat.", "Got an idea?<br> Let’s price it out."],
+  'cta.p': ["Опишите задачу в двух словах — в течение дня пришлю ориентир по цене и срокам. Бесплатно и без занудных созвонов.", "Popište zadání v pár větách — do dne pošlu orientační cenu a termíny. Zdarma a bez zdlouhavých hovorů.", "Describe the task in a couple of words — within a day I’ll send a ballpark on price and timeline. Free and without tedious calls."],
+  'cta.mail': ["Написать на почту", "Napsat e-mail", "Send an email"],
+
+  'footer.mail': ["Почта", "E-mail", "Email"],
+  'footer.meta': ["© 2026 — дизайн и код: Андрей Ковалев", "© 2026 — design a kód: Andrey Kovalov", "© 2026 — design & code: Andrey Kovalov"]
+};
+
+const I18N_REBUILD = [];
+let currentLang = 'ru';
+
+function tr(key, lang) {
+  const e = STR[key];
+  if (!e) return null;
+  const v = e[LANGS[lang]];
+  return (v != null && v !== '') ? v : e[0];
+}
+function applyLang(lang) {
+  if (LANGS[lang] == null) lang = 'ru';
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const v = tr(el.dataset.i18n, lang);
+    if (v != null) el.innerHTML = v;
+  });
+  document.querySelectorAll('[data-i18n-content]').forEach((el) => {
+    const v = tr(el.dataset.i18nContent, lang); if (v != null) el.setAttribute('content', v);
+  });
+  document.querySelectorAll('[data-i18n-alt]').forEach((el) => {
+    const v = tr(el.dataset.i18nAlt, lang); if (v != null) el.setAttribute('alt', v);
+  });
+  if (STR['meta.title']) document.title = tr('meta.title', lang);
+  document.querySelectorAll('#langSwitch button, #mobileLang button').forEach((b) => {
+    b.classList.toggle('is-active', b.dataset.lang === lang);
+  });
+  try { localStorage.setItem('lang', lang); } catch (e) {}
+}
+function detectLang() {
+  let saved = null;
+  try { saved = localStorage.getItem('lang'); } catch (e) {}
+  if (saved && LANGS[saved] != null) return saved;
+  const n = (navigator.language || 'ru').toLowerCase();
+  if (n.indexOf('cs') === 0 || n.indexOf('sk') === 0) return 'cs';
+  if (n.indexOf('en') === 0) return 'en';
+  if (n.indexOf('ru') === 0 || n.indexOf('uk') === 0) return 'ru';
+  return 'ru';
+}
+/* apply detected language before split/manifesto/widgets read the DOM */
+applyLang(detectLang());
 
 /* ---------- smooth scroll ---------- */
 let lenis = null;
@@ -1232,6 +1446,7 @@ if (!reduceMotion) {
   }
   build();
   window.addEventListener('load', build);
+  I18N_REBUILD.push(build);
   let rw = innerWidth;
   addEventListener('resize', () => {
     if (Math.abs(innerWidth - rw) < 50) return;
@@ -1249,32 +1464,43 @@ if (!reduceMotion) {
 (function initCodeStage() {
   const codeEl = document.getElementById('codeType');
   if (!codeEl) return;
-  const lines = [
-    [['p', '<'], ['t', 'section '], ['a', 'class'], ['p', '="'], ['s', 'hero'], ['p', '">']],
-    [['p', '  <'], ['t', 'h1'], ['p', '>'], ['x', 'Сайт, который продаёт'], ['p', '</'], ['t', 'h1'], ['p', '>']],
-    [['p', '  <'], ['t', 'button'], ['p', '>'], ['x', 'Оставить заявку'], ['p', '</'], ['t', 'button'], ['p', '>']],
-    [['p', '</'], ['t', 'section'], ['p', '>']],
-    [['c', '/* ручная вёрстка — ноль конструкторов */']]
-  ];
+  function getLines() {
+    return [
+      [['p', '<'], ['t', 'section '], ['a', 'class'], ['p', '="'], ['s', 'hero'], ['p', '">']],
+      [['p', '  <'], ['t', 'h1'], ['p', '>'], ['x', tr('code.h1', currentLang)], ['p', '</'], ['t', 'h1'], ['p', '>']],
+      [['p', '  <'], ['t', 'button'], ['p', '>'], ['x', tr('code.btn', currentLang)], ['p', '</'], ['t', 'button'], ['p', '>']],
+      [['p', '</'], ['t', 'section'], ['p', '>']],
+      [['c', tr('code.comment', currentLang)]]
+    ];
+  }
+  let lines = getLines();
   function renderFull() {
     codeEl.textContent = '';
-    lines.forEach((ln, i) => {
+    lines.forEach((ln, li) => {
       ln.forEach(([cls, txt]) => {
         const sp = document.createElement('span');
         sp.className = 'tok-' + cls;
         sp.textContent = txt;
         codeEl.appendChild(sp);
       });
-      if (i < lines.length - 1) codeEl.appendChild(document.createTextNode('\n'));
+      if (li < lines.length - 1) codeEl.appendChild(document.createTextNode('\n'));
     });
   }
-  if (reduceMotion) { renderFull(); return; }
+  if (reduceMotion) {
+    renderFull();
+    I18N_REBUILD.push(() => { lines = getLines(); renderFull(); });
+    return;
+  }
 
-  const flat = [];
-  lines.forEach((ln, i) => {
-    ln.forEach(([cls, txt]) => { for (const ch of txt) flat.push([cls, ch]); });
-    if (i < lines.length - 1) flat.push(['nl', '\n']);
-  });
+  let flat = [];
+  function buildFlat() {
+    flat = [];
+    lines.forEach((ln, li) => {
+      ln.forEach(([cls, txt]) => { for (const ch of txt) flat.push([cls, ch]); });
+      if (li < lines.length - 1) flat.push(['nl', '\n']);
+    });
+  }
+  buildFlat();
   let i = 0, curCls = null, curSpan = null, inView = false, running = false;
   function step() {
     if (!inView) { running = false; return; }
@@ -1306,6 +1532,14 @@ if (!reduceMotion) {
     trigger: codeEl, start: 'top bottom', end: 'bottom top',
     onToggle: syncCode, onRefresh: syncCode
   });
+  /* on language switch: rebuild the snippet and restart typing */
+  I18N_REBUILD.push(() => {
+    lines = getLines();
+    buildFlat();
+    codeEl.textContent = '';
+    curCls = null; i = 0;
+    if (inView && !running) { running = true; step(); }
+  });
 })();
 
 /* ---------- counters ---------- */
@@ -1325,12 +1559,22 @@ document.querySelectorAll('[data-count]').forEach((el) => {
 
 /* ---------- manifesto word scrub ---------- */
 const manifesto = document.getElementById('manifesto-text');
-manifesto.innerHTML = manifesto.textContent.trim().split(/\s+/)
-  .map((w) => '<span class="w">' + w + '</span>').join(' ');
-gsap.to('#manifesto-text .w', {
-  opacity: 1, ease: 'none', stagger: 0.6,
-  scrollTrigger: { trigger: manifesto, start: 'top 78%', end: 'bottom 45%', scrub: 0.4 }
-});
+let manifestoTween = null;
+function setupManifesto() {
+  if (manifestoTween) {
+    if (manifestoTween.scrollTrigger) manifestoTween.scrollTrigger.kill();
+    manifestoTween.kill();
+  }
+  manifesto.innerHTML = (manifesto.textContent || '').trim().split(/\s+/)
+    .map((w) => '<span class="w">' + w + '</span>').join(' ');
+  manifestoTween = gsap.to('#manifesto-text .w', {
+    opacity: 1, ease: 'none', stagger: 0.6,
+    scrollTrigger: { trigger: manifesto, start: 'top 78%', end: 'bottom 45%', scrub: 0.4 }
+  });
+}
+setupManifesto();
+/* applyLang resets the sentence; re-split it afterwards */
+I18N_REBUILD.push(setupManifesto);
 
 /* ---------- stacking cases ---------- */
 if (!reduceMotion) {
@@ -1368,6 +1612,17 @@ gsap.utils.toArray('.step-num').forEach((num) => {
   gsap.to(num, {
     color: '#d7fb44', ease: 'none',
     scrollTrigger: { trigger: num, start: 'top 70%', end: 'top 40%', scrub: true }
+  });
+});
+
+/* ---------- language switch ---------- */
+document.querySelectorAll('#langSwitch button, #mobileLang button').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const lang = btn.dataset.lang;
+    if (!lang || lang === currentLang) return;
+    applyLang(lang);
+    I18N_REBUILD.forEach((fn) => { try { fn(lang); } catch (e) {} });
+    if (window.ScrollTrigger) ScrollTrigger.refresh();
   });
 });
 
