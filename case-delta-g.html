@@ -38,18 +38,27 @@ main{overflow-x:clip}
 
 /* progress + topbar */
 .progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--lime);z-index:101;box-shadow:0 0 10px rgba(215,251,68,.6)}
-.topbar{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:100;display:flex;align-items:center;gap:12px;
-  padding:8px 8px 8px 14px;border-radius:999px;background:rgba(16,16,18,.6);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--line);width:max-content;max-width:calc(100vw - 24px)}
-.topbar .mono-mark{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;color:var(--ink-dim);white-space:nowrap}
+.topbar{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:100;display:flex;align-items:center;gap:6px;
+  padding:8px 8px 8px 20px;border-radius:999px;background:rgba(16,16,18,.55);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--line);width:max-content;max-width:calc(100vw - 32px)}
+.topbar .mono-mark{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;color:var(--ink-dim);white-space:nowrap;margin-right:6px}
 .topbar .mono-mark b{color:var(--lime);font-weight:700}
-.topbar a.back{font-size:13px;font-weight:600;color:var(--ink-dim);padding:7px 12px;border-radius:999px;transition:color .3s,background .3s;white-space:nowrap}
+.topbar a.back{font-size:14px;font-weight:500;color:var(--ink-dim);padding:8px 14px;border-radius:999px;transition:color .3s,background .3s;white-space:nowrap}
 .topbar a.back:hover{color:var(--ink);background:rgba(242,240,234,.07)}
-.topbar a.live{font-size:13px;font-weight:700;color:var(--lime-ink);background:var(--lime);padding:8px 15px;border-radius:999px;white-space:nowrap;transition:transform .3s}
-.topbar a.live:hover{transform:scale(1.05)}
-.langs{display:flex;gap:3px;background:rgba(242,240,234,.06);border-radius:999px;padding:3px}
-.langs button{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--ink-dim);background:none;border:none;cursor:pointer;padding:5px 8px;border-radius:999px;transition:background .3s,color .3s;line-height:1}
-.langs button.active{background:var(--lime);color:var(--lime-ink)}
-.langs button:hover:not(.active){color:var(--ink)}
+.topbar a.live{font-size:14px;font-weight:700;color:var(--lime-ink);background:var(--lime);padding:10px 20px;border-radius:999px;white-space:nowrap;transition:transform .3s,box-shadow .3s;margin-left:6px}
+.topbar a.live:hover{transform:scale(1.05);box-shadow:0 0 24px rgba(215,251,68,.35)}
+/* language dropdown — identical to the main site */
+.lang-switch{position:relative}
+.lang-trigger{display:flex;align-items:center;gap:6px;font-family:var(--font-body);font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--ink-dim);background:rgba(242,240,234,.06);border:1px solid var(--line);border-radius:999px;padding:8px 12px;cursor:pointer;transition:color .3s,background .3s,border-color .3s}
+.lang-trigger:hover{color:var(--ink);border-color:rgba(242,240,234,.25)}
+.lang-caret{transition:transform .3s}
+.lang-switch.open .lang-caret{transform:rotate(180deg)}
+.lang-menu{position:absolute;top:calc(100% + 10px);right:0;display:flex;flex-direction:column;gap:2px;min-width:152px;background:rgba(16,16,18,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--line);border-radius:14px;padding:6px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .25s,transform .25s,visibility .25s;z-index:110}
+.lang-switch.open .lang-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.lang-menu button{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;font-family:var(--font-body);font-size:14px;font-weight:600;letter-spacing:.02em;color:var(--ink-dim);background:transparent;border:none;cursor:pointer;padding:9px 12px;border-radius:9px;text-align:left;transition:color .25s,background .25s}
+.lang-menu button small{font-size:12px;font-weight:400;color:var(--ink-faint)}
+.lang-menu button:hover{color:var(--ink);background:rgba(242,240,234,.06)}
+.lang-menu button.is-active{color:var(--lime)}
+.lang-menu button.is-active small{color:rgba(215,251,68,.6)}
 @media (max-width:620px){.topbar .mono-mark{display:none}.topbar a.back .lbl{display:none}}
 
 /* layout */
@@ -237,10 +246,16 @@ footer a{color:var(--ink-dim)}footer a:hover{color:var(--lime)}
 <div class="topbar">
   <span class="mono-mark">CASE_01 / <b>DELTA&nbsp;G</b></span>
   <a class="back" href="index.html#raboty">←&nbsp;<span class="lbl" data-i18n="nav.back">Все работы</span></a>
-  <div class="langs" id="langs">
-    <button type="button" data-lang="ru">RU</button>
-    <button type="button" data-lang="cs">CZ</button>
-    <button type="button" data-lang="en">EN</button>
+  <div class="lang-switch" id="langSwitch">
+    <button type="button" class="lang-trigger" id="langTrigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Язык / Language">
+      <span class="lang-current">RU</span>
+      <svg class="lang-caret" width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="lang-menu" id="langMenu" role="listbox">
+      <button type="button" data-lang="ru" role="option">RU <small>Русский</small></button>
+      <button type="button" data-lang="cs" role="option">CZ <small>Čeština</small></button>
+      <button type="button" data-lang="en" role="option">EN <small>English</small></button>
+    </div>
   </div>
   <a class="live" href="https://deltag.vercel.app/" target="_blank" rel="noopener" data-i18n="nav.live">Открыть сайт ↗</a>
 </div>
@@ -536,7 +551,7 @@ const STR = {
   'nav.live': ["Открыть сайт ↗", "Otevřít web ↗", "Open site ↗"],
 
   'hero.tag': ["Геодезия · Прага · корпоративный сайт под ключ", "Geodézie · Praha · firemní web na míru", "Surveying · Prague · corporate site, end to end"],
-  'hero.sub': ["Антикризисный корпоративный сайт для геодезической фирмы — который удерживает бизнес и открывает новый рынок частных клиентов.", "Firemní web proti krizi pro geodetickou firmu — který udrží stávající byznys a otevře nový trh soukromých klientů.", "An anti-crisis corporate site for a surveying firm — one that holds the existing business and opens a new market of private clients."],
+  'hero.sub': ["Антикризисный корпоративный сайт для геодезической фирмы — который удерживает бизнес и открывает новый рынок частных клиентов.", "Firemní web, který geodetickou firmu provede krizí — udrží stávající zakázky a otevře nový trh soukromých klientů.", "An anti-crisis corporate site for a surveying firm — one that holds the existing business and opens a new market of private clients."],
   'hero.roles': ["<span>Полный цикл:</span> стратегия · UX · дизайн · анимации · вёрстка · копирайт&nbsp;(CZ) · SEO · аналитика · деплой", "<span>Celý cyklus:</span> strategie · UX · design · animace · kód · copywriting&nbsp;(CZ) · SEO · analytika · nasazení", "<span>Full cycle:</span> strategy · UX · design · animation · build · copywriting&nbsp;(CZ) · SEO · analytics · deploy"],
   'hero.scroll': ["скролл", "scroll", "scroll"],
 
@@ -545,16 +560,16 @@ const STR = {
   'stat.bpsub': ["Рекомендации", "Doporučené postupy", "Best practices"],
 
   'intro.kick': ["О проекте", "O projektu", "About the project"],
-  'intro.pull': ["Геодезическая компания из Праги теряла поток заказов из-за того, что весь её сайт говорил только с крупным бизнесом. Я перестроил её цифровое присутствие так, чтобы оно <em>одновременно</em> удерживало корпоративных клиентов и открывало новый рынок частных заказчиков.", "Geodetická firma z Prahy ztrácela zakázky, protože celý její web mluvil jen s velkým byznysem. Přestavěl jsem její digitální přítomnost tak, aby <em>současně</em> udržela firemní klienty a otevřela nový trh soukromých zákazníků.", "A Prague surveying firm was losing orders because its entire site spoke only to big business. I rebuilt its digital presence so it would <em>simultaneously</em> retain corporate clients and open a new market of private customers."],
+  'intro.pull': ["Геодезическая компания из Праги теряла поток заказов из-за того, что весь её сайт говорил только с крупным бизнесом. Я перестроил её цифровое присутствие так, чтобы оно <em>одновременно</em> удерживало корпоративных клиентов и открывало новый рынок частных заказчиков.", "Geodetická firma z Prahy ztrácela zakázky, protože celý její web mluvil jen s velkými firmami. Přestavěl jsem její digitální přítomnost tak, aby <em>současně</em> udržela firemní klienty a otevřela nový trh soukromých zákazníků.", "A Prague surveying firm was losing orders because its entire site spoke only to big business. I rebuilt its digital presence so it would <em>simultaneously</em> retain corporate clients and open a new market of private customers."],
 
   'facts.client.t': ["Клиент", "Klient", "Client"],
   'facts.client.d': ["Delta G s.r.o. — геодезия, Прага, на рынке с 2004 года", "Delta G s.r.o. — geodézie, Praha, na trhu od roku 2004", "Delta G s.r.o. — surveying, Prague, on the market since 2004"],
   'facts.task.t': ["Задача", "Úkol", "Brief"],
-  'facts.task.d': ["не редизайн, а смена бизнес-позиционирования через веб", "ne redesign, ale změna byznys pozicování přes web", "not a redesign, but a shift in business positioning through the web"],
+  'facts.task.d': ["не редизайн, а смена бизнес-позиционирования через веб", "ne redesign, ale změna obchodního positioningu firmy", "not a redesign, but a shift in business positioning through the web"],
   'facts.scope.t': ["Объём", "Rozsah", "Scope"],
   'facts.scope.d': ["корпоративный сайт, 11 страниц, две аудитории (B2B + B2C)", "firemní web, 11 stránek, dvě cílové skupiny (B2B + B2C)", "corporate site, 11 pages, two audiences (B2B + B2C)"],
   'facts.tech.t': ["Технологии", "Technologie", "Tech"],
-  'facts.tech.d': ["чистый HTML / CSS / JS, GSAP-анимации, без CMS и конструкторов", "čisté HTML / CSS / JS, GSAP animace, bez CMS a stavitelů webů", "clean HTML / CSS / JS, GSAP animations, no CMS or site builders"],
+  'facts.tech.d': ["чистый HTML / CSS / JS, GSAP-анимации, без CMS и конструкторов", "čisté HTML / CSS / JS, GSAP animace, bez CMS a webových stavebnic", "clean HTML / CSS / JS, GSAP animations, no CMS or site builders"],
   'facts.quality.t': ["Качество", "Kvalita", "Quality"],
   'facts.quality.d': ["PageSpeed 98 · 93 · 100 · 100 (Google)", "PageSpeed 98 · 93 · 100 · 100 (Google)", "PageSpeed 98 · 93 · 100 · 100 (Google)"],
   'facts.role.t': ["Роль", "Role", "Role"],
@@ -563,7 +578,7 @@ const STR = {
   'intro.cap': ["Секция услуг живьём: справа «дышащий» геодезический чертёж перестраивается под каждую задачу", "Sekce služeb živě: vpravo se „dýchající“ geodetický výkres přestavuje pod každou úlohu", "The services section live: on the right, a “breathing” survey drawing rebuilds for each task"],
 
   'ctx.kick': ["Контекст", "Kontext", "Context"],
-  'ctx.h': ["Бизнес под давлением рынка", "Byznys pod tlakem trhu", "A business under market pressure"],
+  'ctx.h': ["Бизнес под давлением рынка", "Firma pod tlakem trhu", "A business under market pressure"],
   'ctx.p1': ["Delta G десятилетиями держалась на крупных B2B-заказчиках — застройщиках и инфраструктурных проектах. Это давало около <strong>75% оборота</strong>.", "Delta G se desítky let držela na velkých B2B zakázkách — developerech a infrastrukturních projektech. To dávalo zhruba <strong>75 % obratu</strong>.", "For decades Delta G relied on large B2B clients — developers and infrastructure projects. That made up about <strong>75% of revenue</strong>."],
   'ctx.bignum': ["оборота держалось на одной аудитории, которая просела", "obratu stálo na jedné cílové skupině, která poklesla", "of revenue rested on a single audience, which slumped"],
   'ctx.p2': ["Но из-за высоких ставок и инфляции девелоперы по всей Европе заморозили стройки — и привычный поток заказов просел. Компании нужен был второй источник дохода: <strong>частные клиенты</strong>, которым надо разделить участок под Прагой, вынести границы, оформить дом в кадастр. Рынок большой и стабильный — но для него Delta G была фактически невидима.", "Kvůli vysokým sazbám a inflaci ale developeři po celé Evropě zmrazili stavby — a obvyklý tok zakázek poklesl. Firma potřebovala druhý zdroj příjmů: <strong>soukromé klienty</strong>, kteří potřebují rozdělit pozemek u Prahy, vytyčit hranice, zapsat dům do katastru. Trh je velký a stabilní — jenže pro něj byla Delta G prakticky neviditelná.", "But with high rates and inflation, developers across Europe froze construction — and the usual flow of orders slumped. The company needed a second income stream: <strong>private clients</strong> who need to split a plot near Prague, stake out boundaries, register a house in the cadastre. The market is large and stable — yet to it Delta G was practically invisible."],
@@ -587,7 +602,7 @@ const STR = {
   'str.root': ["Delta G<small>один бренд</small>", "Delta G<small>jedna značka</small>", "Delta G<small>one brand</small>"],
   'str.b2c': ["Частные клиенты<small>B2C · новый рынок</small>", "Soukromí klienti<small>B2C · nový trh</small>", "Private clients<small>B2C · new market</small>"],
   'str.formc': ["→ заявка на почту", "→ poptávka na e-mail", "→ request to email"],
-  'str.b2b': ["Фирмы и инвесторы<small>B2B · удержан</small>", "Firmy a investoři<small>B2B · udržen</small>", "Firms & investors<small>B2B · retained</small>"],
+  'str.b2b': ["Фирмы и инвесторы<small>B2B · удержан</small>", "Firmy a investoři<small>B2B · udrženo</small>", "Firms & investors<small>B2B · retained</small>"],
   'str.b2b1': ["инженерная геодезия", "inženýrská geodézie", "engineering surveying"],
   'str.b2b2': ["картографические основы", "mapové podklady", "mapping bases"],
   'str.b2b3': ["мониторинг деформаций", "monitoring deformací", "deformation monitoring"],
@@ -595,7 +610,7 @@ const STR = {
   'str.formb': ["→ B2B-запрос", "→ B2B poptávka", "→ B2B inquiry"],
   'str.c1t': ["Частнику", "Soukromníkovi", "For the individual"],
   'str.c1p': ["человеческий язык, выгоды, снятие страхов перед кадастром и урядами, понятные цены, быстрый расчёт и заявка.", "lidský jazyk, výhody, odbourání strachu z katastru a úřadů, srozumitelné ceny, rychlá kalkulace a poptávka.", "human language, benefits, removing the fear of the cadastre and offices, clear prices, a fast estimate and request."],
-  'str.c2t': ["Бизнесу", "Byznysu", "For business"],
+  'str.c2t': ["Бизнесу", "Firmě", "For business"],
   'str.c2p': ["отдельная страница с профессиональным каталогом, терминологией и допусками. Корпоративный вес сохранён — ничего не «опустили».", "samostatná stránka s profesionálním katalogem, terminologií a akreditacemi. Firemní váha zachována — nic se „neshodilo“.", "a separate page with a professional catalog, terminology and accreditations. The corporate weight is preserved — nothing was “dumbed down.”"],
   'str.c3t': ["Поиску", "Vyhledávání", "For search"],
   'str.c3p': ["сеть отдельных страниц под конкретные частные запросы, чтобы ловить клиентов прямо из Google.", "síť samostatných stránek pod konkrétní soukromé dotazy, aby chytala klienty přímo z Googlu.", "a network of dedicated pages for specific private queries, to catch clients straight from Google."],
@@ -603,7 +618,7 @@ const STR = {
   'work.kick': ["Что сделано", "Co bylo uděláno", "What was done"],
   'work.h': ["Не «причесали», а <em>пересобрали</em>", "Ne „učesat“, ale <em>postavit znovu</em>", "Not “tidied up,” but <em>rebuilt</em>"],
 
-  'w1.h': ["Два входа в один бизнес", "Dva vstupy do jednoho byznysu", "Two entrances to one business"],
+  'w1.h': ["Два входа в один бизнес", "Dva vstupy do jednoho podnikání", "Two entrances to one business"],
   'w1.p': ["Главная встречает частника: оффер «Zaměříme. Vyřídíme. Do katastru bez starostí», выгоды вместо терминов, проработанные страхи. Отдельная страница <b>«Pro firmy a investory»</b> держит весь тяжёлый B2B-каталог на профессиональном языке. Один бренд, две точки входа, ноль потерянных посетителей.", "Domovská stránka vítá soukromníka: nabídka „Zaměříme. Vyřídíme. Do katastru bez starostí“, výhody místo termínů, ošetřené obavy. Samostatná stránka <b>„Pro firmy a investory“</b> drží celý náročný B2B katalog v profesionálním jazyce. Jedna značka, dva vstupy, nula ztracených návštěvníků.", "The homepage greets the individual: the offer “Zaměříme. Vyřídíme. Do katastru bez starostí,” benefits instead of terms, fears addressed. A separate <b>“Pro firmy a investory”</b> page holds the entire heavy B2B catalog in professional language. One brand, two entry points, zero lost visitors."],
   'w1.cap': ["Главная для частного клиента — выгоды, а не термины", "Domovská stránka pro soukromého klienta — výhody, ne termíny", "Homepage for the private client — benefits, not terminology"],
 
@@ -620,12 +635,12 @@ const STR = {
 
   'w3.h': ["Анимации как доказательство точности", "Animace jako důkaz přesnosti", "Animation as proof of precision"],
   'w3.p': ["Геодезия — это про миллиметры, и сайт транслирует это подсознательно. Все анимации сделаны на GSAP вручную и работают на смысл, а не на «вау». Посетитель не читает «мы точные» — он это <b>видит и чувствует</b>.", "Geodézie je o milimetrech a web to podprahově sděluje. Všechny animace jsou udělané ručně na GSAP a pracují pro smysl, ne pro „wow“. Návštěvník nečte „jsme přesní“ — on to <b>vidí a cítí</b>.", "Surveying is about millimetres, and the site conveys that subconsciously. Every animation is hand-built on GSAP and works for meaning, not for “wow.” The visitor doesn't read “we're precise” — they <b>see and feel</b> it."],
-  'w3.cap1': ["Блок «Technologie»: живой сканер тахеометра — ±2&nbsp;mm, RTK&nbsp;FIX, спутники, дистанция", "Sekce „Technologie“: živý scanner totální stanice — ±2&nbsp;mm, RTK&nbsp;FIX, satelity, vzdálenost", "“Technologie” section: a live total-station scanner — ±2&nbsp;mm, RTK&nbsp;FIX, satellites, distance"],
+  'w3.cap1': ["Блок «Technologie»: живой сканер тахеометра — ±2&nbsp;mm, RTK&nbsp;FIX, спутники, дистанция", "Sekce „Technologie“: živý skener totální stanice — ±2&nbsp;mm, RTK&nbsp;FIX, satelity, vzdálenost", "“Technologie” section: a live total-station scanner — ±2&nbsp;mm, RTK&nbsp;FIX, satellites, distance"],
   'w3.cap2': ["Чертёж участка оживает при скролле", "Výkres pozemku ožívá při scrollování", "The plot drawing comes alive on scroll"],
   'w3.cap3': ["CTA-блок: анимированная кнопка заявки и курсор — мягкий толчок к действию", "CTA blok: animované tlačítko poptávky a kurzor — jemné popostrčení k akci", "CTA block: an animated request button and cursor — a gentle nudge to act"],
 
   'w4.h': ["Калькулятор и захват заявок", "Kalkulačka a sběr poptávek", "Calculator and lead capture"],
-  'w4.p': ["Чтобы превратить интерес в лид, я добавил <b>квиз-калькулятор</b>: три простых вопроса — и человек получает ориентировочную цену прямо на сайте, не уходя гуглить к конкурентам. Все формы — заявка, калькулятор, B2B-запрос, отклик на вакансию — <b>реально отправляют заявки на почту владельца за секунды</b> (проверено сквозным тестом). Сайт работает не как витрина, а как канал продаж.", "Abych proměnil zájem v lead, přidal jsem <b>kvízovou kalkulačku</b>: tři jednoduché otázky — a člověk dostane orientační cenu přímo na webu, aniž by šel googlit konkurenci. Všechny formuláře — poptávka, kalkulačka, B2B dotaz, reakce na inzerát — <b>reálně odešlou poptávku na e-mail majitele během sekund</b> (ověřeno end-to-end testem). Web nefunguje jako výloha, ale jako prodejní kanál.", "To turn interest into a lead, I added a <b>quiz calculator</b>: three simple questions and the person gets an indicative price right on the site, without going off to Google the competition. Every form — request, calculator, B2B inquiry, job application — <b>actually sends the request to the owner's inbox within seconds</b> (verified end-to-end). The site works not as a showcase but as a sales channel."],
+  'w4.p': ["Чтобы превратить интерес в лид, я добавил <b>квиз-калькулятор</b>: три простых вопроса — и человек получает ориентировочную цену прямо на сайте, не уходя гуглить к конкурентам. Все формы — заявка, калькулятор, B2B-запрос, отклик на вакансию — <b>реально отправляют заявки на почту владельца за секунды</b> (проверено сквозным тестом). Сайт работает не как витрина, а как канал продаж.", "Abych proměnil zájem v lead, přidal jsem <b>kvízovou kalkulačku</b>: tři jednoduché otázky — a člověk dostane orientační cenu přímo na webu, aniž by šel googlit konkurenci. Všechny formuláře — poptávka, kalkulačka, B2B dotaz, reakce na inzerát — <b>reálně odešlou poptávku na e-mail majitele během sekund</b> (ověřeno kompletním testem). Web nefunguje jako výloha, ale jako prodejní kanál.", "To turn interest into a lead, I added a <b>quiz calculator</b>: three simple questions and the person gets an indicative price right on the site, without going off to Google the competition. Every form — request, calculator, B2B inquiry, job application — <b>actually sends the request to the owner's inbox within seconds</b> (verified end-to-end). The site works not as a showcase but as a sales channel."],
   'w4.cap': ["Квиз-калькулятор: «Шаг 2 из 3» — локация и площадь участка, расчёт цены без звонка", "Kvízová kalkulačka: „Krok 2 ze 3“ — lokalita a výměra pozemku, výpočet ceny bez telefonu", "Quiz calculator: “Step 2 of 3” — location and plot area, a price estimate without a phone call"],
 
   'w5.h': ["Полноценный корпоративный сайт, а не одна страница", "Plnohodnotný firemní web, ne jedna stránka", "A full corporate site, not a single page"],
@@ -639,13 +654,13 @@ const STR = {
 
   'tech.kick': ["Технический фундамент", "Technický základ", "Technical foundation"],
   'tech.h': ["Быстрее, дешевле в владении<br> и лучше для SEO", "Rychlejší, levnější na provoz<br> a lepší pro SEO", "Faster, cheaper to own<br> and better for SEO"],
-  'tech.lede': ["Сайт написан на чистом коде — без WordPress, без Tilda, без React и конструкторов. Это не вопрос вкуса, это три бизнес-выгоды.", "Web je napsaný v čistém kódu — bez WordPressu, bez Tildy, bez Reactu a stavitelů. Není to otázka vkusu, jsou to tři byznys výhody.", "The site is written in clean code — no WordPress, no Tilda, no React, no builders. It's not a matter of taste, it's three business benefits."],
+  'tech.lede': ["Сайт написан на чистом коде — без WordPress, без Tilda, без React и конструкторов. Это не вопрос вкуса, это три бизнес-выгоды.", "Web je napsaný v čistém kódu — bez WordPressu, bez Tildy, bez Reactu a stavebnic. Není to otázka vkusu, jsou to tři obchodní výhody.", "The site is written in clean code — no WordPress, no Tilda, no React, no builders. It's not a matter of taste, it's three business benefits."],
   'tech.c1t': ["Скорость <span>98/100</span>", "Rychlost <span>98/100</span>", "Speed <span>98/100</span>"],
-  'tech.c1p': ["Нет тонны лишнего кода, который тащат конструкторы и тяжёлые фреймворки. Отсюда — 98 из 100 по производительности на мобильных.", "Žádná tuna zbytečného kódu, který s sebou tahají stavitelé a těžké frameworky. Odtud — 98 ze 100 ve výkonu na mobilu.", "No tonne of excess code dragged in by builders and heavy frameworks. Hence 98 out of 100 for mobile performance."],
+  'tech.c1p': ["Нет тонны лишнего кода, который тащат конструкторы и тяжёлые фреймворки. Отсюда — 98 из 100 по производительности на мобильных.", "Žádná tuna zbytečného kódu, který s sebou tahají webové stavebnice a těžké frameworky. Odtud — 98 ze 100 ve výkonu na mobilu.", "No tonne of excess code dragged in by builders and heavy frameworks. Hence 98 out of 100 for mobile performance."],
   'tech.c2t': ["SEO <span>100/100</span>", "SEO <span>100/100</span>", "SEO <span>100/100</span>"],
-  'tech.c2p': ["Поисковику отдаётся чистая, идеально читаемая страница. Конструкторы и SPA на React часто мешают индексации — здесь этой проблемы нет в принципе.", "Vyhledávač dostává čistou, ideálně čitelnou stránku. Stavitelé a SPA na Reactu často brání indexaci — tady tento problém v principu není.", "The search engine gets a clean, perfectly readable page. Builders and React SPAs often hinder indexing — here that problem simply doesn't exist."],
+  'tech.c2p': ["Поисковику отдаётся чистая, идеально читаемая страница. Конструкторы и SPA на React часто мешают индексации — здесь этой проблемы нет в принципе.", "Vyhledávač dostává čistou, ideálně čitelnou stránku. Webové stavebnice a SPA na Reactu často brání indexaci — tady tento problém v principu není.", "The search engine gets a clean, perfectly readable page. Builders and React SPAs often hinder indexing — here that problem simply doesn't exist."],
   'tech.c3t': ["Владение <span>0 Kč/год</span>", "Vlastnictví <span>0 Kč/rok</span>", "Ownership <span>0 Kč/yr</span>"],
-  'tech.c3p': ["Нет вечной подписки на конструктор (5–15 тыс. крон в год навсегда). Сайт принадлежит компании, лежит где угодно, не сломается от обновления плагина.", "Žádné věčné předplatné stavitele (5–15 tis. Kč ročně napořád). Web patří firmě, leží kdekoli, nerozbije se po aktualizaci pluginu.", "No perpetual builder subscription (5–15k CZK a year forever). The site belongs to the company, can be hosted anywhere, won't break from a plugin update."],
+  'tech.c3p': ["Нет вечной подписки на конструктор (5–15 тыс. крон в год навсегда). Сайт принадлежит компании, лежит где угодно, не сломается от обновления плагина.", "Žádné věčné předplatné webové stavebnice (5–15 tis. Kč ročně napořád). Web patří firmě, leží kdekoli, nerozbije se po aktualizaci pluginu.", "No perpetual builder subscription (5–15k CZK a year forever). The site belongs to the company, can be hosted anywhere, won't break from a plugin update."],
   'tech.p': ["Плюс под капотом — оптимизация, за которую обычно никто не благодарит, но без которой нет этих цифр: самостоятельно захостенные шрифты, сжатые изображения, устранённые сдвиги вёрстки (CLS), доступность на <b>93/100</b>.", "Plus pod kapotou — optimalizace, za kterou obvykle nikdo nepoděkuje, ale bez níž ta čísla nejsou: vlastně hostované fonty, komprimované obrázky, odstraněné posuny layoutu (CLS), přístupnost na <b>93/100</b>.", "Plus under the hood — optimization nobody usually thanks you for, but without which these numbers don't happen: self-hosted fonts, compressed images, eliminated layout shifts (CLS), accessibility at <b>93/100</b>."],
   'tech.cap': ["Вердикт Google, а не мои слова. Большинство сайтов малого бизнеса живут в красной и жёлтой зоне", "Verdikt Googlu, ne má slova. Většina webů malých firem žije v červené a žluté zóně", "Google's verdict, not my words. Most small-business sites live in the red and yellow zones"],
 
@@ -671,8 +686,8 @@ const STR = {
   'role.t7': ["SEO-фундамент", "SEO základ", "SEO foundation"],
   'role.t8': ["Формы и деплой", "Formuláře a nasazení", "Forms & deploy"],
 
-  'cta.h': ["Нужен такой же подход<br> к вашему бизнесу?", "Chcete stejný přístup<br> pro svůj byznys?", "Want the same approach<br> for your business?"],
-  'cta.p': ["Я не делаю «просто красивые сайты». Я разбираюсь, как устроены ваши продажи, и строю цифровое присутствие, которое решает бизнес-задачу.", "Nedělám „jen hezké weby“. Rozumím tomu, jak fungují vaše prodeje, a stavím digitální přítomnost, která řeší byznys úkol.", "I don't make “just pretty websites.” I understand how your sales work and build a digital presence that solves a business problem."],
+  'cta.h': ["Нужен такой же подход<br> к вашему бизнесу?", "Chcete stejný přístup<br> pro svou firmu?", "Want the same approach<br> for your business?"],
+  'cta.p': ["Я не делаю «просто красивые сайты». Я разбираюсь, как устроены ваши продажи, и строю цифровое присутствие, которое решает бизнес-задачу.", "Nedělám „jen hezké weby“. Rozumím tomu, jak fungují vaše prodeje, a stavím digitální přítomnost, která řeší obchodní úkol.", "I don't make “just pretty websites.” I understand how your sales work and build a digital presence that solves a business problem."],
   'cta.btn': ["Обсудить проект", "Probrat projekt", "Discuss the project"],
   'cta.back': ["← Другие работы", "← Další práce", "← Other work"]
 };
@@ -685,7 +700,9 @@ function applyLang(lang){
   document.querySelectorAll('[data-i18n]').forEach((el)=>{ const v=tr(el.dataset.i18n,lang); if(v!=null) el.innerHTML=v; });
   document.querySelectorAll('[data-i18n-content]').forEach((el)=>{ const v=tr(el.dataset.i18nContent,lang); if(v!=null) el.setAttribute('content',v); });
   if(STR['meta.title']) document.title=tr('meta.title',lang);
-  document.querySelectorAll('#langs button').forEach((b)=>{ b.classList.toggle('active', b.dataset.lang===lang); });
+  const LABELS={ru:'RU',cs:'CZ',en:'EN'};
+  const cur=document.querySelector('.lang-current'); if(cur) cur.textContent=LABELS[lang]||lang.toUpperCase();
+  document.querySelectorAll('#langMenu button').forEach((b)=>{ b.classList.toggle('is-active', b.dataset.lang===lang); });
   try{ localStorage.setItem('lang',lang); }catch(e){}
 }
 function detectLang(){
@@ -697,7 +714,16 @@ function detectLang(){
   if(n.startsWith('ru')||n.startsWith('uk')) return 'ru';
   return 'ru';
 }
-document.getElementById('langs').addEventListener('click',(e)=>{ const b=e.target.closest('button[data-lang]'); if(b) applyLang(b.dataset.lang); });
+/* language dropdown — same behaviour as the main site */
+const langSwitch=document.getElementById('langSwitch');
+const langTrigger=document.getElementById('langTrigger');
+function closeLangMenu(){ if(langSwitch){ langSwitch.classList.remove('open'); langTrigger.setAttribute('aria-expanded','false'); } }
+document.querySelectorAll('#langMenu button').forEach((btn)=>{ btn.addEventListener('click',()=>{ applyLang(btn.dataset.lang); closeLangMenu(); }); });
+if(langTrigger&&langSwitch){
+  langTrigger.addEventListener('click',(e)=>{ e.stopPropagation(); const open=langSwitch.classList.toggle('open'); langTrigger.setAttribute('aria-expanded',open?'true':'false'); });
+  document.addEventListener('click',(e)=>{ if(!langSwitch.contains(e.target)) closeLangMenu(); });
+  document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') closeLangMenu(); });
+}
 applyLang(detectLang());
 </script>
 
