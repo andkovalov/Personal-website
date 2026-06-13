@@ -431,11 +431,20 @@ main{overflow-x:clip;width:100%;max-width:100%}
 .case-link:hover{background:var(--lime);color:var(--lime-ink);border-color:var(--lime);transform:scale(1.05)}
 .case-link svg{transition:transform .35s}
 .case-link:hover svg{transform:translate(2px,-2px)}
+.case-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.case-icon{
+  display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;
+  width:44px;height:44px;color:var(--ink);
+  border:1px solid rgba(242,240,234,.28);border-radius:999px;
+  transition:background .35s,color .35s,border-color .35s,transform .35s;
+}
+.case-icon:hover{background:var(--lime);color:var(--lime-ink);border-color:var(--lime);transform:scale(1.05)}
 .case-media{
   overflow:hidden;position:relative;background:var(--bg-soft);
   display:flex;align-items:center;justify-content:center;
   padding:clamp(20px,3.5vw,44px);
 }
+.case-cover-link{position:absolute;inset:0;z-index:3;cursor:pointer}
 .case-media img{
   max-width:min(100%,620px);max-height:100%;width:auto;height:auto;
   transition:transform .9s cubic-bezier(.22,1,.36,1);
@@ -719,20 +728,25 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
             <div>
               <p class="case-idx" data-i18n="case.deltag.idx">/ 01 — Корпоративный сайт с нуля</p>
               <h3>Delta&nbsp;G</h3>
-              <p data-i18n="case.deltag.desc">Геодезическая фирма со старым сайтом, который отпугивал жаргоном и терял заказы. Пересобрал всё с нуля на новом коде: услуги переписаны с профессионального языка на жизненные ситуации для частных клиентов, а B2B-направление переосмыслено в полноценный корпоративный сайт. Куки-баннер, политика, отдельные SEO-страницы под каждую услугу.</p>
+              <p data-i18n="case.deltag.desc">Старый сайт отпугивал частных клиентов жаргоном и терял заказы. Пересобрал с нуля: услуги — на языке клиента, B2B — в полноценный корпоративный сайт.</p>
             </div>
             <div class="case-foot">
               <div class="case-metric">
                 <b data-i18n="case.deltag.mb">11 страниц</b>
                 <span data-i18n="case.deltag.ms">единая дизайн-система, PageSpeed под сотню по всем метрикам</span>
               </div>
-              <a class="case-link" href="case-delta-g.html" data-hover>
-                <span data-i18n="case.study">Смотреть кейс</span>
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
+              <div class="case-actions">
+                <a class="case-link" href="case-delta-g.html" data-hover>
+                  <span data-i18n="case.study">Смотреть кейс</span>
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <a class="case-icon" href="https://deltag.cz/" target="_blank" rel="noopener" data-hover aria-label="Открыть сайт Delta G" data-i18n-aria="case.live">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3H3.5A1.5 1.5 0 0 0 2 4.5v8A1.5 1.5 0 0 0 3.5 14h8a1.5 1.5 0 0 0 1.5-1.5V10M9.5 2.5h4v4M13.2 2.8 7.5 8.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
             </div>
           </div>
-          <div class="case-media cm-deltag"><img src="assets/cases/deltag.png" data-i18n-alt="case.deltag.alt" alt="Delta G — антикризисный редизайн сайта геодезической фирмы" loading="lazy" width="640" height="435"></div>
+          <div class="case-media cm-deltag"><a class="case-cover-link" href="case-delta-g.html" aria-label="Открыть кейс Delta G" data-i18n-aria="case.study" data-hover></a><img src="assets/cases/deltag.png" data-i18n-alt="case.deltag.alt" alt="Delta G — антикризисный редизайн сайта геодезической фирмы" loading="lazy" width="640" height="435"></div>
         </article>
 
         <article class="case" data-hover>
@@ -1032,9 +1046,10 @@ const STR = {
   'cases.h2': ["Проекты, которые<br> уже <em>приносят заявки</em>", "Projekty, které<br> už <em>přinášejí poptávky</em>", "Projects that<br> already <em>bring in leads</em>"],
   'case.open': ["Открыть сайт", "Otevřít web", "Visit site"],
   'case.study': ["Смотреть кейс", "Zobrazit case", "View case study"],
+  'case.live': ["Открыть сайт Delta G", "Otevřít web Delta G", "Open Delta G website"],
 
   'case.deltag.idx': ["/ 01 — Корпоративный сайт с нуля", "/ 01 — Firemní web od nuly", "/ 01 — Corporate site from scratch"],
-  'case.deltag.desc': ["Геодезическая фирма со старым сайтом, который отпугивал жаргоном и терял заказы. Пересобрал всё с нуля на новом коде: услуги переписаны с профессионального языка на жизненные ситуации для частных клиентов, а B2B-направление переосмыслено в полноценный корпоративный сайт. Куки-баннер, политика, отдельные SEO-страницы под каждую услугу.", "Geodetická firma se starým webem, který odrazoval žargonem a ztrácel zakázky. Vše jsem postavil znovu od nuly na novém kódu: služby přepsané z odborného jazyka do životních situací pro soukromé klienty a B2B větev přepracovaná do plnohodnotného firemního webu. Cookie lišta, zásady soukromí, samostatné SEO stránky pro každou službu.", "A surveying firm with an old site that scared people off with jargon and lost orders. I rebuilt everything from scratch on new code: services rewritten from professional language into real-life situations for private clients, and the B2B branch reimagined into a full corporate site. Cookie banner, privacy policy, dedicated SEO pages for every service."],
+  'case.deltag.desc': ["Старый сайт отпугивал частных клиентов жаргоном и терял заказы. Пересобрал с нуля: услуги — на языке клиента, B2B — в полноценный корпоративный сайт.", "Starý web odrazoval soukromé klienty žargonem a ztrácel zakázky. Postavil jsem ho znovu od nuly: služby v jazyce klienta, B2B v plnohodnotný firemní web.", "The old site scared off private clients with jargon and lost orders. I rebuilt it from scratch: services in the client's language, B2B as a full corporate site."],
   'case.deltag.mb': ["11 страниц", "11 stránek", "11 pages"],
   'case.deltag.ms': ["единая дизайн-система, PageSpeed под сотню по всем метрикам", "jednotný design systém, PageSpeed kolem 100 ve všech metrikách", "one design system, near-100 PageSpeed across all metrics"],
   'case.deltag.alt': ["Delta G — антикризисный редизайн сайта геодезической фирмы", "Delta G — redesign firemního webu geodetické firmy", "Delta G — corporate website redesign for a surveying firm"],
@@ -1141,6 +1156,9 @@ function applyLang(lang) {
   });
   document.querySelectorAll('[data-i18n-alt]').forEach((el) => {
     const v = tr(el.dataset.i18nAlt, lang); if (v != null) el.setAttribute('alt', v);
+  });
+  document.querySelectorAll('[data-i18n-aria]').forEach((el) => {
+    const v = tr(el.dataset.i18nAria, lang); if (v != null) el.setAttribute('aria-label', v);
   });
   if (STR['meta.title']) document.title = tr('meta.title', lang);
   const LABELS = { ru: 'RU', cs: 'CZ', en: 'EN' };
