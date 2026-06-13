@@ -445,12 +445,11 @@ main{overflow-x:clip;width:100%;max-width:100%}
   padding:clamp(20px,3.5vw,44px);
 }
 .case-cover-link{position:absolute;inset:0;z-index:3;cursor:pointer}
-.case-media img,.case-media video{
+.case-media img{
   max-width:min(100%,620px);max-height:100%;width:auto;height:auto;
   transition:transform .9s cubic-bezier(.22,1,.36,1);
 }
-.case-media video{border-radius:10px;box-shadow:0 18px 50px rgba(0,0,0,.22)}
-.case:hover .case-media img,.case:hover .case-media video{transform:scale(1.045) translateY(-4px)}
+.case:hover .case-media img{transform:scale(1.045) translateY(-4px)}
 .cm-deltag{background:linear-gradient(160deg,#eaf0fd,#d7e3fb)}
 .cm-notadocs{background:linear-gradient(160deg,#e3f4e6,#cfe9d6)}
 .cm-tattoo{background:linear-gradient(160deg,#2c2620,#171310)}
@@ -737,7 +736,7 @@ main{overflow-x:clip;width:100%;max-width:100%}
               </div>
             </div>
           </div>
-          <div class="case-media cm-deltag"><a class="case-cover-link" href="case-delta-g.html" aria-label="Открыть кейс Delta G" data-i18n-aria="case.study" data-hover></a><video src="assets/cases/deltag/vid-services.mp4" poster="assets/cases/deltag/poster-services.png" muted loop playsinline preload="none" width="640" height="360" data-lazyvid></video></div>
+          <div class="case-media cm-deltag"><a class="case-cover-link" href="case-delta-g.html" aria-label="Открыть кейс Delta G" data-i18n-aria="case.study" data-hover></a><img src="assets/cases/deltag.png" data-i18n-alt="case.deltag.alt" alt="Delta G — антикризисный редизайн сайта геодезической фирмы" loading="lazy" width="640" height="435"></div>
         </article>
 
         <article class="case" data-hover>
@@ -1663,17 +1662,6 @@ if (langTrigger && langSwitch) {
   document.addEventListener('click', (e) => { if (!langSwitch.contains(e.target)) closeLangMenu(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLangMenu(); });
 }
-
-/* ---------- lazy-play case videos only while in view ---------- */
-document.querySelectorAll('[data-lazyvid]').forEach((vid) => {
-  const io = new IntersectionObserver((es) => {
-    es.forEach((e) => {
-      if (e.isIntersecting) { if (vid.preload === 'none') { vid.preload = 'auto'; vid.load(); } vid.play().catch(() => {}); }
-      else vid.pause();
-    });
-  }, { threshold: 0.35 });
-  io.observe(vid);
-});
 
 window.addEventListener('load', () => ScrollTrigger.refresh());
 </script>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Кейс: Delta G — антикризисный корпоративный сайт · Andrey Kovalov</title>
-<meta name="description" content="Как я перестроил цифровое присутствие геодезической фирмы Delta G: корпоративный сайт из 11 страниц, две аудитории, сеть SEO-страниц и PageSpeed 98/93/100/100.">
+<title data-i18n="meta.title">Кейс: Delta G — антикризисный корпоративный сайт · Andrey Kovalov</title>
+<meta name="description" data-i18n-content="meta.desc" content="Как я перестроил цифровое присутствие геодезической фирмы Delta G: корпоративный сайт из 11 страниц, две аудитории, сеть SEO-страниц и PageSpeed 98/93/100/100.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23d7fb44'/%3E%3Ctext x='32' y='42' font-family='Arial Black' font-size='28' font-weight='900' text-anchor='middle' fill='%230a0a0b'%3EAK%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,15 +38,19 @@ main{overflow-x:clip}
 
 /* progress + topbar */
 .progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--lime);z-index:101;box-shadow:0 0 10px rgba(215,251,68,.6)}
-.topbar{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:100;display:flex;align-items:center;gap:14px;
-  padding:8px 8px 8px 14px;border-radius:999px;background:rgba(16,16,18,.6);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--line);width:max-content;max-width:calc(100vw - 28px)}
+.topbar{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:100;display:flex;align-items:center;gap:12px;
+  padding:8px 8px 8px 14px;border-radius:999px;background:rgba(16,16,18,.6);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--line);width:max-content;max-width:calc(100vw - 24px)}
 .topbar .mono-mark{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;color:var(--ink-dim);white-space:nowrap}
 .topbar .mono-mark b{color:var(--lime);font-weight:700}
 .topbar a.back{font-size:13px;font-weight:600;color:var(--ink-dim);padding:7px 12px;border-radius:999px;transition:color .3s,background .3s;white-space:nowrap}
 .topbar a.back:hover{color:var(--ink);background:rgba(242,240,234,.07)}
 .topbar a.live{font-size:13px;font-weight:700;color:var(--lime-ink);background:var(--lime);padding:8px 15px;border-radius:999px;white-space:nowrap;transition:transform .3s}
 .topbar a.live:hover{transform:scale(1.05)}
-@media (max-width:560px){.topbar .mono-mark{display:none}}
+.langs{display:flex;gap:3px;background:rgba(242,240,234,.06);border-radius:999px;padding:3px}
+.langs button{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--ink-dim);background:none;border:none;cursor:pointer;padding:5px 8px;border-radius:999px;transition:background .3s,color .3s;line-height:1}
+.langs button.active{background:var(--lime);color:var(--lime-ink)}
+.langs button:hover:not(.active){color:var(--ink)}
+@media (max-width:620px){.topbar .mono-mark{display:none}.topbar a.back .lbl{display:none}}
 
 /* layout */
 .wrap{max-width:1080px;margin:0 auto;padding-inline:clamp(20px,5vw,48px)}
@@ -198,11 +202,10 @@ figcaption::before{content:"▸";color:var(--lime)}
 .roi{margin-top:36px;border:1px solid rgba(215,251,68,.3);border-radius:16px;padding:26px 28px;background:rgba(215,251,68,.05);font-size:16.5px}
 .roi b{color:var(--lime)}
 
-/* role list */
-.role-list{columns:2;column-gap:48px;margin-top:30px;list-style:none}
-.role-list li{break-inside:avoid;padding:11px 0 11px 26px;position:relative;color:var(--ink-dim);border-bottom:1px solid var(--line)}
-.role-list li::before{content:"→";position:absolute;left:0;color:var(--lime)}
-@media (max-width:620px){.role-list{columns:1}}
+/* role tags */
+.role-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;list-style:none}
+.role-tags li{font-family:var(--font-mono);font-size:13px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:10px 16px;transition:border-color .35s,transform .35s var(--ease)}
+.role-tags li:hover{border-color:rgba(215,251,68,.4);transform:translateY(-2px)}
 
 /* CTA */
 .cta{text-align:center;position:relative;overflow:hidden}
@@ -233,8 +236,13 @@ footer a{color:var(--ink-dim)}footer a:hover{color:var(--lime)}
 
 <div class="topbar">
   <span class="mono-mark">CASE_01 / <b>DELTA&nbsp;G</b></span>
-  <a class="back" href="index.html#raboty">← Все работы</a>
-  <a class="live" href="https://deltag.vercel.app/" target="_blank" rel="noopener">Открыть сайт ↗</a>
+  <a class="back" href="index.html#raboty">←&nbsp;<span class="lbl" data-i18n="nav.back">Все работы</span></a>
+  <div class="langs" id="langs">
+    <button type="button" data-lang="ru">RU</button>
+    <button type="button" data-lang="cs">CZ</button>
+    <button type="button" data-lang="en">EN</button>
+  </div>
+  <a class="live" href="https://deltag.vercel.app/" target="_blank" rel="noopener" data-i18n="nav.live">Открыть сайт ↗</a>
 </div>
 
 <main>
@@ -254,36 +262,36 @@ footer a{color:var(--ink-dim)}footer a:hover{color:var(--lime)}
   <div class="coord br" id="coordReadout">SCAN · RTK FIX<br>±2&nbsp;mm</div>
 
   <div class="wrap hero-inner">
-    <p class="tagline"><span class="dot"></span> Геодезия · Прага · корпоративный сайт под ключ</p>
+    <p class="tagline"><span class="dot"></span> <span data-i18n="hero.tag">Геодезия · Прага · корпоративный сайт под ключ</span></p>
     <h1><span data-split>DELTA</span> <span class="g" data-split>G</span></h1>
-    <p class="sub">Антикризисный корпоративный сайт для геодезической фирмы — который удерживает бизнес и открывает новый рынок частных клиентов.</p>
-    <p class="roles"><span>Полный цикл:</span> стратегия · UX · дизайн · анимации · вёрстка · копирайт&nbsp;(CZ) · SEO · аналитика · деплой</p>
+    <p class="sub" data-i18n="hero.sub">Антикризисный корпоративный сайт для геодезической фирмы — который удерживает бизнес и открывает новый рынок частных клиентов.</p>
+    <p class="roles" data-i18n="hero.roles"><span>Полный цикл:</span> стратегия · UX · дизайн · анимации · вёрстка · копирайт&nbsp;(CZ) · SEO · аналитика · деплой</p>
   </div>
-  <div class="scrollcue">скролл</div>
+  <div class="scrollcue" data-i18n="hero.scroll">скролл</div>
 </header>
 
 <!-- ============ PAGESPEED STAT BAND ============ -->
 <section class="statband">
   <div class="statgrid">
-    <div class="stat"><div class="num" data-count="98">0</div><div class="lbl">Производительность</div><div class="sub">Google PageSpeed</div></div>
-    <div class="stat"><div class="num" data-count="93">0</div><div class="lbl">Доступность</div><div class="sub">Accessibility</div></div>
-    <div class="stat"><div class="num" data-count="100">0</div><div class="lbl">Best Practices</div><div class="sub">Doporučené postupy</div></div>
+    <div class="stat"><div class="num" data-count="98">0</div><div class="lbl" data-i18n="stat.perf">Производительность</div><div class="sub">Google PageSpeed</div></div>
+    <div class="stat"><div class="num" data-count="93">0</div><div class="lbl" data-i18n="stat.a11y">Доступность</div><div class="sub">Accessibility</div></div>
+    <div class="stat"><div class="num" data-count="100">0</div><div class="lbl">Best Practices</div><div class="sub" data-i18n="stat.bpsub">Рекомендации</div></div>
     <div class="stat"><div class="num" data-count="100">0</div><div class="lbl">SEO</div><div class="sub">100 / 100</div></div>
   </div>
 </section>
 
 <!-- ============ INTRO ============ -->
 <section class="block"><div class="wrap">
-  <p class="kick reveal"><b>00</b> — О проекте</p>
-  <p class="pull reveal">Геодезическая компания из Праги теряла поток заказов из-за того, что весь её сайт говорил только с крупным бизнесом. Я перестроил её цифровое присутствие так, чтобы оно <em>одновременно</em> удерживало корпоративных клиентов и открывало новый рынок частных заказчиков.</p>
+  <p class="kick reveal"><b>00</b> — <span data-i18n="intro.kick">О проекте</span></p>
+  <p class="pull reveal" data-i18n="intro.pull">Геодезическая компания из Праги теряла поток заказов из-за того, что весь её сайт говорил только с крупным бизнесом. Я перестроил её цифровое присутствие так, чтобы оно <em>одновременно</em> удерживало корпоративных клиентов и открывало новый рынок частных заказчиков.</p>
 
   <dl class="facts reveal">
-    <div><dt>Клиент</dt><dd>Delta G s.r.o. — геодезия, Прага, на рынке с 2004 года</dd></div>
-    <div><dt>Задача</dt><dd>не редизайн, а смена бизнес-позиционирования через веб</dd></div>
-    <div><dt>Объём</dt><dd>корпоративный сайт, 11 страниц, две аудитории (B2B + B2C)</dd></div>
-    <div><dt>Технологии</dt><dd>чистый HTML / CSS / JS, GSAP-анимации, без CMS и конструкторов</dd></div>
-    <div><dt>Качество</dt><dd>PageSpeed 98 · 93 · 100 · 100 (Google)</dd></div>
-    <div><dt>Роль</dt><dd>один специалист на всём цикле — от стратегии до продакшена</dd></div>
+    <div><dt data-i18n="facts.client.t">Клиент</dt><dd data-i18n="facts.client.d">Delta G s.r.o. — геодезия, Прага, на рынке с 2004 года</dd></div>
+    <div><dt data-i18n="facts.task.t">Задача</dt><dd data-i18n="facts.task.d">не редизайн, а смена бизнес-позиционирования через веб</dd></div>
+    <div><dt data-i18n="facts.scope.t">Объём</dt><dd data-i18n="facts.scope.d">корпоративный сайт, 11 страниц, две аудитории (B2B + B2C)</dd></div>
+    <div><dt data-i18n="facts.tech.t">Технологии</dt><dd data-i18n="facts.tech.d">чистый HTML / CSS / JS, GSAP-анимации, без CMS и конструкторов</dd></div>
+    <div><dt data-i18n="facts.quality.t">Качество</dt><dd data-i18n="facts.quality.d">PageSpeed 98 · 93 · 100 · 100 (Google)</dd></div>
+    <div><dt data-i18n="facts.role.t">Роль</dt><dd data-i18n="facts.role.d">один специалист на всём цикле — от стратегии до продакшена</dd></div>
   </dl>
 
   <figure class="reveal" style="margin-top:44px">
@@ -291,90 +299,89 @@ footer a{color:var(--ink-dim)}footer a:hover{color:var(--lime)}
       <div class="browser"><i></i><i></i><i></i><span class="url">deltag.cz</span></div>
       <video src="assets/cases/deltag/vid-services.mp4" poster="assets/cases/deltag/poster-services.png" muted loop playsinline preload="none" data-lazyvid></video>
     </div>
-    <figcaption>Секция услуг живьём: справа «дышащий» геодезический чертёж перестраивается под каждую задачу</figcaption>
+    <figcaption data-i18n="intro.cap">Секция услуг живьём: справа «дышащий» геодезический чертёж перестраивается под каждую задачу</figcaption>
   </figure>
 </div></section>
 
 <!-- ============ CONTEXT ============ -->
 <section class="block"><div class="wrap narrow">
-  <p class="kick reveal"><b>01</b> — Контекст</p>
-  <h2 class="h reveal">Бизнес под давлением рынка</h2>
-  <p class="body reveal">Delta G десятилетиями держалась на крупных B2B-заказчиках — застройщиках, строительных компаниях, инфраструктурных проектах. Это давало около <strong>75% оборота</strong>.</p>
-  <p class="reveal" style="margin:36px 0"><span class="bignum">75%</span> <span style="color:var(--ink-faint);font-family:var(--font-mono);font-size:13px;display:block;margin-top:4px">оборота держалось на одной аудитории, которая просела</span></p>
-  <p class="body reveal">Но рынок изменился. Из-за высоких ипотечных ставок и инфляции девелоперы по всей Европе замораживают проекты. Большие стройки встали — и привычный поток заказов, который годами стабильно кормил компанию, просел. Старые связи перестали давать прежний объём.</p>
-  <p class="body reveal">Чтобы пережить спад, компании нужен был второй источник дохода — <strong>частные клиенты</strong>: люди, которым надо разделить участок под Прагой, вынести границы перед забором, оформить дом в кадастр. Рынок большой и стабильный. Проблема была в том, что Delta G была для него фактически невидима.</p>
+  <p class="kick reveal"><b>01</b> — <span data-i18n="ctx.kick">Контекст</span></p>
+  <h2 class="h reveal" data-i18n="ctx.h">Бизнес под давлением рынка</h2>
+  <p class="body reveal" data-i18n="ctx.p1">Delta G десятилетиями держалась на крупных B2B-заказчиках — застройщиках и инфраструктурных проектах. Это давало около <strong>75% оборота</strong>.</p>
+  <p class="reveal" style="margin:36px 0"><span class="bignum">75%</span> <span style="color:var(--ink-faint);font-family:var(--font-mono);font-size:13px;display:block;margin-top:4px" data-i18n="ctx.bignum">оборота держалось на одной аудитории, которая просела</span></p>
+  <p class="body reveal" data-i18n="ctx.p2">Но из-за высоких ставок и инфляции девелоперы по всей Европе заморозили стройки — и привычный поток заказов просел. Компании нужен был второй источник дохода: <strong>частные клиенты</strong>, которым надо разделить участок под Прагой, вынести границы, оформить дом в кадастр. Рынок большой и стабильный — но для него Delta G была фактически невидима.</p>
 </div></section>
 
 <!-- ============ DIAGNOSIS ============ -->
 <section class="block"><div class="wrap">
-  <p class="kick reveal"><b>02</b> — Диагноз</p>
-  <h2 class="h reveal">Старый сайт работал <em>против</em> компании</h2>
-  <p class="lede reveal">Я начал не с дизайна, а с аудита существующего сайта. И он оказался корнем проблемы.</p>
+  <p class="kick reveal"><b>02</b> — <span data-i18n="diag.kick">Диагноз</span></p>
+  <h2 class="h reveal" data-i18n="diag.h">Старый сайт работал <em>против</em> компании</h2>
+  <p class="lede reveal" data-i18n="diag.lede">Я начал не с дизайна, а с аудита существующего сайта. И он оказался корнем проблемы.</p>
 
   <div class="before" style="margin-top:48px">
     <figure class="reveal">
-      <div class="oldframe"><span class="oldtag">Было · deltag.cz</span><img src="assets/cases/deltag/old.png" alt="Старый сайт deltag.cz — перегруженный, на языке крупного бизнеса" loading="lazy"></div>
-      <figcaption>Старый deltag.cz целиком</figcaption>
+      <div class="oldframe"><span class="oldtag" data-i18n="diag.oldtag">Было · deltag.cz</span><img src="assets/cases/deltag/old.png" alt="Старый сайт deltag.cz" loading="lazy"></div>
+      <figcaption data-i18n="diag.oldcap">Старый deltag.cz целиком</figcaption>
     </figure>
     <div>
-      <p class="body reveal" style="margin-top:0">Сайт был сделан для «больших дядей» и отлично отпугивал всех остальных:</p>
+      <p class="body reveal" style="margin-top:0" data-i18n="diag.intro">Сайт был сделан для «больших дядей» и отлично отпугивал всех остальных:</p>
       <ul class="problems reveal" style="margin-top:24px">
-        <li><b>Непробиваемый жаргон.</b> Обычный человек, которому надо разделить участок, не понимает ни слова — и закрывает вкладку.
+        <li><span data-i18n="diag.p1"><b>Непробиваемый жаргон.</b> Обычный человек, которому надо разделить участок, не понимает ни слова — и закрывает вкладку.</span>
           <div class="jargon"><code>§ 16f odst. 1 zák. č. 200/1994 Sb.</code><code>vteřinové robotické totální stanice</code><code>GNSS systém R12i</code></div>
         </li>
-        <li><b>Масштаб пугает, а не привлекает.</b> Допуски к железным дорогам, сертификаты ISO, тяжёлое оборудование. Частник решает: «это контора для гигантов, моя задача им неинтересна или будет стоить космос».</li>
-        <li><b>Ноль прозрачности.</b> Цен нет, сроков нет, объяснений «зачем это вообще нужно» нет.</li>
-        <li><b>Слабые точки захвата.</b> Единственная кнопка — невнятное «Mám zájem». Ни расчёта, ни понятного «оставьте заявку».</li>
-        <li><b>Одна аудитория.</b> Сайт умел разговаривать только с профессионалами и полностью игнорировал растущий частный спрос.</li>
+        <li data-i18n="diag.p2"><b>Масштаб пугает, а не привлекает.</b> Допуски к железным дорогам, сертификаты ISO, тяжёлое оборудование. Частник решает: «это контора для гигантов, моя задача им неинтересна или будет стоить космос».</li>
+        <li data-i18n="diag.p3"><b>Ноль прозрачности.</b> Цен нет, сроков нет, объяснений «зачем это вообще нужно» нет.</li>
+        <li data-i18n="diag.p4"><b>Слабые точки захвата.</b> Единственная кнопка — невнятное «Mám zájem». Ни расчёта, ни понятного «оставьте заявку».</li>
+        <li data-i18n="diag.p5"><b>Одна аудитория.</b> Сайт умел разговаривать только с профессионалами и полностью игнорировал растущий частный спрос.</li>
       </ul>
     </div>
   </div>
-  <p class="pull reveal" style="margin-top:56px">Вывод был жёстким: сайт <em>успешно отталкивал именно тех клиентов</em>, которые теперь нужны для выживания.</p>
+  <p class="pull reveal" style="margin-top:56px" data-i18n="diag.pull">Вывод был жёстким: сайт <em>успешно отталкивал именно тех клиентов</em>, которые теперь нужны для выживания.</p>
 </div></section>
 
 <!-- ============ STRATEGY ============ -->
 <section class="block"><div class="wrap">
-  <p class="kick reveal"><b>03</b> — Стратегия</p>
-  <h2 class="h reveal">Разделить аудитории,<br> не потеряв ни одну</h2>
-  <p class="lede reveal">Ключевое решение, которое определило весь проект: не делать «ещё один сайт», а развести два мира внутри одного корпоративного присутствия.</p>
+  <p class="kick reveal"><b>03</b> — <span data-i18n="str.kick">Стратегия</span></p>
+  <h2 class="h reveal" data-i18n="str.h">Разделить аудитории,<br> не потеряв ни одну</h2>
+  <p class="lede reveal" data-i18n="str.lede">Ключевое решение, которое определило весь проект: не делать «ещё один сайт», а развести два мира внутри одного корпоративного присутствия.</p>
 
   <div class="diagram reveal">
     <div class="d-top">
-      <span class="node d-root">Delta G<small>один бренд</small></span>
+      <span class="node d-root" data-i18n="str.root">Delta G<small>один бренд</small></span>
     </div>
     <div class="d-branch"><span class="bar"></span></div>
     <div class="d-row">
       <div class="d-col">
-        <span class="node d-b2c">Частные клиенты<small>B2C · новый рынок</small></span>
+        <span class="node d-b2c" data-i18n="str.b2c">Частные клиенты<small>B2C · новый рынок</small></span>
         <span class="d-conn"></span>
         <div class="d-seo">
           <span>rozdělení pozemku</span><span>vytyčení hranic</span><span>zaměření pro projekt</span>
           <span>geometrický plán</span><span>pasport stavby</span><span>vytyčení stavby</span>
         </div>
         <span class="d-conn"></span>
-        <span class="d-form">→ заявка на почту</span>
+        <span class="d-form" data-i18n="str.formc">→ заявка на почту</span>
       </div>
       <div class="d-col">
-        <span class="node d-b2b">Фирмы и инвесторы<small>B2B · удержан</small></span>
+        <span class="node d-b2b" data-i18n="str.b2b">Фирмы и инвесторы<small>B2B · удержан</small></span>
         <span class="d-conn"></span>
-        <div class="d-seo"><span>инженерная геодезия</span><span>картографические основы</span><span>мониторинг деформаций</span><span>кадастр для застройщиков</span></div>
+        <div class="d-seo"><span data-i18n="str.b2b1">инженерная геодезия</span><span data-i18n="str.b2b2">картографические основы</span><span data-i18n="str.b2b3">мониторинг деформаций</span><span data-i18n="str.b2b4">кадастр для застройщиков</span></div>
         <span class="d-conn"></span>
-        <span class="d-form" style="background:var(--dg);color:#fff">→ B2B-запрос</span>
+        <span class="d-form" style="background:var(--dg);color:#fff" data-i18n="str.formb">→ B2B-запрос</span>
       </div>
     </div>
   </div>
 
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px" class="reveal">
-    <div><h3 style="font-family:var(--font-display);font-weight:700;font-size:1.05rem;margin-bottom:8px">Частнику</h3><p style="color:var(--ink-dim);font-size:14.5px">человеческий язык, выгоды, снятие страхов перед кадастром и урядами, понятные цены, быстрый расчёт и заявка.</p></div>
-    <div><h3 style="font-family:var(--font-display);font-weight:700;font-size:1.05rem;margin-bottom:8px">Бизнесу</h3><p style="color:var(--ink-dim);font-size:14.5px">отдельная страница с профессиональным каталогом, терминологией и допусками. Корпоративный вес сохранён — ничего не «опустили».</p></div>
-    <div><h3 style="font-family:var(--font-display);font-weight:700;font-size:1.05rem;margin-bottom:8px">Поиску</h3><p style="color:var(--ink-dim);font-size:14.5px">сеть отдельных страниц под конкретные частные запросы, чтобы ловить клиентов прямо из Google.</p></div>
+    <div><h3 style="font-family:var(--font-display);font-weight:700;font-size:1.05rem;margin-bottom:8px" data-i18n="str.c1t">Частнику</h3><p style="color:var(--ink-dim);font-size:14.5px" data-i18n="str.c1p">человеческий язык, выгоды, снятие страхов перед кадастром и урядами, понятные цены, быстрый расчёт и заявка.</p></div>
+    <div><h3 style="font-family:var(--font-display);font-weight:700;font-size:1.05rem;margin-bottom:8px" data-i18n="str.c2t">Бизнесу</h3><p style="color:var(--ink-dim);font-size:14.5px" data-i18n="str.c2p">отдельная страница с профессиональным каталогом, терминологией и допусками. Корпоративный вес сохранён — ничего не «опустили».</p></div>
+    <div><h3 style="font-family:var(--font-display);font-weight:700;font-size:1.05rem;margin-bottom:8px" data-i18n="str.c3t">Поиску</h3><p style="color:var(--ink-dim);font-size:14.5px" data-i18n="str.c3p">сеть отдельных страниц под конкретные частные запросы, чтобы ловить клиентов прямо из Google.</p></div>
   </div>
 </div></section>
 
 <!-- ============ WHAT WAS DONE ============ -->
 <section class="block" style="padding-bottom:0"><div class="wrap">
-  <p class="kick reveal"><b>04</b> — Что сделано</p>
-  <h2 class="h reveal">Не «причесали», а <em>пересобрали</em></h2>
+  <p class="kick reveal"><b>04</b> — <span data-i18n="work.kick">Что сделано</span></p>
+  <h2 class="h reveal" data-i18n="work.h">Не «причесали», а <em>пересобрали</em></h2>
 </div></section>
 
 <section><div class="wrap">
@@ -383,9 +390,9 @@ footer a{color:var(--ink-dim)}footer a:hover{color:var(--lime)}
   <div class="work-item">
     <div class="idx reveal">01</div>
     <div>
-      <h3 class="reveal">Два входа в один бизнес</h3>
-      <p class="wlede reveal">Главная встречает частника: оффер «Zaměříme. Vyřídíme. Do katastru bez starostí», выгоды вместо терминов, проработанные страхи. Отдельная страница <b>«Pro firmy a investory»</b> держит весь тяжёлый B2B-каталог на профессиональном языке. Один бренд, две точки входа, ноль потерянных посетителей.</p>
-      <figure class="media reveal"><div class="fig"><div class="browser"><i></i><i></i><i></i><span class="url">deltag.cz</span></div><img src="assets/cases/deltag/hero.png" alt="Hero нового сайта Delta G" loading="lazy"></div><figcaption>Главная для частного клиента — выгоды, а не термины</figcaption></figure>
+      <h3 class="reveal" data-i18n="w1.h">Два входа в один бизнес</h3>
+      <p class="wlede reveal" data-i18n="w1.p">Главная встречает частника: оффер «Zaměříme. Vyřídíme. Do katastru bez starostí», выгоды вместо терминов, проработанные страхи. Отдельная страница <b>«Pro firmy a investory»</b> держит весь тяжёлый B2B-каталог на профессиональном языке. Один бренд, две точки входа, ноль потерянных посетителей.</p>
+      <figure class="media reveal"><div class="fig"><div class="browser"><i></i><i></i><i></i><span class="url">deltag.cz</span></div><img src="assets/cases/deltag/hero.png" alt="Hero нового сайта Delta G" loading="lazy"></div><figcaption data-i18n="w1.cap">Главная для частного клиента — выгоды, а не термины</figcaption></figure>
     </div>
   </div>
 
@@ -393,14 +400,14 @@ footer a{color:var(--ink-dim)}footer a:hover{color:var(--lime)}
   <div class="work-item">
     <div class="idx reveal">02</div>
     <div>
-      <h3 class="reveal">Сеть SEO-страниц — почему сайт, а не лендинг</h3>
-      <p class="wlede reveal">Человек вечером вводит в Google <b>«rozdělení pozemku Praha ceník»</b>. Это горячий клиент — с деньгами, конкретной задачей и намерением заказать. Если под этот точный запрос нет отдельной страницы — его забирает конкурент. Один лендинг тут бессилен: Google не показывает внутренние секции по узким запросам.</p>
-      <figure class="media reveal"><div class="fig" style="background:#fff"><img src="assets/cases/deltag/seo-search.png" alt="Поисковый запрос Google: rozdělení pozemku Praha ceník" loading="lazy"></div><figcaption>Под точный коммерческий запрос — отдельная посадочная</figcaption></figure>
-      <p class="wlede reveal" style="margin-top:30px">Поэтому я построил <b>6 автономных посадочных страниц</b> — под каждую частную услугу. У каждой свой заголовок под реальный запрос, свои цены, анимированная схема и блок FAQ. Это не «копии ради объёма» — это шесть ловушек платёжеспособного органического трафика, работающих без оплаты за рекламу.</p>
+      <h3 class="reveal" data-i18n="w2.h">Сеть SEO-страниц — почему сайт, а не лендинг</h3>
+      <p class="wlede reveal" data-i18n="w2.p1">Человек вечером вводит в Google <b>«rozdělení pozemku Praha ceník»</b>. Это горячий клиент — с деньгами, конкретной задачей и намерением заказать. Если под этот точный запрос нет отдельной страницы — его забирает конкурент. Один лендинг тут бессилен: Google не показывает внутренние секции по узким запросам.</p>
+      <figure class="media reveal"><div class="fig" style="background:#fff"><img src="assets/cases/deltag/seo-search.png" alt="Поисковый запрос Google: rozdělení pozemku Praha ceník" loading="lazy"></div><figcaption data-i18n="w2.cap">Под точный коммерческий запрос — отдельная посадочная</figcaption></figure>
+      <p class="wlede reveal" style="margin-top:30px" data-i18n="w2.p2">Поэтому я построил <b>6 автономных посадочных страниц</b> — под каждую частную услугу. У каждой свой заголовок под реальный запрос, свои цены, анимированная схема и блок FAQ. Это не «копии ради объёма» — это шесть ловушек платёжеспособного органического трафика, работающих без оплаты за рекламу.</p>
       <div class="svc reveal">
-        <span><b>01</b> Разделение участка</span><span><b>02</b> Вынос границ</span>
-        <span><b>03</b> Съёмка под проект дома</span><span><b>04</b> Геометрический план для колаудации</span>
-        <span><b>05</b> Паспорт строения</span><span><b>06</b> Вынос строения в натуру</span>
+        <span><b>01</b> <span data-i18n="w2.s1">Разделение участка</span></span><span><b>02</b> <span data-i18n="w2.s2">Вынос границ</span></span>
+        <span><b>03</b> <span data-i18n="w2.s3">Съёмка под проект дома</span></span><span><b>04</b> <span data-i18n="w2.s4">Геометрический план для колаудации</span></span>
+        <span><b>05</b> <span data-i18n="w2.s5">Паспорт строения</span></span><span><b>06</b> <span data-i18n="w2.s6">Вынос строения в натуру</span></span>
       </div>
     </div>
   </div>
@@ -409,12 +416,12 @@ footer a{color:var(--ink-dim)}footer a:hover{color:var(--lime)}
   <div class="work-item">
     <div class="idx reveal">03</div>
     <div>
-      <h3 class="reveal">Анимации как доказательство точности</h3>
-      <p class="wlede reveal">Геодезия — это про миллиметры, и сайт транслирует это подсознательно. Все анимации сделаны на GSAP вручную и работают на смысл, а не на «вау». Посетитель не читает «мы точные» — он это <b>видит и чувствует</b>.</p>
+      <h3 class="reveal" data-i18n="w3.h">Анимации как доказательство точности</h3>
+      <p class="wlede reveal" data-i18n="w3.p">Геодезия — это про миллиметры, и сайт транслирует это подсознательно. Все анимации сделаны на GSAP вручную и работают на смысл, а не на «вау». Посетитель не читает «мы точные» — он это <b>видит и чувствует</b>.</p>
       <div class="anim-grid">
-        <figure class="reveal span2"><div class="fig"><video src="assets/cases/deltag/vid-scanner.mp4" poster="assets/cases/deltag/poster-scanner.png" muted loop playsinline preload="none" data-lazyvid></video></div><figcaption>Блок «Технологie»: живой сканер тахеометра — ±2&nbsp;mm, RTK&nbsp;FIX, спутники, дистанция</figcaption></figure>
-        <figure class="reveal"><div class="fig"><video src="assets/cases/deltag/vid-blueprint.mp4" poster="assets/cases/deltag/poster-blueprint.png" muted loop playsinline preload="none" data-lazyvid></video></div><figcaption>Чертёж участка оживает при скролле</figcaption></figure>
-        <figure class="reveal"><div class="fig"><video src="assets/cases/deltag/vid-cta.mp4" poster="assets/cases/deltag/poster-cta.png" muted loop playsinline preload="none" data-lazyvid></video></div><figcaption>Координатная сетка и точки замера в интерфейсе</figcaption></figure>
+        <figure class="reveal span2"><div class="fig"><video src="assets/cases/deltag/vid-scanner.mp4" poster="assets/cases/deltag/poster-scanner.png" muted loop playsinline preload="none" data-lazyvid></video></div><figcaption data-i18n="w3.cap1">Блок «Technologie»: живой сканер тахеометра — ±2&nbsp;mm, RTK&nbsp;FIX, спутники, дистанция</figcaption></figure>
+        <figure class="reveal"><div class="fig"><video src="assets/cases/deltag/vid-blueprint.mp4" poster="assets/cases/deltag/poster-blueprint.png" muted loop playsinline preload="none" data-lazyvid></video></div><figcaption data-i18n="w3.cap2">Чертёж участка оживает при скролле</figcaption></figure>
+        <figure class="reveal"><div class="fig"><video src="assets/cases/deltag/vid-cta.mp4" poster="assets/cases/deltag/poster-cta.png" muted loop playsinline preload="none" data-lazyvid></video></div><figcaption data-i18n="w3.cap3">CTA-блок: анимированная кнопка заявки и курсор — мягкий толчок к действию</figcaption></figure>
       </div>
     </div>
   </div>
@@ -423,9 +430,9 @@ footer a{color:var(--ink-dim)}footer a:hover{color:var(--lime)}
   <div class="work-item">
     <div class="idx reveal">04</div>
     <div>
-      <h3 class="reveal">Калькулятор и захват заявок</h3>
-      <p class="wlede reveal">Чтобы превратить интерес в лид, я добавил <b>квиз-калькулятор</b>: три простых вопроса — и человек получает ориентировочную цену прямо на сайте, не уходя гуглить к конкурентам. Все формы — заявка, калькулятор, B2B-запрос, отклик на вакансию — <b>реально отправляют заявки на почту владельца за секунды</b> (проверено сквозным тестом). Сайт работает не как витрина, а как канал продаж.</p>
-      <figure class="media reveal"><div class="fig"><video src="assets/cases/deltag/vid-calculator.mp4" poster="assets/cases/deltag/poster-calculator.png" muted loop playsinline preload="none" data-lazyvid></video></div><figcaption>Квиз-калькулятор: «Шаг 2 из 3» — локация и площадь участка, расчёт цены без звонка</figcaption></figure>
+      <h3 class="reveal" data-i18n="w4.h">Калькулятор и захват заявок</h3>
+      <p class="wlede reveal" data-i18n="w4.p">Чтобы превратить интерес в лид, я добавил <b>квиз-калькулятор</b>: три простых вопроса — и человек получает ориентировочную цену прямо на сайте, не уходя гуглить к конкурентам. Все формы — заявка, калькулятор, B2B-запрос, отклик на вакансию — <b>реально отправляют заявки на почту владельца за секунды</b> (проверено сквозным тестом). Сайт работает не как витрина, а как канал продаж.</p>
+      <figure class="media reveal"><div class="fig"><video src="assets/cases/deltag/vid-calculator.mp4" poster="assets/cases/deltag/poster-calculator.png" muted loop playsinline preload="none" data-lazyvid></video></div><figcaption data-i18n="w4.cap">Квиз-калькулятор: «Шаг 2 из 3» — локация и площадь участка, расчёт цены без звонка</figcaption></figure>
     </div>
   </div>
 
@@ -433,12 +440,12 @@ footer a{color:var(--ink-dim)}footer a:hover{color:var(--lime)}
   <div class="work-item">
     <div class="idx reveal">05</div>
     <div>
-      <h3 class="reveal">Полноценный корпоративный сайт, а не одна страница</h3>
+      <h3 class="reveal" data-i18n="w5.h">Полноценный корпоративный сайт, а не одна страница</h3>
       <ul class="problems reveal" style="margin-top:20px;gap:16px">
-        <li style="padding-left:0"><b>Карьерная страница</b> с формой отклика — компания растёт и нанимает геодезистов без рекрутера.</li>
-        <li style="padding-left:0"><b>Страница контактов</b> с картой, реквизитами и живым индикатором часов работы.</li>
-        <li style="padding-left:0"><b>Политика конфиденциальности и cookie-баннер с opt-in</b> — до согласия не собирается ни один байт. Это юридическая защита: за нарушение GDPR чешский ÚOOÚ штрафует ощутимо.</li>
-        <li style="padding-left:0"><b>Сквозная корпоративная шапка</b> с выпадающим меню услуг и единый футер на всех 11 страницах.</li>
+        <li style="padding-left:0" data-i18n="w5.l1"><b>Карьерная страница</b> с формой отклика — компания растёт и нанимает геодезистов без рекрутера.</li>
+        <li style="padding-left:0" data-i18n="w5.l2"><b>Страница контактов</b> с картой, реквизитами и живым индикатором часов работы.</li>
+        <li style="padding-left:0" data-i18n="w5.l3"><b>Политика конфиденциальности и cookie-баннер с opt-in</b> — до согласия не собирается ни один байт. Это юридическая защита: за нарушение GDPR чешский ÚOOÚ штрафует ощутимо.</li>
+        <li style="padding-left:0" data-i18n="w5.l4"><b>Сквозная корпоративная шапка</b> с выпадающим меню услуг и единый футер на всех 11 страницах.</li>
       </ul>
     </div>
   </div>
@@ -447,69 +454,68 @@ footer a{color:var(--ink-dim)}footer a:hover{color:var(--lime)}
   <div class="work-item">
     <div class="idx reveal">06</div>
     <div>
-      <h3 class="reveal">Социальные сигналы и бренд-детали</h3>
-      <p class="wlede reveal" style="margin-bottom:0">Самостоятельная фавиконка, OG-изображение для соцсетей (ссылка в WhatsApp/Telegram выглядит как от солидной компании, а не голым URL), Twitter-карточка, единая дизайн-система. Мелочи, которые в сумме формируют доверие до первого клика.</p>
+      <h3 class="reveal" data-i18n="w6.h">Социальные сигналы и бренд-детали</h3>
+      <p class="wlede reveal" style="margin-bottom:0" data-i18n="w6.p">Самостоятельная фавиконка, OG-изображение для соцсетей (ссылка в WhatsApp/Telegram выглядит как от солидной компании, а не голым URL), Twitter-карточка, единая дизайн-система. Мелочи, которые в сумме формируют доверие до первого клика.</p>
     </div>
   </div>
 </div></section>
 
 <!-- ============ TECH FOUNDATION ============ -->
 <section class="block"><div class="wrap">
-  <p class="kick reveal"><b>05</b> — Технический фундамент</p>
-  <h2 class="h reveal">Быстрее, дешевле в владении<br> и лучше для SEO</h2>
-  <p class="lede reveal">Сайт написан на чистом коде — без WordPress, без Tilda, без React и конструкторов. Это не вопрос вкуса, это три бизнес-выгоды.</p>
+  <p class="kick reveal"><b>05</b> — <span data-i18n="tech.kick">Технический фундамент</span></p>
+  <h2 class="h reveal" data-i18n="tech.h">Быстрее, дешевле в владении<br> и лучше для SEO</h2>
+  <p class="lede reveal" data-i18n="tech.lede">Сайт написан на чистом коде — без WordPress, без Tilda, без React и конструкторов. Это не вопрос вкуса, это три бизнес-выгоды.</p>
 
   <div class="tech3">
-    <div class="card reveal"><div class="t">Скорость <span>98/100</span></div><p>Нет тонны лишнего кода, который тащат конструкторы и тяжёлые фреймворки. Отсюда — 98 из 100 по производительности на мобильных.</p></div>
-    <div class="card reveal"><div class="t">SEO <span>100/100</span></div><p>Поисковику отдаётся чистая, идеально читаемая страница. Конструкторы и SPA на React часто мешают индексации — здесь этой проблемы нет в принципе.</p></div>
-    <div class="card reveal"><div class="t">Владение <span>0 Kč/год</span></div><p>Нет вечной подписки на конструктор (5–15 тыс. крон в год навсегда). Сайт принадлежит компании, лежит где угодно, не сломается от обновления плагина.</p></div>
+    <div class="card reveal"><div class="t" data-i18n="tech.c1t">Скорость <span>98/100</span></div><p data-i18n="tech.c1p">Нет тонны лишнего кода, который тащат конструкторы и тяжёлые фреймворки. Отсюда — 98 из 100 по производительности на мобильных.</p></div>
+    <div class="card reveal"><div class="t" data-i18n="tech.c2t">SEO <span>100/100</span></div><p data-i18n="tech.c2p">Поисковику отдаётся чистая, идеально читаемая страница. Конструкторы и SPA на React часто мешают индексации — здесь этой проблемы нет в принципе.</p></div>
+    <div class="card reveal"><div class="t" data-i18n="tech.c3t">Владение <span>0 Kč/год</span></div><p data-i18n="tech.c3p">Нет вечной подписки на конструктор (5–15 тыс. крон в год навсегда). Сайт принадлежит компании, лежит где угодно, не сломается от обновления плагина.</p></div>
   </div>
 
-  <p class="body reveal">Плюс под капотом — оптимизация, за которую обычно никто не благодарит, но без которой нет этих цифр: самостоятельно захостенные шрифты, сжатые изображения, устранённые сдвиги вёрстки (CLS), доступность на <b>93/100</b>.</p>
+  <p class="body reveal" data-i18n="tech.p">Плюс под капотом — оптимизация, за которую обычно никто не благодарит, но без которой нет этих цифр: самостоятельно захостенные шрифты, сжатые изображения, устранённые сдвиги вёрстки (CLS), доступность на <b>93/100</b>.</p>
 
-  <figure class="reveal" style="margin-top:40px"><div class="fig" style="background:#fff"><img src="assets/cases/deltag/pagespeed.png" alt="Google PageSpeed: 98 / 93 / 100 / 100" loading="lazy"></div><figcaption>Вердикт Google, а не мои слова. Большинство сайтов малого бизнеса живут в красной и жёлтой зоне</figcaption></figure>
+  <figure class="reveal" style="margin-top:40px"><div class="fig" style="background:#fff"><img src="assets/cases/deltag/pagespeed.png" alt="Google PageSpeed: 98 / 93 / 100 / 100" loading="lazy"></div><figcaption data-i18n="tech.cap">Вердикт Google, а не мои слова. Большинство сайтов малого бизнеса живут в красной и жёлтой зоне</figcaption></figure>
 </div></section>
 
 <!-- ============ RESULTS ============ -->
 <section class="block"><div class="wrap narrow">
-  <p class="kick reveal"><b>06</b> — Итог</p>
-  <h2 class="h reveal">Что в итоге заложено</h2>
-  <p class="lede reveal">Сайт только запущен, поэтому честно: вместо выдуманной статистики — то, что реально построено и будет работать.</p>
+  <p class="kick reveal"><b>06</b> — <span data-i18n="res.kick">Итог</span></p>
+  <h2 class="h reveal" data-i18n="res.h">Что в итоге заложено</h2>
+  <p class="lede reveal" data-i18n="res.lede">Сайт только запущен, поэтому честно: вместо выдуманной статистики — то, что реально построено и будет работать.</p>
   <ul class="results reveal">
-    <li>Компания <b>впервые видима</b> для частного клиента и говорит с ним на его языке.</li>
-    <li><b>6 SEO-страниц</b> начинают собирать органический трафик по коммерческим запросам — поток, который растёт со временем и не требует платы за рекламу.</li>
-    <li><b>Рабочая воронка</b>: от поискового запроса или рекламы → к понятной странице → к расчёту цены → к заявке на почту.</li>
-    <li>B2B-направление <b>не потеряно</b>, а получило достойную отдельную площадку.</li>
-    <li>Техническая база — скорость, SEO, доступность — на уровне, которого нет у большинства конкурентов в нише.</li>
+    <li data-i18n="res.l1">Компания <b>впервые видима</b> для частного клиента и говорит с ним на его языке.</li>
+    <li data-i18n="res.l2"><b>6 SEO-страниц</b> начинают собирать органический трафик по коммерческим запросам — поток, который растёт со временем и не требует платы за рекламу.</li>
+    <li data-i18n="res.l3"><b>Рабочая воронка</b>: от поискового запроса или рекламы → к понятной странице → к расчёту цены → к заявке на почту.</li>
+    <li data-i18n="res.l4">B2B-направление <b>не потеряно</b>, а получило достойную отдельную площадку.</li>
+    <li data-i18n="res.l5">Техническая база — скорость, SEO, доступность — на уровне, которого нет у большинства конкурентов в нише.</li>
   </ul>
-  <div class="roi reveal">Окупаемость говорит сама за себя: один частный заказ на раздел участка — это <b>9–15 тыс. крон</b>. Сайту достаточно привести несколько таких клиентов, чтобы полностью себя окупить, а дальше он работает в плюс годами.</div>
+  <div class="roi reveal" data-i18n="res.roi">Окупаемость говорит сама за себя: один частный заказ на раздел участка — это <b>9–15 тыс. крон</b>. Сайту достаточно привести несколько таких клиентов, чтобы полностью себя окупить, а дальше он работает в плюс годами.</div>
 </div></section>
 
 <!-- ============ MY ROLE ============ -->
 <section class="block" style="padding-top:0"><div class="wrap">
-  <p class="kick reveal"><b>07</b> — Моя роль</p>
-  <h2 class="h reveal">Один человек на всех этапах</h2>
-  <p class="lede reveal">Там, где в агентстве работала бы команда из нескольких человек:</p>
-  <ul class="role-list reveal">
-    <li>бизнес-анализ и стратегия позиционирования</li>
-    <li>UX-архитектура и проектирование двух аудиторий</li>
-    <li>визуальный дизайн и дизайн-система</li>
-    <li>кастомные анимации (GSAP)</li>
-    <li>вёрстка и фронтенд (чистый код)</li>
-    <li>копирайтинг на чешском — отдельно B2C и B2B</li>
-    <li>SEO-фундамент: структура, мета, sitemap, schema.org, перелинковка</li>
-    <li>интеграция форм и доставка заявок</li>
-    <li>настройка деплоя и автообновления</li>
+  <p class="kick reveal"><b>07</b> — <span data-i18n="role.kick">Моя роль</span></p>
+  <h2 class="h reveal" data-i18n="role.h">Один человек на всех этапах</h2>
+  <p class="lede reveal" data-i18n="role.lede">Там, где в агентстве работала бы команда из нескольких человек — весь цикл вёл я один:</p>
+  <ul class="role-tags reveal">
+    <li data-i18n="role.t1">Стратегия и позиционирование</li>
+    <li data-i18n="role.t2">UX и архитектура</li>
+    <li data-i18n="role.t3">Дизайн-система</li>
+    <li data-i18n="role.t4">GSAP-анимации</li>
+    <li data-i18n="role.t5">Вёрстка · чистый код</li>
+    <li data-i18n="role.t6">Копирайт CZ · B2C + B2B</li>
+    <li data-i18n="role.t7">SEO-фундамент</li>
+    <li data-i18n="role.t8">Формы и деплой</li>
   </ul>
 </div></section>
 
 <!-- ============ CTA ============ -->
 <section class="block cta"><div class="orb"></div><div class="wrap">
-  <h2 class="reveal">Нужен такой же подход<br> к вашему бизнесу?</h2>
-  <p class="reveal">Я не делаю «просто красивые сайты». Я разбираюсь, как устроены ваши продажи, и строю цифровое присутствие, которое решает бизнес-задачу.</p>
+  <h2 class="reveal" data-i18n="cta.h">Нужен такой же подход<br> к вашему бизнесу?</h2>
+  <p class="reveal" data-i18n="cta.p">Я не делаю «просто красивые сайты». Я разбираюсь, как устроены ваши продажи, и строю цифровое присутствие, которое решает бизнес-задачу.</p>
   <div class="cta-actions reveal">
-    <a class="btn btn-primary" href="https://cal.com/andkovalov/first-talk" target="_blank" rel="noopener">Обсудить проект <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    <a class="btn btn-ghost" href="index.html#raboty">← Другие работы</a>
+    <a class="btn btn-primary" href="https://cal.com/andkovalov/first-talk" target="_blank" rel="noopener"><span data-i18n="cta.btn">Обсудить проект</span> <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a class="btn btn-ghost" href="index.html#raboty" data-i18n="cta.back">← Другие работы</a>
   </div>
 </div></section>
 </main>
@@ -518,6 +524,182 @@ footer a{color:var(--ink-dim)}footer a:hover{color:var(--lime)}
   <span>CASE_01 · DELTA G · ANDREY KOVALOV © <span id="yr"></span></span>
   <a href="https://deltag.vercel.app/" target="_blank" rel="noopener">deltag.cz ↗</a>
 </div></footer>
+
+<script>
+/* ===================== i18n ===================== */
+const LANGS = { ru:0, cs:1, en:2 };
+const STR = {
+  'meta.title': ["Кейс: Delta G — антикризисный корпоративный сайт · Andrey Kovalov", "Case: Delta G — firemní web proti krizi · Andrey Kovalov", "Case study: Delta G — anti-crisis corporate site · Andrey Kovalov"],
+  'meta.desc': ["Как я перестроил цифровое присутствие геодезической фирмы Delta G: корпоративный сайт из 11 страниц, две аудитории, сеть SEO-страниц и PageSpeed 98/93/100/100.", "Jak jsem přestavěl digitální přítomnost geodetické firmy Delta G: firemní web o 11 stránkách, dvě cílové skupiny, síť SEO stránek a PageSpeed 98/93/100/100.", "How I rebuilt the digital presence of surveying firm Delta G: an 11-page corporate site, two audiences, a network of SEO pages and PageSpeed 98/93/100/100."],
+
+  'nav.back': ["Все работы", "Všechny práce", "All work"],
+  'nav.live': ["Открыть сайт ↗", "Otevřít web ↗", "Open site ↗"],
+
+  'hero.tag': ["Геодезия · Прага · корпоративный сайт под ключ", "Geodézie · Praha · firemní web na míru", "Surveying · Prague · corporate site, end to end"],
+  'hero.sub': ["Антикризисный корпоративный сайт для геодезической фирмы — который удерживает бизнес и открывает новый рынок частных клиентов.", "Firemní web proti krizi pro geodetickou firmu — který udrží stávající byznys a otevře nový trh soukromých klientů.", "An anti-crisis corporate site for a surveying firm — one that holds the existing business and opens a new market of private clients."],
+  'hero.roles': ["<span>Полный цикл:</span> стратегия · UX · дизайн · анимации · вёрстка · копирайт&nbsp;(CZ) · SEO · аналитика · деплой", "<span>Celý cyklus:</span> strategie · UX · design · animace · kód · copywriting&nbsp;(CZ) · SEO · analytika · nasazení", "<span>Full cycle:</span> strategy · UX · design · animation · build · copywriting&nbsp;(CZ) · SEO · analytics · deploy"],
+  'hero.scroll': ["скролл", "scroll", "scroll"],
+
+  'stat.perf': ["Производительность", "Výkon", "Performance"],
+  'stat.a11y': ["Доступность", "Přístupnost", "Accessibility"],
+  'stat.bpsub': ["Рекомендации", "Doporučené postupy", "Best practices"],
+
+  'intro.kick': ["О проекте", "O projektu", "About the project"],
+  'intro.pull': ["Геодезическая компания из Праги теряла поток заказов из-за того, что весь её сайт говорил только с крупным бизнесом. Я перестроил её цифровое присутствие так, чтобы оно <em>одновременно</em> удерживало корпоративных клиентов и открывало новый рынок частных заказчиков.", "Geodetická firma z Prahy ztrácela zakázky, protože celý její web mluvil jen s velkým byznysem. Přestavěl jsem její digitální přítomnost tak, aby <em>současně</em> udržela firemní klienty a otevřela nový trh soukromých zákazníků.", "A Prague surveying firm was losing orders because its entire site spoke only to big business. I rebuilt its digital presence so it would <em>simultaneously</em> retain corporate clients and open a new market of private customers."],
+
+  'facts.client.t': ["Клиент", "Klient", "Client"],
+  'facts.client.d': ["Delta G s.r.o. — геодезия, Прага, на рынке с 2004 года", "Delta G s.r.o. — geodézie, Praha, na trhu od roku 2004", "Delta G s.r.o. — surveying, Prague, on the market since 2004"],
+  'facts.task.t': ["Задача", "Úkol", "Brief"],
+  'facts.task.d': ["не редизайн, а смена бизнес-позиционирования через веб", "ne redesign, ale změna byznys pozicování přes web", "not a redesign, but a shift in business positioning through the web"],
+  'facts.scope.t': ["Объём", "Rozsah", "Scope"],
+  'facts.scope.d': ["корпоративный сайт, 11 страниц, две аудитории (B2B + B2C)", "firemní web, 11 stránek, dvě cílové skupiny (B2B + B2C)", "corporate site, 11 pages, two audiences (B2B + B2C)"],
+  'facts.tech.t': ["Технологии", "Technologie", "Tech"],
+  'facts.tech.d': ["чистый HTML / CSS / JS, GSAP-анимации, без CMS и конструкторов", "čisté HTML / CSS / JS, GSAP animace, bez CMS a stavitelů webů", "clean HTML / CSS / JS, GSAP animations, no CMS or site builders"],
+  'facts.quality.t': ["Качество", "Kvalita", "Quality"],
+  'facts.quality.d': ["PageSpeed 98 · 93 · 100 · 100 (Google)", "PageSpeed 98 · 93 · 100 · 100 (Google)", "PageSpeed 98 · 93 · 100 · 100 (Google)"],
+  'facts.role.t': ["Роль", "Role", "Role"],
+  'facts.role.d': ["один специалист на всём цикле — от стратегии до продакшена", "jeden specialista na celém cyklu — od strategie po produkci", "one specialist across the whole cycle — from strategy to production"],
+
+  'intro.cap': ["Секция услуг живьём: справа «дышащий» геодезический чертёж перестраивается под каждую задачу", "Sekce služeb živě: vpravo se „dýchající“ geodetický výkres přestavuje pod každou úlohu", "The services section live: on the right, a “breathing” survey drawing rebuilds for each task"],
+
+  'ctx.kick': ["Контекст", "Kontext", "Context"],
+  'ctx.h': ["Бизнес под давлением рынка", "Byznys pod tlakem trhu", "A business under market pressure"],
+  'ctx.p1': ["Delta G десятилетиями держалась на крупных B2B-заказчиках — застройщиках и инфраструктурных проектах. Это давало около <strong>75% оборота</strong>.", "Delta G se desítky let držela na velkých B2B zakázkách — developerech a infrastrukturních projektech. To dávalo zhruba <strong>75 % obratu</strong>.", "For decades Delta G relied on large B2B clients — developers and infrastructure projects. That made up about <strong>75% of revenue</strong>."],
+  'ctx.bignum': ["оборота держалось на одной аудитории, которая просела", "obratu stálo na jedné cílové skupině, která poklesla", "of revenue rested on a single audience, which slumped"],
+  'ctx.p2': ["Но из-за высоких ставок и инфляции девелоперы по всей Европе заморозили стройки — и привычный поток заказов просел. Компании нужен был второй источник дохода: <strong>частные клиенты</strong>, которым надо разделить участок под Прагой, вынести границы, оформить дом в кадастр. Рынок большой и стабильный — но для него Delta G была фактически невидима.", "Kvůli vysokým sazbám a inflaci ale developeři po celé Evropě zmrazili stavby — a obvyklý tok zakázek poklesl. Firma potřebovala druhý zdroj příjmů: <strong>soukromé klienty</strong>, kteří potřebují rozdělit pozemek u Prahy, vytyčit hranice, zapsat dům do katastru. Trh je velký a stabilní — jenže pro něj byla Delta G prakticky neviditelná.", "But with high rates and inflation, developers across Europe froze construction — and the usual flow of orders slumped. The company needed a second income stream: <strong>private clients</strong> who need to split a plot near Prague, stake out boundaries, register a house in the cadastre. The market is large and stable — yet to it Delta G was practically invisible."],
+
+  'diag.kick': ["Диагноз", "Diagnóza", "Diagnosis"],
+  'diag.h': ["Старый сайт работал <em>против</em> компании", "Starý web pracoval <em>proti</em> firmě", "The old site worked <em>against</em> the company"],
+  'diag.lede': ["Я начал не с дизайна, а с аудита существующего сайта. И он оказался корнем проблемы.", "Nezačal jsem designem, ale auditem stávajícího webu. A ten byl jádrem problému.", "I started not with design but with an audit of the existing site. And it turned out to be the root of the problem."],
+  'diag.oldtag': ["Было · deltag.cz", "Předtím · deltag.cz", "Before · deltag.cz"],
+  'diag.oldcap': ["Старый deltag.cz целиком", "Celý starý deltag.cz", "The old deltag.cz in full"],
+  'diag.intro': ["Сайт был сделан для «больших дядей» и отлично отпугивал всех остальных:", "Web byl udělaný pro „velké hráče“ a skvěle odrazoval všechny ostatní:", "The site was built for the “big players” and did a great job of scaring off everyone else:"],
+  'diag.p1': ["<b>Непробиваемый жаргон.</b> Обычный человек, которому надо разделить участок, не понимает ни слова — и закрывает вкладку.", "<b>Neprůstřelný žargon.</b> Běžný člověk, který potřebuje rozdělit pozemek, nerozumí ani slovu — a zavře záložku.", "<b>Impenetrable jargon.</b> An ordinary person who needs to split a plot doesn't understand a word — and closes the tab."],
+  'diag.p2': ["<b>Масштаб пугает, а не привлекает.</b> Допуски к железным дорогам, сертификаты ISO, тяжёлое оборудование. Частник решает: «это контора для гигантов, моя задача им неинтересна или будет стоить космос».", "<b>Měřítko spíš děsí, než láká.</b> Akreditace pro železnice, ISO certifikáty, těžká technika. Soukromník si řekne: „to je firma pro giganty, moje zakázka je nezajímá nebo bude stát majlant“.", "<b>The scale intimidates rather than attracts.</b> Railway accreditations, ISO certificates, heavy equipment. A private client concludes: “this is a firm for giants, my job won't interest them or will cost a fortune.”"],
+  'diag.p3': ["<b>Ноль прозрачности.</b> Цен нет, сроков нет, объяснений «зачем это вообще нужно» нет.", "<b>Nulová transparentnost.</b> Žádné ceny, žádné termíny, žádné vysvětlení „proč to vlastně potřebuju“.", "<b>Zero transparency.</b> No prices, no timelines, no explanation of “why you even need this.”"],
+  'diag.p4': ["<b>Слабые точки захвата.</b> Единственная кнопка — невнятное «Mám zájem». Ни расчёта, ни понятного «оставьте заявку».", "<b>Slabé záchytné body.</b> Jediné tlačítko — nejasné „Mám zájem“. Žádná kalkulace, žádné srozumitelné „pošlete poptávku“.", "<b>Weak capture points.</b> The only button — a vague “Mám zájem.” No calculator, no clear “send a request.”"],
+  'diag.p5': ["<b>Одна аудитория.</b> Сайт умел разговаривать только с профессионалами и полностью игнорировал растущий частный спрос.", "<b>Jedna cílová skupina.</b> Web uměl mluvit jen s profesionály a úplně ignoroval rostoucí soukromou poptávku.", "<b>A single audience.</b> The site could speak only to professionals and completely ignored the growing private demand."],
+  'diag.pull': ["Вывод был жёстким: сайт <em>успешно отталкивал именно тех клиентов</em>, которые теперь нужны для выживания.", "Závěr byl tvrdý: web <em>úspěšně odpuzoval právě ty klienty</em>, které firma teď potřebuje k přežití.", "The conclusion was harsh: the site was <em>successfully repelling exactly the clients</em> now needed for survival."],
+
+  'str.kick': ["Стратегия", "Strategie", "Strategy"],
+  'str.h': ["Разделить аудитории,<br> не потеряв ни одну", "Rozdělit cílové skupiny,<br> aniž bych jednu ztratil", "Split the audiences<br> without losing either one"],
+  'str.lede': ["Ключевое решение, которое определило весь проект: не делать «ещё один сайт», а развести два мира внутри одного корпоративного присутствия.", "Klíčové rozhodnutí, které určilo celý projekt: nedělat „další web“, ale rozdělit dva světy uvnitř jedné firemní přítomnosti.", "The key decision that defined the whole project: not to build “another website,” but to separate two worlds within a single corporate presence."],
+  'str.root': ["Delta G<small>один бренд</small>", "Delta G<small>jedna značka</small>", "Delta G<small>one brand</small>"],
+  'str.b2c': ["Частные клиенты<small>B2C · новый рынок</small>", "Soukromí klienti<small>B2C · nový trh</small>", "Private clients<small>B2C · new market</small>"],
+  'str.formc': ["→ заявка на почту", "→ poptávka na e-mail", "→ request to email"],
+  'str.b2b': ["Фирмы и инвесторы<small>B2B · удержан</small>", "Firmy a investoři<small>B2B · udržen</small>", "Firms & investors<small>B2B · retained</small>"],
+  'str.b2b1': ["инженерная геодезия", "inženýrská geodézie", "engineering surveying"],
+  'str.b2b2': ["картографические основы", "mapové podklady", "mapping bases"],
+  'str.b2b3': ["мониторинг деформаций", "monitoring deformací", "deformation monitoring"],
+  'str.b2b4': ["кадастр для застройщиков", "katastr pro developery", "cadastre for developers"],
+  'str.formb': ["→ B2B-запрос", "→ B2B poptávka", "→ B2B inquiry"],
+  'str.c1t': ["Частнику", "Soukromníkovi", "For the individual"],
+  'str.c1p': ["человеческий язык, выгоды, снятие страхов перед кадастром и урядами, понятные цены, быстрый расчёт и заявка.", "lidský jazyk, výhody, odbourání strachu z katastru a úřadů, srozumitelné ceny, rychlá kalkulace a poptávka.", "human language, benefits, removing the fear of the cadastre and offices, clear prices, a fast estimate and request."],
+  'str.c2t': ["Бизнесу", "Byznysu", "For business"],
+  'str.c2p': ["отдельная страница с профессиональным каталогом, терминологией и допусками. Корпоративный вес сохранён — ничего не «опустили».", "samostatná stránka s profesionálním katalogem, terminologií a akreditacemi. Firemní váha zachována — nic se „neshodilo“.", "a separate page with a professional catalog, terminology and accreditations. The corporate weight is preserved — nothing was “dumbed down.”"],
+  'str.c3t': ["Поиску", "Vyhledávání", "For search"],
+  'str.c3p': ["сеть отдельных страниц под конкретные частные запросы, чтобы ловить клиентов прямо из Google.", "síť samostatných stránek pod konkrétní soukromé dotazy, aby chytala klienty přímo z Googlu.", "a network of dedicated pages for specific private queries, to catch clients straight from Google."],
+
+  'work.kick': ["Что сделано", "Co bylo uděláno", "What was done"],
+  'work.h': ["Не «причесали», а <em>пересобрали</em>", "Ne „učesat“, ale <em>postavit znovu</em>", "Not “tidied up,” but <em>rebuilt</em>"],
+
+  'w1.h': ["Два входа в один бизнес", "Dva vstupy do jednoho byznysu", "Two entrances to one business"],
+  'w1.p': ["Главная встречает частника: оффер «Zaměříme. Vyřídíme. Do katastru bez starostí», выгоды вместо терминов, проработанные страхи. Отдельная страница <b>«Pro firmy a investory»</b> держит весь тяжёлый B2B-каталог на профессиональном языке. Один бренд, две точки входа, ноль потерянных посетителей.", "Domovská stránka vítá soukromníka: nabídka „Zaměříme. Vyřídíme. Do katastru bez starostí“, výhody místo termínů, ošetřené obavy. Samostatná stránka <b>„Pro firmy a investory“</b> drží celý náročný B2B katalog v profesionálním jazyce. Jedna značka, dva vstupy, nula ztracených návštěvníků.", "The homepage greets the individual: the offer “Zaměříme. Vyřídíme. Do katastru bez starostí,” benefits instead of terms, fears addressed. A separate <b>“Pro firmy a investory”</b> page holds the entire heavy B2B catalog in professional language. One brand, two entry points, zero lost visitors."],
+  'w1.cap': ["Главная для частного клиента — выгоды, а не термины", "Domovská stránka pro soukromého klienta — výhody, ne termíny", "Homepage for the private client — benefits, not terminology"],
+
+  'w2.h': ["Сеть SEO-страниц — почему сайт, а не лендинг", "Síť SEO stránek — proč web, a ne landing page", "A network of SEO pages — why a site, not a landing page"],
+  'w2.p1': ["Человек вечером вводит в Google <b>«rozdělení pozemku Praha ceník»</b>. Это горячий клиент — с деньгами, конкретной задачей и намерением заказать. Если под этот точный запрос нет отдельной страницы — его забирает конкурент. Один лендинг тут бессилен: Google не показывает внутренние секции по узким запросам.", "Člověk večer zadá do Googlu <b>„rozdělení pozemku Praha ceník“</b>. To je horký klient — s penězi, konkrétním úkolem a záměrem objednat. Pokud pro tento přesný dotaz není samostatná stránka, vezme si ho konkurence. Jediná landing page je tu bezmocná: Google nezobrazuje vnitřní sekce na úzké dotazy.", "In the evening someone types into Google <b>“rozdělení pozemku Praha ceník.”</b> That's a hot lead — with money, a specific task and intent to order. If there's no dedicated page for that exact query, a competitor takes them. A single landing page is powerless here: Google doesn't surface internal sections for narrow queries."],
+  'w2.cap': ["Под точный коммерческий запрос — отдельная посадочная", "Pro přesný komerční dotaz — samostatná vstupní stránka", "For an exact commercial query — a dedicated landing page"],
+  'w2.p2': ["Поэтому я построил <b>6 автономных посадочных страниц</b> — под каждую частную услугу. У каждой свой заголовок под реальный запрос, свои цены, анимированная схема и блок FAQ. Это не «копии ради объёма» — это шесть ловушек платёжеспособного органического трафика, работающих без оплаты за рекламу.", "Proto jsem postavil <b>6 samostatných vstupních stránek</b> — pro každou soukromou službu. Každá má vlastní titulek pod reálný dotaz, vlastní ceny, animované schéma a FAQ blok. Nejsou to „kopie pro objem“ — je to šest pastí na platící organický provoz, fungujících bez placení za reklamu.", "So I built <b>6 standalone landing pages</b> — one per private service. Each has its own headline matching a real query, its own prices, an animated diagram and an FAQ block. These aren't “copies for volume” — they're six traps for paying organic traffic that work without paying for ads."],
+  'w2.s1': ["Разделение участка", "Rozdělení pozemku", "Plot division"],
+  'w2.s2': ["Вынос границ", "Vytyčení hranic", "Boundary staking"],
+  'w2.s3': ["Съёмка под проект дома", "Zaměření pro projekt domu", "Survey for a house project"],
+  'w2.s4': ["Геометрический план для колаудации", "Geometrický plán pro kolaudaci", "Geometric plan for approval"],
+  'w2.s5': ["Паспорт строения", "Pasport stavby", "Building passport"],
+  'w2.s6': ["Вынос строения в натуру", "Vytyčení stavby", "Staking out the building"],
+
+  'w3.h': ["Анимации как доказательство точности", "Animace jako důkaz přesnosti", "Animation as proof of precision"],
+  'w3.p': ["Геодезия — это про миллиметры, и сайт транслирует это подсознательно. Все анимации сделаны на GSAP вручную и работают на смысл, а не на «вау». Посетитель не читает «мы точные» — он это <b>видит и чувствует</b>.", "Geodézie je o milimetrech a web to podprahově sděluje. Všechny animace jsou udělané ručně na GSAP a pracují pro smysl, ne pro „wow“. Návštěvník nečte „jsme přesní“ — on to <b>vidí a cítí</b>.", "Surveying is about millimetres, and the site conveys that subconsciously. Every animation is hand-built on GSAP and works for meaning, not for “wow.” The visitor doesn't read “we're precise” — they <b>see and feel</b> it."],
+  'w3.cap1': ["Блок «Technologie»: живой сканер тахеометра — ±2&nbsp;mm, RTK&nbsp;FIX, спутники, дистанция", "Sekce „Technologie“: živý scanner totální stanice — ±2&nbsp;mm, RTK&nbsp;FIX, satelity, vzdálenost", "“Technologie” section: a live total-station scanner — ±2&nbsp;mm, RTK&nbsp;FIX, satellites, distance"],
+  'w3.cap2': ["Чертёж участка оживает при скролле", "Výkres pozemku ožívá při scrollování", "The plot drawing comes alive on scroll"],
+  'w3.cap3': ["CTA-блок: анимированная кнопка заявки и курсор — мягкий толчок к действию", "CTA blok: animované tlačítko poptávky a kurzor — jemné popostrčení k akci", "CTA block: an animated request button and cursor — a gentle nudge to act"],
+
+  'w4.h': ["Калькулятор и захват заявок", "Kalkulačka a sběr poptávek", "Calculator and lead capture"],
+  'w4.p': ["Чтобы превратить интерес в лид, я добавил <b>квиз-калькулятор</b>: три простых вопроса — и человек получает ориентировочную цену прямо на сайте, не уходя гуглить к конкурентам. Все формы — заявка, калькулятор, B2B-запрос, отклик на вакансию — <b>реально отправляют заявки на почту владельца за секунды</b> (проверено сквозным тестом). Сайт работает не как витрина, а как канал продаж.", "Abych proměnil zájem v lead, přidal jsem <b>kvízovou kalkulačku</b>: tři jednoduché otázky — a člověk dostane orientační cenu přímo na webu, aniž by šel googlit konkurenci. Všechny formuláře — poptávka, kalkulačka, B2B dotaz, reakce na inzerát — <b>reálně odešlou poptávku na e-mail majitele během sekund</b> (ověřeno end-to-end testem). Web nefunguje jako výloha, ale jako prodejní kanál.", "To turn interest into a lead, I added a <b>quiz calculator</b>: three simple questions and the person gets an indicative price right on the site, without going off to Google the competition. Every form — request, calculator, B2B inquiry, job application — <b>actually sends the request to the owner's inbox within seconds</b> (verified end-to-end). The site works not as a showcase but as a sales channel."],
+  'w4.cap': ["Квиз-калькулятор: «Шаг 2 из 3» — локация и площадь участка, расчёт цены без звонка", "Kvízová kalkulačka: „Krok 2 ze 3“ — lokalita a výměra pozemku, výpočet ceny bez telefonu", "Quiz calculator: “Step 2 of 3” — location and plot area, a price estimate without a phone call"],
+
+  'w5.h': ["Полноценный корпоративный сайт, а не одна страница", "Plnohodnotný firemní web, ne jedna stránka", "A full corporate site, not a single page"],
+  'w5.l1': ["<b>Карьерная страница</b> с формой отклика — компания растёт и нанимает геодезистов без рекрутера.", "<b>Kariérní stránka</b> s formulářem — firma roste a najímá geodety bez recruitera.", "<b>A careers page</b> with an application form — the company is growing and hiring surveyors without a recruiter."],
+  'w5.l2': ["<b>Страница контактов</b> с картой, реквизитами и живым индикатором часов работы.", "<b>Stránka kontaktů</b> s mapou, údaji firmy a živým indikátorem otevírací doby.", "<b>A contacts page</b> with a map, company details and a live opening-hours indicator."],
+  'w5.l3': ["<b>Политика конфиденциальности и cookie-баннер с opt-in</b> — до согласия не собирается ни один байт. Это юридическая защита: за нарушение GDPR чешский ÚOOÚ штрафует ощутимо.", "<b>Zásady soukromí a cookie lišta s opt-inem</b> — do souhlasu se nesbírá ani bajt. Je to právní ochrana: za porušení GDPR český ÚOOÚ pokutuje citelně.", "<b>A privacy policy and an opt-in cookie banner</b> — not a single byte is collected before consent. It's legal protection: the Czech ÚOOÚ fines GDPR breaches noticeably."],
+  'w5.l4': ["<b>Сквозная корпоративная шапка</b> с выпадающим меню услуг и единый футер на всех 11 страницах.", "<b>Průběžná firemní hlavička</b> s rozbalovacím menu služeb a jednotná patička na všech 11 stránkách.", "<b>A consistent corporate header</b> with a services dropdown and a unified footer across all 11 pages."],
+
+  'w6.h': ["Социальные сигналы и бренд-детали", "Sociální signály a detaily značky", "Social signals and brand details"],
+  'w6.p': ["Самостоятельная фавиконка, OG-изображение для соцсетей (ссылка в WhatsApp/Telegram выглядит как от солидной компании, а не голым URL), Twitter-карточка, единая дизайн-система. Мелочи, которые в сумме формируют доверие до первого клика.", "Vlastní favicon, OG obrázek pro sociální sítě (odkaz ve WhatsApp/Telegramu vypadá jako od solidní firmy, ne jako holá URL), Twitter karta, jednotný design systém. Maličkosti, které dohromady budují důvěru ještě před prvním klikem.", "A custom favicon, an OG image for social media (a link in WhatsApp/Telegram looks like it's from a serious company, not a bare URL), a Twitter card, a unified design system. Small things that together build trust before the first click."],
+
+  'tech.kick': ["Технический фундамент", "Technický základ", "Technical foundation"],
+  'tech.h': ["Быстрее, дешевле в владении<br> и лучше для SEO", "Rychlejší, levnější na provoz<br> a lepší pro SEO", "Faster, cheaper to own<br> and better for SEO"],
+  'tech.lede': ["Сайт написан на чистом коде — без WordPress, без Tilda, без React и конструкторов. Это не вопрос вкуса, это три бизнес-выгоды.", "Web je napsaný v čistém kódu — bez WordPressu, bez Tildy, bez Reactu a stavitelů. Není to otázka vkusu, jsou to tři byznys výhody.", "The site is written in clean code — no WordPress, no Tilda, no React, no builders. It's not a matter of taste, it's three business benefits."],
+  'tech.c1t': ["Скорость <span>98/100</span>", "Rychlost <span>98/100</span>", "Speed <span>98/100</span>"],
+  'tech.c1p': ["Нет тонны лишнего кода, который тащат конструкторы и тяжёлые фреймворки. Отсюда — 98 из 100 по производительности на мобильных.", "Žádná tuna zbytečného kódu, který s sebou tahají stavitelé a těžké frameworky. Odtud — 98 ze 100 ve výkonu na mobilu.", "No tonne of excess code dragged in by builders and heavy frameworks. Hence 98 out of 100 for mobile performance."],
+  'tech.c2t': ["SEO <span>100/100</span>", "SEO <span>100/100</span>", "SEO <span>100/100</span>"],
+  'tech.c2p': ["Поисковику отдаётся чистая, идеально читаемая страница. Конструкторы и SPA на React часто мешают индексации — здесь этой проблемы нет в принципе.", "Vyhledávač dostává čistou, ideálně čitelnou stránku. Stavitelé a SPA na Reactu často brání indexaci — tady tento problém v principu není.", "The search engine gets a clean, perfectly readable page. Builders and React SPAs often hinder indexing — here that problem simply doesn't exist."],
+  'tech.c3t': ["Владение <span>0 Kč/год</span>", "Vlastnictví <span>0 Kč/rok</span>", "Ownership <span>0 Kč/yr</span>"],
+  'tech.c3p': ["Нет вечной подписки на конструктор (5–15 тыс. крон в год навсегда). Сайт принадлежит компании, лежит где угодно, не сломается от обновления плагина.", "Žádné věčné předplatné stavitele (5–15 tis. Kč ročně napořád). Web patří firmě, leží kdekoli, nerozbije se po aktualizaci pluginu.", "No perpetual builder subscription (5–15k CZK a year forever). The site belongs to the company, can be hosted anywhere, won't break from a plugin update."],
+  'tech.p': ["Плюс под капотом — оптимизация, за которую обычно никто не благодарит, но без которой нет этих цифр: самостоятельно захостенные шрифты, сжатые изображения, устранённые сдвиги вёрстки (CLS), доступность на <b>93/100</b>.", "Plus pod kapotou — optimalizace, za kterou obvykle nikdo nepoděkuje, ale bez níž ta čísla nejsou: vlastně hostované fonty, komprimované obrázky, odstraněné posuny layoutu (CLS), přístupnost na <b>93/100</b>.", "Plus under the hood — optimization nobody usually thanks you for, but without which these numbers don't happen: self-hosted fonts, compressed images, eliminated layout shifts (CLS), accessibility at <b>93/100</b>."],
+  'tech.cap': ["Вердикт Google, а не мои слова. Большинство сайтов малого бизнеса живут в красной и жёлтой зоне", "Verdikt Googlu, ne má slova. Většina webů malých firem žije v červené a žluté zóně", "Google's verdict, not my words. Most small-business sites live in the red and yellow zones"],
+
+  'res.kick': ["Итог", "Výsledek", "Outcome"],
+  'res.h': ["Что в итоге заложено", "Co je nakonec připraveno", "What's been put in place"],
+  'res.lede': ["Сайт только запущен, поэтому честно: вместо выдуманной статистики — то, что реально построено и будет работать.", "Web je teprve spuštěný, takže upřímně: místo vymyšlené statistiky to, co je reálně postaveno a bude fungovat.", "The site has only just launched, so honestly: instead of made-up statistics, here's what's actually built and will work."],
+  'res.l1': ["Компания <b>впервые видима</b> для частного клиента и говорит с ним на его языке.", "Firma je <b>poprvé viditelná</b> pro soukromého klienta a mluví s ním jeho jazykem.", "The company is <b>visible to the private client for the first time</b> and speaks to them in their language."],
+  'res.l2': ["<b>6 SEO-страниц</b> начинают собирать органический трафик по коммерческим запросам — поток, который растёт со временем и не требует платы за рекламу.", "<b>6 SEO stránek</b> začíná sbírat organický provoz na komerční dotazy — tok, který v čase roste a nevyžaduje platbu za reklamu.", "<b>6 SEO pages</b> begin collecting organic traffic on commercial queries — a flow that grows over time and needs no ad spend."],
+  'res.l3': ["<b>Рабочая воронка</b>: от поискового запроса или рекламы → к понятной странице → к расчёту цены → к заявке на почту.", "<b>Funkční trychtýř</b>: od vyhledávacího dotazu nebo reklamy → ke srozumitelné stránce → k výpočtu ceny → k poptávce na e-mail.", "<b>A working funnel</b>: from a search query or ad → to a clear page → to a price estimate → to a request in the inbox."],
+  'res.l4': ["B2B-направление <b>не потеряно</b>, а получило достойную отдельную площадку.", "B2B směr <b>není ztracen</b>, ale dostal důstojnou samostatnou plochu.", "The B2B side is <b>not lost</b> — it gained a worthy dedicated space."],
+  'res.l5': ["Техническая база — скорость, SEO, доступность — на уровне, которого нет у большинства конкурентов в нише.", "Technický základ — rychlost, SEO, přístupnost — na úrovni, kterou většina konkurentů v oboru nemá.", "The technical foundation — speed, SEO, accessibility — at a level most competitors in the niche don't have."],
+  'res.roi': ["Окупаемость говорит сама за себя: один частный заказ на раздел участка — это <b>9–15 тыс. крон</b>. Сайту достаточно привести несколько таких клиентов, чтобы полностью себя окупить, а дальше он работает в плюс годами.", "Návratnost mluví sama za sebe: jedna soukromá zakázka na rozdělení pozemku je <b>9–15 tis. Kč</b>. Webu stačí přivést pár takových klientů, aby se plně zaplatil, a dál pracuje v plusu roky.", "The payback speaks for itself: one private plot-division order is <b>9–15k CZK</b>. The site only needs to bring a few such clients to fully pay for itself, and after that it runs in the black for years."],
+
+  'role.kick': ["Моя роль", "Moje role", "My role"],
+  'role.h': ["Один человек на всех этапах", "Jeden člověk ve všech fázích", "One person across every stage"],
+  'role.lede': ["Там, где в агентстве работала бы команда из нескольких человек — весь цикл вёл я один:", "Tam, kde by v agentuře pracoval několikačlenný tým — celý cyklus jsem vedl sám:", "Where an agency would put a team of several people — I ran the whole cycle alone:"],
+  'role.t1': ["Стратегия и позиционирование", "Strategie a pozicování", "Strategy & positioning"],
+  'role.t2': ["UX и архитектура", "UX a architektura", "UX & architecture"],
+  'role.t3': ["Дизайн-система", "Design systém", "Design system"],
+  'role.t4': ["GSAP-анимации", "GSAP animace", "GSAP animations"],
+  'role.t5': ["Вёрстка · чистый код", "Kód · čistý frontend", "Build · clean code"],
+  'role.t6': ["Копирайт CZ · B2C + B2B", "Copywriting CZ · B2C + B2B", "Copywriting CZ · B2C + B2B"],
+  'role.t7': ["SEO-фундамент", "SEO základ", "SEO foundation"],
+  'role.t8': ["Формы и деплой", "Formuláře a nasazení", "Forms & deploy"],
+
+  'cta.h': ["Нужен такой же подход<br> к вашему бизнесу?", "Chcete stejný přístup<br> pro svůj byznys?", "Want the same approach<br> for your business?"],
+  'cta.p': ["Я не делаю «просто красивые сайты». Я разбираюсь, как устроены ваши продажи, и строю цифровое присутствие, которое решает бизнес-задачу.", "Nedělám „jen hezké weby“. Rozumím tomu, jak fungují vaše prodeje, a stavím digitální přítomnost, která řeší byznys úkol.", "I don't make “just pretty websites.” I understand how your sales work and build a digital presence that solves a business problem."],
+  'cta.btn': ["Обсудить проект", "Probrat projekt", "Discuss the project"],
+  'cta.back': ["← Другие работы", "← Další práce", "← Other work"]
+};
+let currentLang = 'ru';
+function tr(key, lang){ const e = STR[key]; if(!e) return null; const v = e[LANGS[lang]]; return (v!=null && v!=='') ? v : e[0]; }
+function applyLang(lang){
+  if(LANGS[lang]==null) lang='ru';
+  currentLang=lang;
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-i18n]').forEach((el)=>{ const v=tr(el.dataset.i18n,lang); if(v!=null) el.innerHTML=v; });
+  document.querySelectorAll('[data-i18n-content]').forEach((el)=>{ const v=tr(el.dataset.i18nContent,lang); if(v!=null) el.setAttribute('content',v); });
+  if(STR['meta.title']) document.title=tr('meta.title',lang);
+  document.querySelectorAll('#langs button').forEach((b)=>{ b.classList.toggle('active', b.dataset.lang===lang); });
+  try{ localStorage.setItem('lang',lang); }catch(e){}
+}
+function detectLang(){
+  let s=null; try{ s=localStorage.getItem('lang'); }catch(e){}
+  if(s && LANGS[s]!=null) return s;
+  const n=(navigator.language||'ru').toLowerCase();
+  if(n.startsWith('cs')||n.startsWith('sk')) return 'cs';
+  if(n.startsWith('en')) return 'en';
+  if(n.startsWith('ru')||n.startsWith('uk')) return 'ru';
+  return 'ru';
+}
+document.getElementById('langs').addEventListener('click',(e)=>{ const b=e.target.closest('button[data-lang]'); if(b) applyLang(b.dataset.lang); });
+applyLang(detectLang());
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
