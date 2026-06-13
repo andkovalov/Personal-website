@@ -261,6 +261,11 @@ main{overflow-x:clip;width:100%;max-width:100%}
   animation:drop 1.8s ease-in-out infinite;
 }
 @keyframes drop{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media (max-width:560px){
+  .hero-ctas{flex-direction:column;align-items:center;width:100%}
+  .hero-ctas .btn{width:100%;max-width:330px;justify-content:center}
+  .hero-scroll{display:none}
+}
 
 /* ---------- marquee ---------- */
 .marquee{
@@ -333,7 +338,7 @@ main{overflow-x:clip;width:100%;max-width:100%}
   background:var(--lime);transform:translate(-50%,-50%);
   box-shadow:0 0 0 4px rgba(215,251,68,.16);
 }
-.ds-select{position:absolute;top:140px;left:9%;padding:14px;border:1.5px dashed rgba(215,251,68,.45)}
+.ds-select{position:absolute;top:140px;left:9%;padding:14px;border:1.6px dashed rgba(215,251,68,.65)}
 .ds-select i{position:absolute;width:8px;height:8px;background:var(--bg);border:1.5px solid var(--lime)}
 .ds-select i:nth-of-type(1){top:-5px;left:-5px}
 .ds-select i:nth-of-type(2){top:-5px;right:-5px}
@@ -342,7 +347,7 @@ main{overflow-x:clip;width:100%;max-width:100%}
 .ds-ripple{position:absolute;inset:8px;border:1.5px solid var(--lime);border-radius:999px;opacity:0;pointer-events:none}
 .ds-btn{
   font-family:var(--font-body);font-weight:700;font-size:14px;
-  background:var(--lime);color:var(--lime-ink);border:none;border-radius:10px;
+  background:var(--lime);color:var(--lime-ink);border:none;border-radius:0;
   padding:13px 26px;pointer-events:none;display:block;
 }
 .ds-pointer{position:absolute;left:0;top:0;z-index:3;filter:drop-shadow(0 3px 8px rgba(0,0,0,.55));transform-origin:7px 4px}
@@ -375,7 +380,7 @@ main{overflow-x:clip;width:100%;max-width:100%}
 @keyframes caret{50%{opacity:0}}
 @media (max-width:900px){
   .bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:minmax(210px,auto)}
-  .bento-a{grid-column:span 2;grid-row:span 1;min-height:480px}
+  .bento-a{grid-column:span 2;grid-row:span 1;min-height:560px}
   .bento-b{grid-column:span 2;min-height:360px}
 }
 @media (max-width:560px){
@@ -444,7 +449,9 @@ main{overflow-x:clip;width:100%;max-width:100%}
 @media (max-width:860px){
   .case{grid-template-columns:1fr;min-height:0}
   .case-media{height:240px;position:relative;order:-1}
-  .case{top:76px}
+  /* drop the sticky-stacking on mobile: a card is taller than the screen, so
+     stacking would hide the metric + link before the user can read/tap them */
+  .case{position:relative;top:auto;margin-bottom:18px}
 }
 
 /* ---------- process (pinned split) ---------- */
@@ -1421,7 +1428,7 @@ if (!reduceMotion) {
     if (tl) tl.kill();
     gsap.set(knob, { left: '38%' });
     gsap.set(fill, { width: '38%' });
-    gsap.set(btn, { borderRadius: 10, scale: 1, boxShadow: 'none' });
+    gsap.set(btn, { borderRadius: 0, scale: 1, boxShadow: 'none' });
     const s = stage.getBoundingClientRect();
     if (s.width < 40) { tl = null; return; }
     const tr = track.getBoundingClientRect();
@@ -1459,7 +1466,7 @@ if (!reduceMotion) {
       .fromTo(rip, { opacity: 0.9, scale: 0.75 }, { opacity: 0, scale: 1.45, duration: 0.7, ease: 'power1.out' }, '<')
       .to(cur, { x: homeX, y: homeY, duration: 0.9 }, '+=0.6')
       /* reset for the next loop */
-      .to(btn, { scale: 1, boxShadow: 'none', borderRadius: 10, duration: 0.5 }, '<')
+      .to(btn, { scale: 1, boxShadow: 'none', borderRadius: 0, duration: 0.5 }, '<')
       .to(knob, { left: '38%', duration: 0.5 }, '<')
       .to(fill, { width: '38%', duration: 0.5 }, '<');
   }
@@ -1595,21 +1602,23 @@ setupManifesto();
 /* applyLang resets the sentence; re-split it afterwards */
 I18N_REBUILD.push(setupManifesto);
 
-/* ---------- stacking cases ---------- */
-if (!reduceMotion) {
-  const cases = gsap.utils.toArray('.case');
-  cases.forEach((card, i) => {
-    if (i === cases.length - 1) return;
-    gsap.fromTo(card,
-      { scale: 1, filter: 'brightness(1)' },
-      {
-        scale: 0.94, filter: 'brightness(0.55)', transformOrigin: 'center top', ease: 'none',
-        scrollTrigger: {
-          trigger: cases[i + 1], start: 'top 80%', end: 'top 130px', scrub: true
-        }
-      });
-  });
-}
+/* ---------- stacking cases (desktop only) ---------- */
+ScrollTrigger.matchMedia({
+  '(min-width: 861px) and (prefers-reduced-motion: no-preference)': () => {
+    const cases = gsap.utils.toArray('.case');
+    cases.forEach((card, i) => {
+      if (i === cases.length - 1) return;
+      gsap.fromTo(card,
+        { scale: 1, filter: 'brightness(1)' },
+        {
+          scale: 0.94, filter: 'brightness(0.55)', transformOrigin: 'center top', ease: 'none',
+          scrollTrigger: {
+            trigger: cases[i + 1], start: 'top 80%', end: 'top 130px', scrub: true
+          }
+        });
+    });
+  }
+});
 
 /* ---------- pinned process (desktop only) ---------- */
 ScrollTrigger.matchMedia({
