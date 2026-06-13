@@ -145,7 +145,20 @@ figcaption::before{content:"▸";color:var(--lime)}
 .d-seo span{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-dim);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 12px;text-align:left}
 .d-form{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--lime-ink);background:var(--lime);border-radius:8px;padding:9px 16px;font-weight:700}
 .d-conn{width:1px;height:26px;background:linear-gradient(var(--line),rgba(242,240,234,.25))}
-@media (max-width:620px){.d-row{grid-template-columns:1fr;gap:24px}}
+.d-top{display:flex;justify-content:center}
+/* branch: vertical stub from root → horizontal bar → two drops into the columns */
+.d-branch{position:relative;height:34px}
+.d-branch::before{content:"";position:absolute;top:0;left:50%;width:1px;height:17px;background:rgba(242,240,234,.25);transform:translateX(-50%)}
+.d-branch .bar{position:absolute;top:17px;left:25%;right:25%;height:1px;background:rgba(242,240,234,.25)}
+.d-branch .bar::before,.d-branch .bar::after{content:"";position:absolute;top:0;width:1px;height:17px;background:rgba(242,240,234,.25)}
+.d-branch .bar::before{left:0}
+.d-branch .bar::after{right:0}
+@media (max-width:620px){
+  .d-row{grid-template-columns:1fr;gap:24px}
+  .d-branch{height:24px}
+  .d-branch::before{height:24px}
+  .d-branch .bar{display:none}
+}
 
 /* work subsections */
 .work-item{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,4vw,54px);padding-block:clamp(40px,6vw,72px);border-top:1px solid var(--line);align-items:start}
@@ -221,7 +234,7 @@ footer a{color:var(--ink-dim)}footer a:hover{color:var(--lime)}
 <div class="topbar">
   <span class="mono-mark">CASE_01 / <b>DELTA&nbsp;G</b></span>
   <a class="back" href="index.html#raboty">← Все работы</a>
-  <a class="live" href="https://deltag.cz/" target="_blank" rel="noopener">Открыть сайт ↗</a>
+  <a class="live" href="https://deltag.vercel.app/" target="_blank" rel="noopener">Открыть сайт ↗</a>
 </div>
 
 <main>
@@ -276,9 +289,9 @@ footer a{color:var(--ink-dim)}footer a:hover{color:var(--lime)}
   <figure class="reveal" style="margin-top:44px">
     <div class="fig">
       <div class="browser"><i></i><i></i><i></i><span class="url">deltag.cz</span></div>
-      <img src="assets/cases/deltag/hero.png" alt="Главная нового сайта Delta G: «Zaměříme. Vyřídíme. Do katastru bez starostí.»" loading="lazy">
+      <video src="assets/cases/deltag/vid-services.mp4" poster="assets/cases/deltag/poster-services.png" muted loop playsinline preload="none" data-lazyvid></video>
     </div>
-    <figcaption>Новый hero: оффер на языке частного клиента, два CTA, координатная сетка с прицелом</figcaption>
+    <figcaption>Секция услуг живьём: справа «дышащий» геодезический чертёж перестраивается под каждую задачу</figcaption>
   </figure>
 </div></section>
 
@@ -326,10 +339,10 @@ footer a{color:var(--ink-dim)}footer a:hover{color:var(--lime)}
   <p class="lede reveal">Ключевое решение, которое определило весь проект: не делать «ещё один сайт», а развести два мира внутри одного корпоративного присутствия.</p>
 
   <div class="diagram reveal">
-    <div style="display:flex;flex-direction:column;align-items:center">
+    <div class="d-top">
       <span class="node d-root">Delta G<small>один бренд</small></span>
-      <span class="d-conn"></span>
     </div>
+    <div class="d-branch"><span class="bar"></span></div>
     <div class="d-row">
       <div class="d-col">
         <span class="node d-b2c">Частные клиенты<small>B2C · новый рынок</small></span>
@@ -356,7 +369,6 @@ footer a{color:var(--ink-dim)}footer a:hover{color:var(--lime)}
     <div><h3 style="font-family:var(--font-display);font-weight:700;font-size:1.05rem;margin-bottom:8px">Бизнесу</h3><p style="color:var(--ink-dim);font-size:14.5px">отдельная страница с профессиональным каталогом, терминологией и допусками. Корпоративный вес сохранён — ничего не «опустили».</p></div>
     <div><h3 style="font-family:var(--font-display);font-weight:700;font-size:1.05rem;margin-bottom:8px">Поиску</h3><p style="color:var(--ink-dim);font-size:14.5px">сеть отдельных страниц под конкретные частные запросы, чтобы ловить клиентов прямо из Google.</p></div>
   </div>
-  <div style="grid-template-columns:1fr" class="reveal"></div>
 </div></section>
 
 <!-- ============ WHAT WAS DONE ============ -->
@@ -413,6 +425,7 @@ footer a{color:var(--ink-dim)}footer a:hover{color:var(--lime)}
     <div>
       <h3 class="reveal">Калькулятор и захват заявок</h3>
       <p class="wlede reveal">Чтобы превратить интерес в лид, я добавил <b>квиз-калькулятор</b>: три простых вопроса — и человек получает ориентировочную цену прямо на сайте, не уходя гуглить к конкурентам. Все формы — заявка, калькулятор, B2B-запрос, отклик на вакансию — <b>реально отправляют заявки на почту владельца за секунды</b> (проверено сквозным тестом). Сайт работает не как витрина, а как канал продаж.</p>
+      <figure class="media reveal"><div class="fig"><video src="assets/cases/deltag/vid-calculator.mp4" poster="assets/cases/deltag/poster-calculator.png" muted loop playsinline preload="none" data-lazyvid></video></div><figcaption>Квиз-калькулятор: «Шаг 2 из 3» — локация и площадь участка, расчёт цены без звонка</figcaption></figure>
     </div>
   </div>
 
@@ -449,7 +462,7 @@ footer a{color:var(--ink-dim)}footer a:hover{color:var(--lime)}
   <div class="tech3">
     <div class="card reveal"><div class="t">Скорость <span>98/100</span></div><p>Нет тонны лишнего кода, который тащат конструкторы и тяжёлые фреймворки. Отсюда — 98 из 100 по производительности на мобильных.</p></div>
     <div class="card reveal"><div class="t">SEO <span>100/100</span></div><p>Поисковику отдаётся чистая, идеально читаемая страница. Конструкторы и SPA на React часто мешают индексации — здесь этой проблемы нет в принципе.</p></div>
-    <div class="card reveal"><div class="t">Владение <span>0 ₽/год</span></div><p>Нет вечной подписки на конструктор (5–15 тыс. крон в год навсегда). Сайт принадлежит компании, лежит где угодно, не сломается от обновления плагина.</p></div>
+    <div class="card reveal"><div class="t">Владение <span>0 Kč/год</span></div><p>Нет вечной подписки на конструктор (5–15 тыс. крон в год навсегда). Сайт принадлежит компании, лежит где угодно, не сломается от обновления плагина.</p></div>
   </div>
 
   <p class="body reveal">Плюс под капотом — оптимизация, за которую обычно никто не благодарит, но без которой нет этих цифр: самостоятельно захостенные шрифты, сжатые изображения, устранённые сдвиги вёрстки (CLS), доступность на <b>93/100</b>.</p>
@@ -503,7 +516,7 @@ footer a{color:var(--ink-dim)}footer a:hover{color:var(--lime)}
 
 <footer><div class="wrap">
   <span>CASE_01 · DELTA G · ANDREY KOVALOV © <span id="yr"></span></span>
-  <a href="https://deltag.cz/" target="_blank" rel="noopener">deltag.cz ↗</a>
+  <a href="https://deltag.vercel.app/" target="_blank" rel="noopener">deltag.cz ↗</a>
 </div></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>

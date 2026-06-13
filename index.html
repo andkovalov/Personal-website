@@ -445,11 +445,12 @@ main{overflow-x:clip;width:100%;max-width:100%}
   padding:clamp(20px,3.5vw,44px);
 }
 .case-cover-link{position:absolute;inset:0;z-index:3;cursor:pointer}
-.case-media img{
+.case-media img,.case-media video{
   max-width:min(100%,620px);max-height:100%;width:auto;height:auto;
   transition:transform .9s cubic-bezier(.22,1,.36,1);
 }
-.case:hover .case-media img{transform:scale(1.045) translateY(-4px)}
+.case-media video{border-radius:10px;box-shadow:0 18px 50px rgba(0,0,0,.22)}
+.case:hover .case-media img,.case:hover .case-media video{transform:scale(1.045) translateY(-4px)}
 .cm-deltag{background:linear-gradient(160deg,#eaf0fd,#d7e3fb)}
 .cm-notadocs{background:linear-gradient(160deg,#e3f4e6,#cfe9d6)}
 .cm-tattoo{background:linear-gradient(160deg,#2c2620,#171310)}
@@ -541,16 +542,6 @@ main{overflow-x:clip;width:100%;max-width:100%}
   font-size:clamp(1rem,2.4vw,1.6rem);color:var(--ink-dim);transition:color .35s;position:relative;
 }
 .cta-mail:hover{color:var(--lime)}
-
-/* ---------- footer ---------- */
-footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-soft)}
-.footer-grid{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
-.footer-logo{font-family:var(--font-display);font-weight:800;font-size:17px}
-.footer-logo em{color:var(--lime);font-style:normal}
-.footer-nav{display:flex;gap:26px;flex-wrap:wrap}
-.footer-nav a{font-size:14.5px;color:var(--ink-dim);transition:color .3s}
-.footer-nav a:hover{color:var(--lime)}
-.footer-meta{font-size:13.5px;color:var(--ink-faint)}
 
 /* ---------- reveal defaults ---------- */
 .reveal{opacity:0;transform:translateY(46px)}
@@ -740,13 +731,13 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
                   <span data-i18n="case.study">Смотреть кейс</span>
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </a>
-                <a class="case-icon" href="https://deltag.cz/" target="_blank" rel="noopener" data-hover aria-label="Открыть сайт Delta G" data-i18n-aria="case.live">
+                <a class="case-icon" href="https://deltag.vercel.app/" target="_blank" rel="noopener" data-hover aria-label="Открыть сайт Delta G" data-i18n-aria="case.live">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3H3.5A1.5 1.5 0 0 0 2 4.5v8A1.5 1.5 0 0 0 3.5 14h8a1.5 1.5 0 0 0 1.5-1.5V10M9.5 2.5h4v4M13.2 2.8 7.5 8.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </a>
               </div>
             </div>
           </div>
-          <div class="case-media cm-deltag"><a class="case-cover-link" href="case-delta-g.html" aria-label="Открыть кейс Delta G" data-i18n-aria="case.study" data-hover></a><img src="assets/cases/deltag.png" data-i18n-alt="case.deltag.alt" alt="Delta G — антикризисный редизайн сайта геодезической фирмы" loading="lazy" width="640" height="435"></div>
+          <div class="case-media cm-deltag"><a class="case-cover-link" href="case-delta-g.html" aria-label="Открыть кейс Delta G" data-i18n-aria="case.study" data-hover></a><video src="assets/cases/deltag/vid-services.mp4" poster="assets/cases/deltag/poster-services.png" muted loop playsinline preload="none" width="640" height="360" data-lazyvid></video></div>
         </article>
 
         <article class="case" data-hover>
@@ -962,20 +953,6 @@ footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg-
 
 </main>
 
-<footer>
-  <div class="wrap footer-grid">
-    <a class="footer-logo" href="#top">ANDREY<em>.</em>KOVALOV</a>
-    <nav class="footer-nav">
-      <a href="#raboty" data-hover data-i18n="nav.works">Работы</a>
-      <a href="#uslugi" data-hover data-i18n="nav.services">Услуги</a>
-      <a href="#process" data-hover data-i18n="nav.process">Процесс</a>
-      <a href="#tseny" data-hover data-i18n="nav.pricing">Цены</a>
-      <a href="mailto:andkovalov@gmail.com" data-hover data-i18n="footer.mail">Почта</a>
-    </nav>
-    <p class="footer-meta" data-i18n="footer.meta">&copy; 2026 — дизайн и код: Андрей Ковалев</p>
-  </div>
-</footer>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.149.0/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
@@ -1128,10 +1105,7 @@ const STR = {
   'cta.kicker': ["Свободен для проектов — июль 2026", "Volný pro projekty — červenec 2026", "Available for projects — July 2026"],
   'cta.h2': ["Есть идея?<br> Давайте посчитаем.", "Máte nápad?<br> Pojďme to spočítat.", "Got an idea?<br> Let’s price it out."],
   'cta.p': ["Опишите задачу в двух словах — в течение дня пришлю ориентир по цене и срокам. Бесплатно и без занудных созвонов.", "Popište zadání v pár větách — do druhého dne pošlu orientační cenu a termíny. Zdarma a bez zdlouhavých hovorů.", "Describe the task in a couple of words — within a day I’ll send a ballpark on price and timeline. Free and without tedious calls."],
-  'cta.mail': ["Написать на почту", "Napsat e-mail", "Send an email"],
-
-  'footer.mail': ["Почта", "E-mail", "Email"],
-  'footer.meta': ["© 2026 — дизайн и код: Андрей Ковалев", "© 2026 — design a kód: Andrey Kovalov", "© 2026 — design & code: Andrey Kovalov"]
+  'cta.mail': ["Написать на почту", "Napsat e-mail", "Send an email"]
 };
 
 const I18N_REBUILD = [];
@@ -1689,6 +1663,17 @@ if (langTrigger && langSwitch) {
   document.addEventListener('click', (e) => { if (!langSwitch.contains(e.target)) closeLangMenu(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLangMenu(); });
 }
+
+/* ---------- lazy-play case videos only while in view ---------- */
+document.querySelectorAll('[data-lazyvid]').forEach((vid) => {
+  const io = new IntersectionObserver((es) => {
+    es.forEach((e) => {
+      if (e.isIntersecting) { if (vid.preload === 'none') { vid.preload = 'auto'; vid.load(); } vid.play().catch(() => {}); }
+      else vid.pause();
+    });
+  }, { threshold: 0.35 });
+  io.observe(vid);
+});
 
 window.addEventListener('load', () => ScrollTrigger.refresh());
 </script>
