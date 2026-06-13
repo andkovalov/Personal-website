@@ -496,7 +496,7 @@ main{overflow-x:clip;width:100%;max-width:100%}
   font-family:var(--font-display);font-weight:800;font-size:clamp(2rem,3vw,2.6rem);
   margin:22px 0 6px;line-height:1;
 }
-.price-num small{font-size:.45em;color:var(--ink-dim);font-weight:500;font-family:var(--font-body)}
+.price-num small{display:block;font-size:.4em;color:var(--ink-dim);font-weight:500;font-family:var(--font-body);letter-spacing:0;margin-top:7px}
 .price-term{font-size:13.5px;color:var(--ink-faint);margin-bottom:26px}
 .price-card ul{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:34px;flex-grow:1}
 .price-card li{display:flex;gap:12px;font-size:15px;color:var(--ink-dim);align-items:flex-start}
@@ -1079,7 +1079,7 @@ const STR = {
   'pricing.h2': ["Фиксированная смета <em>до&nbsp;старта.</em><br> Никаких «ну, так получилось».", "Pevná cena <em>před&nbsp;startem.</em><br> Žádné „no, nějak to dopadlo“.", "A fixed quote <em>before&nbsp;we&nbsp;start.</em><br> No “well, that’s how it turned out”."],
   'price1.h3': ["Лендинг", "Landing page", "Landing page"],
   'price1.p': ["Одностраничник под продукт, услугу или событие.", "Jednostránka pro produkt, službu nebo událost.", "A one-pager for a product, service or event."],
-  'price1.num': ["от $490", "od $490", "from $490"],
+  'price1.num': ["от 25 000 Kč<small>≈ €1 000</small>", "od 25 000 Kč<small>≈ €1 000</small>", "from 25,000 Kč<small>≈ €1,000</small>"],
   'price1.term': ["7–14 дней", "7–14 dní", "7–14 days"],
   'price1.li1': ["Прототип, тексты и дизайн", "Prototyp, texty a design", "Prototype, copy and design"],
   'price1.li2': ["Ручная вёрстка + анимации", "Ruční kódování + animace", "Hand-coded markup + animation"],
@@ -1089,7 +1089,7 @@ const STR = {
   'price2.badge': ["Чаще всего выбирают", "Nejčastější volba", "Most popular"],
   'price2.h3': ["Сайт под ключ", "Web na klíč", "Turnkey website"],
   'price2.p': ["Многостраничный сайт для компании или бренда.", "Vícestránkový web pro firmu nebo značku.", "A multi-page site for a company or brand."],
-  'price2.num': ["от $990", "od $990", "from $990"],
+  'price2.num': ["от 55 000 Kč<small>≈ €2 220</small>", "od 55 000 Kč<small>≈ €2 220</small>", "from 55,000 Kč<small>≈ €2,220</small>"],
   'price2.term': ["2–4 недели", "2–4 týdny", "2–4 weeks"],
   'price2.li1': ["Всё из тарифа «Лендинг»", "Vše z balíčku „Landing page“", "Everything in “Landing page”"],
   'price2.li2': ["До 8 уникальных страниц", "Až 8 unikátních stránek", "Up to 8 unique pages"],
@@ -1098,7 +1098,7 @@ const STR = {
   'price2.li5': ["Месяц поддержки после запуска", "Měsíc podpory po spuštění", "A month of support after launch"],
   'price3.h3': ["Магазин / веб-апп", "Obchod / webová aplikace", "Store / web app"],
   'price3.p': ["E-commerce или сервис с личным кабинетом.", "E-commerce nebo služba s uživatelským účtem.", "E-commerce or a service with a user account."],
-  'price3.num': ["от $1900", "od $1900", "from $1900"],
+  'price3.num': ["от 120 000 Kč<small>≈ €4 900</small>", "od 120 000 Kč<small>≈ €4 900</small>", "from 120,000 Kč<small>≈ €4,900</small>"],
   'price3.term': ["от 4 недель", "od 4 týdnů", "from 4 weeks"],
   'price3.li1': ["Каталог и онлайн-оплата", "Katalog a online platba", "Catalogue and online payment"],
   'price3.li2': ["Личный кабинет, интеграции", "Uživatelský účet, integrace", "User account, integrations"],
